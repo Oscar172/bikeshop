@@ -1,7 +1,7 @@
 package se.kth.iv1350.integration;
 
-import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.dto.RepairOrderDTO;
+import se.kth.iv1350.model.RepairOrder;
 
 public class RepairOrderRegistry {
 
@@ -33,8 +33,17 @@ public class RepairOrderRegistry {
         return null;
     }
 
+    /**
+     * Saves a new or overwrites a repair order
+     * @param repairOrder the specific repair order object
+     */
     public void updateRepairOrder(RepairOrderDTO repairOrder){
-
+        /*
+        repairOrders[] = new RepairOrderDTO[10];
+        repairOrders[i] = repairOrder;
+        i++;
+        repairOrderDTO = new repairOrder;
+        */
     }
 
     public RepairOrderDTO returnRepairOrderDTO(String repairOrderId){

@@ -9,7 +9,11 @@ public class CustomerRegistry {
         return new CustomerRegistry();
     }
 
-    //findCustomer(phoneNumber : String) : CustomerDTO
+    /**
+     * Searches for a specific customer in the customer registry
+     * @param phoneNumber The customers phone number
+     * @return Returns the searched for customers CustomerDTO
+     */
     public CustomerDTO searchCustomer(String phoneNumber){
         return new CustomerDTO(phoneNumber);
     }

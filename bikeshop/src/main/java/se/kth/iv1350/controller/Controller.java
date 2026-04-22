@@ -3,8 +3,8 @@ package se.kth.iv1350.controller;
 import se.kth.iv1350.dto.CustomerDTO;
 import se.kth.iv1350.dto.RepairOrderDTO;
 import se.kth.iv1350.integration.CustomerRegistry;
-import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.integration.Printer;
+import se.kth.iv1350.integration.RepairOrderRegistry;
 
 
 
@@ -22,6 +22,11 @@ public class Controller {
         this.printer = printer;
     }
 
+    /**
+     * Searches for a specific customer in the customer registry
+     * @param phoneNumber The customers phone number
+     * @return Returns the searched for customers CustomerDTO
+     */
     public CustomerDTO findCustomer(String phoneNumber){
         return customerRegistry.searchCustomer(phoneNumber);
     }
