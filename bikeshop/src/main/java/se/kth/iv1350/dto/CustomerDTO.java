@@ -21,9 +21,8 @@ public class CustomerDTO {
     public String customerBajs(String phoneNumber){
         return phoneNumber;
     }
-    
 
-    // detta är ett test att pusha.
-
-
+    public String customerBajs2(String phoneNumber){
+        return phoneNumber;
+    }
 }
