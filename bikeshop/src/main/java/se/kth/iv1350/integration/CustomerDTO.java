@@ -1,4 +1,4 @@
-package se.kth.iv1350.dto;
+package se.kth.iv1350.integration;
 
 public class CustomerDTO {
 
