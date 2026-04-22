@@ -18,7 +18,12 @@ public class CustomerDTO {
         return name;
     }
 
+    public String customerBajs(String phoneNumber){
+        return phoneNumber;
+    }
     
+
+    // detta är ett test att pusha.
 
 
 }
