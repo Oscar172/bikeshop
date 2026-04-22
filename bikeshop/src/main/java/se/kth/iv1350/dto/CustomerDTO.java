@@ -25,4 +25,8 @@ public class CustomerDTO {
     public String customerBajs2(String phoneNumber){
         return phoneNumber;
     }
+
+    public String customerBajs3(String phoneNumber){
+        return phoneNumber;
+    }
 }
