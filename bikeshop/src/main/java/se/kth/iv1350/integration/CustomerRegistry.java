@@ -10,12 +10,9 @@ public class CustomerRegistry {
     }
 
     //findCustomer(phoneNumber : String) : CustomerDTO
-    public CustomerDTO findCustomer(String phoneNumber){
+    public CustomerDTO searchCustomer(String phoneNumber){
         return new CustomerDTO(phoneNumber);
     }
-
-
-
 
 
 }

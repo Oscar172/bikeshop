@@ -23,7 +23,7 @@ public class Controller {
     }
 
     public CustomerDTO findCustomer(String phoneNumber){
-        return customerRegistry.findCustomer(phoneNumber);
+        return customerRegistry.searchCustomer(phoneNumber);
     }
 
     public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
