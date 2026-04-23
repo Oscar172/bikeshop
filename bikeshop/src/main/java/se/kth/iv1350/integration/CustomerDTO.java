@@ -1,11 +1,20 @@
 package se.kth.iv1350.integration;
+import se.kth.iv1350.integration.CustomerRegistry;
 
 public class CustomerDTO {
+    //skapar CustomerDTO-class
+    public static CustomerDTO createCustomerDTO(){
+        return new CustomerDTO();
+    }
+
+    //nollställer referensen? typ
+    public CustomerDTO() {}
 
     private String phoneNumber;
     private String name;
 
-    public CustomerDTO(String phoneNumber, String name){
+        
+    public CustomerDTO (String phoneNumber, String name){
         this.phoneNumber = phoneNumber;
         this.name = name;
     }
@@ -18,15 +27,15 @@ public class CustomerDTO {
         return name;
     }
 
-    public String customerBajs(String phoneNumber){
+    public String customerEx(String phoneNumber){
         return phoneNumber;
     }
 
-    public String customerBajs2(String phoneNumber){
+    public String customerEx2(String phoneNumber){
         return phoneNumber;
     }
 
-    public String customerBajs3(String phoneNumber){
+    public String customerEx3(String phoneNumber){
         return phoneNumber;
     }
 }
