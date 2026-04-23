@@ -38,4 +38,8 @@ public class CustomerDTO {
     public String customerEx3(String phoneNumber){
         return phoneNumber;
     }
+
+    public String customerEx4(String phoneNumber){
+        return phoneNumber;
+    }
 }

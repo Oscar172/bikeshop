@@ -31,12 +31,13 @@ public class Controller {
         return customerRegistry.searchCustomer(phoneNumber);
     }
 
-    public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        repairOrderRegistry.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber);
+    public RepairOrderDTO createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
+        return repairOrderRegistry.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber);
     }
 
     public RepairOrderDTO[] findAllRepairOrders(String phoneNumber){
-        return repairOrderRegistry.findAllRepairOrders(phoneNumber);
+        RepairOrderDTO[] repairOrders = repairOrderRegistry.findAllRepairOrders(phoneNumber);
+        return repairOrders;
     }
 
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
@@ -48,7 +49,8 @@ public class Controller {
     }
 
     public RepairOrderDTO findRepairOrder(String phoneNumber){
-        return repairOrderRegistry.findRepairOrder(phoneNumber);
+        RepairOrderDTO repairOrder = repairOrderRegistry.findRepairOrder(phoneNumber);
+        return repairOrder;
     }
 
     public void acceptRepairOrder(String repairOrderId){

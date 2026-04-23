@@ -17,7 +17,7 @@ public class CustomerRegistry {
      * @return Returns the searched for customers CustomerDTO
      */
     public CustomerDTO searchCustomer(String phoneNumber){
-        return new CustomerDTO(phoneNumber);
+        return new CustomerDTO(phoneNumber, "Unknown customer");
     }
 
    
