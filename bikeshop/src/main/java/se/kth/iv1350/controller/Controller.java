@@ -1,12 +1,12 @@
 package se.kth.iv1350.controller;
 
-import se.kth.iv1350.dto.CustomerDTO;
-import se.kth.iv1350.dto.RepairOrderDTO;
+import se.kth.iv1350.integration.CustomerDTO;
+import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 
-
+//skapa getters till RepairDTO och CustomerDTO här.
 
 public class Controller {
 

@@ -1,6 +1,6 @@
 package se.kth.iv1350.integration;
 
-import se.kth.iv1350.dto.CustomerDTO;
+import se.kth.iv1350.integration.CustomerDTO;
 
 public class CustomerRegistry {
 
@@ -9,6 +9,8 @@ public class CustomerRegistry {
         return new CustomerRegistry();
     }
 
+    CustomerDTO customerDTO = CustomerDTO.createCustomerDTO();
+   
     /**
      * Searches for a specific customer in the customer registry
      * @param phoneNumber The customers phone number
@@ -18,5 +20,9 @@ public class CustomerRegistry {
         return new CustomerDTO(phoneNumber);
     }
 
+   
 
+     public void getCustomerDTO(CustomerDTO customer){
+
+     }
 }
