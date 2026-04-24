@@ -1,8 +1,5 @@
 package se.kth.iv1350.integration;
 
-import se.kth.iv1350.model.RepairTask;
-import se.kth.iv1350.model.RepairOrder;
-
 public class RepairOrderRegistry {
 
     private RepairOrderDTO[] repairOrders;
@@ -18,42 +15,29 @@ public class RepairOrderRegistry {
         return new RepairOrderRegistry();
     }
 
-    //createRepairOrder
-    public RepairOrderDTO createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        RepairOrder repairOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, this);
-
-        RepairOrderDTO repairOrderDTO = new RepairOrderDTO(repairOrder.getRepairOrderId(),
-                                                           repairOrder.getProblemDescr(),
-                                                           repairOrder.getPhoneNumber(),
-                                                           repairOrder.getBikeSerialNumber(),
-                                                           repairOrder.getState(),
-                                                           repairOrder.getTotalCost(),
-                                                           repairOrder.getDiagnosticReport(), "");
-        updateRepairOrder(repairOrderDTO);
-        return repairOrderDTO;
+    public String generateRepairOrderId(){
+        return "RO" + (nrOfRepairOrders + 1);
     }
-
-
 
     //findAllRepairOrders
     public RepairOrderDTO[] findAllRepairOrders(String phoneNumber){
-    RepairOrderDTO[] foundRepairOrders = new RepairOrderDTO[nrOfRepairOrders];
-    int nrOfFoundRepairOrders = 0;
+        RepairOrderDTO[] foundRepairOrders = new RepairOrderDTO[nrOfRepairOrders];
+        int nrOfFoundRepairOrders = 0;
 
-    for(int i = 0; i < nrOfRepairOrders; i++){
-        if(repairOrders[i].phoneNumber().equals(phoneNumber)){
-            foundRepairOrders[nrOfFoundRepairOrders] = repairOrders[i];
-            nrOfFoundRepairOrders++;
+        for(int i = 0; i < nrOfRepairOrders; i++){
+            if(repairOrders[i].phoneNumber().equals(phoneNumber)){
+                foundRepairOrders[nrOfFoundRepairOrders] = repairOrders[i];
+                nrOfFoundRepairOrders++;
+            }
         }
-    }
 
-    RepairOrderDTO[] repairOrders = new RepairOrderDTO[nrOfFoundRepairOrders];
-    for(int i = 0; i < nrOfFoundRepairOrders; i++){
-        repairOrders[i] = foundRepairOrders[i];
-    }
+        RepairOrderDTO[] repairOrders = new RepairOrderDTO[nrOfFoundRepairOrders];
+        for(int i = 0; i < nrOfFoundRepairOrders; i++){
+            repairOrders[i] = foundRepairOrders[i];
+        }
 
-    return repairOrders;
-}
+        return repairOrders;
+    }
 
     //addDiagnosticReport
     public void addDiagnosticReport(String repairOrderId, String diagRepairTask){
@@ -64,16 +48,13 @@ public class RepairOrderRegistry {
 
     }
 
-    public RepairOrderDTO findRepairOrder(String phoneString){
-        RepairOrderDTO repairOrder = null;
-
-        for(int i = 0; i < nrOfRepairOrders; i++){
-            if(repairOrders[i].phoneNumber().equals(phoneString)){
-                repairOrder = repairOrders[i];
-                break;
+    public RepairOrderDTO findRepairOrder(String phoneNumber){
+        for(int i = nrOfRepairOrders - 1; i >= 0; i--){
+            if(repairOrders[i].phoneNumber().equals(phoneNumber)){
+                return repairOrders[i];
             }
         }
-        return repairOrder;
+        return null;
     }
 
     /**
@@ -81,6 +62,13 @@ public class RepairOrderRegistry {
      * @param repairOrder the specific repair order object
      */
     public void updateRepairOrder(RepairOrderDTO repairOrder){
+        for(int i = 0; i < nrOfRepairOrders; i++){
+            if(repairOrders[i].repairOrderId().equals(repairOrder.repairOrderId())){
+                repairOrders[i] = repairOrder;
+                return;
+            }
+        }
+
         repairOrders[nrOfRepairOrders] = repairOrder;
         nrOfRepairOrders++;
     }
@@ -97,4 +85,3 @@ public class RepairOrderRegistry {
         
     }
 }
-

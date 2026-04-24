@@ -1,22 +1,21 @@
 package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
-import se.kth.iv1350.integration.CustomerDTO; 
-import se.kth.iv1350.integration.RepairOrderDTO; 
+import se.kth.iv1350.integration.CustomerDTO;
+import se.kth.iv1350.integration.RepairOrderDTO;
 
 public class View {
 
     private Controller contr;
+
     public View(Controller contr) {
         this.contr = contr;
     }
     
-    String phoneNumber = "0000";
-    CustomerDTO foundCustomer = contr.findCustomer(phoneNumber);
-
-    RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
-    
-    RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber);
-
-    
+    public void sampleExecution() {
+        String phoneNumber = "0000";
+        CustomerDTO foundCustomer = contr.findCustomer(phoneNumber);
+        RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
+        RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber);
+    }
 }

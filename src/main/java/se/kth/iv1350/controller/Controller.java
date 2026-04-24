@@ -1,12 +1,11 @@
 package se.kth.iv1350.controller;
 
 import se.kth.iv1350.integration.CustomerDTO;
-import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.Printer;
+import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
-
-//skapa getters till RepairDTO och CustomerDTO här.
+import se.kth.iv1350.model.RepairOrder;
 
 public class Controller {
 
@@ -32,12 +31,12 @@ public class Controller {
     }
 
     public RepairOrderDTO createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        return repairOrderRegistry.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber);
+        RepairOrder repairOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
+        return repairOrder.createRepairOrderDTO();
     }
 
     public RepairOrderDTO[] findAllRepairOrders(String phoneNumber){
-        RepairOrderDTO[] repairOrders = repairOrderRegistry.findAllRepairOrders(phoneNumber);
-        return repairOrders;
+        return repairOrderRegistry.findAllRepairOrders(phoneNumber);
     }
 
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
@@ -49,8 +48,7 @@ public class Controller {
     }
 
     public RepairOrderDTO findRepairOrder(String phoneNumber){
-        RepairOrderDTO repairOrder = repairOrderRegistry.findRepairOrder(phoneNumber);
-        return repairOrder;
+        return repairOrderRegistry.findRepairOrder(phoneNumber);
     }
 
     public void acceptRepairOrder(String repairOrderId){
@@ -60,11 +58,4 @@ public class Controller {
     public void rejectRepairOrder(String repairOrderId){
         repairOrderRegistry.rejectRepairOrder(repairOrderId);
     }
-
-
-
-
-
-
-
 }

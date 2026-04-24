@@ -1,7 +1,8 @@
 package se.kth.iv1350.model;
 
-import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.integration.Printer;
+import se.kth.iv1350.integration.RepairOrderDTO;
+import se.kth.iv1350.integration.RepairOrderRegistry;
 
 public class RepairOrder {
 
@@ -26,6 +27,7 @@ public class RepairOrder {
         this.bikeSerialNumber = bikeSerialNumber;
         this.totalCost = 0.0;
         this.diagnosticReport = "";
+        this.estimatedCompletionDate = "";
         this.repairTasks = new RepairTask[10];
         this.nrOfRepairTasks = 0;
         this.state = "CREATED";
@@ -33,8 +35,10 @@ public class RepairOrder {
     
     //<<create>> repairOrder
     public static RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
-        String repairOrderId = "RO1";
-        return new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber);
+        String repairOrderId = repairOrderRegistry.generateRepairOrderId();
+        RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber);
+        repairOrderRegistry.updateRepairOrder(repairOrder.createRepairOrderDTO());
+        return repairOrder;
     }
 
     //addDiagnosticReport
@@ -69,7 +73,18 @@ public class RepairOrder {
         printer.printRepairOrder(this);
     }
 
-    //getters för printer
+    public RepairOrderDTO createRepairOrderDTO(){
+        return new RepairOrderDTO(repairOrderId,
+                                  problemDescr,
+                                  phoneNumber,
+                                  bikeSerialNumber,
+                                  state,
+                                  totalCost,
+                                  diagnosticReport,
+                                  estimatedCompletionDate);
+    }
+
+    //getters for printer
     public String getRepairOrderId(){
         return repairOrderId;
     }
@@ -91,5 +106,4 @@ public class RepairOrder {
     public String getPhoneNumber(){
         return phoneNumber;
     }
-
 }
