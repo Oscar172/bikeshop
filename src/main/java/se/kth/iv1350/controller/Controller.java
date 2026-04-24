@@ -51,9 +51,9 @@ public class Controller {
     }
 
     /**
-     * 
-     * @param repairOrderId
-     * @param diagTaskResult
+     * Adds a diagnostic report to an existing repair order.
+     * @param repairOrderId  The id of the order to add a diagnostic report to.
+     * @param diagTaskResult The result of the diagnose.
      */
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
         RepairOrder repairOrder = new RepairOrder();
