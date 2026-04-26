@@ -1,4 +1,5 @@
 package se.kth.iv1350.integration;
+import se.kth.iv1350.model.RepairTask;
 
 public class RepairOrderDTO {
 
@@ -10,6 +11,8 @@ public class RepairOrderDTO {
     private double totalCost;
     private String diagnosticReport;
     private String estimatedCompletionDate;
+    private final int nrOfRepairTasks;
+    private final RepairTask[] repairTasks;
 
     /**
      * Constructs RepairOrderDTO class
@@ -19,11 +22,25 @@ public class RepairOrderDTO {
         return new RepairOrderDTO();
     }
 
-    //nollställer referensen? typ
-    public RepairOrderDTO() {}
+    
+    public RepairOrderDTO() {
+        this.nrOfRepairTasks = 0;
+        this.repairTasks = new RepairTask[0];
+        this.repairOrderId = "";
+    }
 
-    //Skapar RepairOrderDTO objekt
-    public RepairOrderDTO(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber, String state, double totalCost, String diagnosticReport, String estimatedCompletionDate){
+    /**
+     * Declares the RepairOrderDTO object.
+     * @param repairOrderId
+     * @param problemDescr
+     * @param phoneNumber
+     * @param bikeSerialNumber
+     * @param state
+     * @param totalCost
+     * @param diagnosticReport
+     * @param estimatedCompletionDate
+     */
+    public RepairOrderDTO(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber, String state, double totalCost, String diagnosticReport, String estimatedCompletionDate, int nrOfRepairTasks, RepairTask[] repairTasks){
         this.repairOrderId = repairOrderId;
         this.problemDescr = problemDescr;
         this. phoneNumber = phoneNumber;
@@ -32,33 +49,42 @@ public class RepairOrderDTO {
         this.totalCost = totalCost;
         this.diagnosticReport = diagnosticReport;
         this.estimatedCompletionDate = estimatedCompletionDate;
+        this.nrOfRepairTasks = nrOfRepairTasks;
+        this.repairTasks = repairTasks;
     }
 
     //getters
-    public String repairOrderId(){
+    public String getRepairOrderId(){
         return repairOrderId;
     }
-    public String problemDescr(){
+    public String getProblemDescr(){
         return problemDescr;
     }
-    public String phoneNumber(){
+    public String getPhoneNumber(){
         return phoneNumber;
     }
-    public String bikeSerialNumber(){
+    public String getBikeSerialNumber(){
         return bikeSerialNumber;
     }
-    public String state(){
+    public String getState(){
         return state;
     }
-    public double totalCost(){
+    public double getTotalCost(){
         return totalCost;
     }
-    public String diagnosticReport(){
+    public String getDiagnosticReport(){
         return diagnosticReport;
     }
-    public String estimatedCompletionDate(){
+    public String getEstimatedCompletionDate(){
         return estimatedCompletionDate;
     }
 
+    public int getNrOfRepairTasks(){
+        return nrOfRepairTasks;
+    }
+
+     public RepairTask [] getRepairTasks(){
+        return repairTasks;
+    }
 
 }

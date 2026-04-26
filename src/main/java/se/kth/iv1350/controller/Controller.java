@@ -14,9 +14,7 @@ public class Controller {
     private RepairOrderRegistry repairOrderRegistry;
     private Printer printer;
 
-    public Controller(CustomerRegistry customerRegistry,
-                        RepairOrderRegistry repairOrderRegistry,
-                        Printer printer){
+    public Controller(CustomerRegistry customerRegistry, RepairOrderRegistry repairOrderRegistry, Printer printer){
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;
@@ -42,24 +40,34 @@ public class Controller {
         return repairOrderRegistry.findAllRepairOrders(phoneNumber);
     }
 
+    /**
+     * Adds a diagnostic result to a specified report.
+     * @param repairOrderId Identifier of the repairOrder.
+     * @param diagTaskResult Result of the diagnostic.
+     */
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
-        repairOrderRegistry.addDiagnosticReport(repairOrderId, diagTaskResult);
-    }
+        
+        RepairOrderDTO dto = repairOrderRegistry.getRepairOrderByRepairOrderId(repairOrderId); //gets the DTO from registry
+        RepairOrder repairOrder = new RepairOrder(dto, repairOrderRegistry); //anropa repairORder class för att lägga till
+        repairOrder.addDiagnosticReport(diagTaskResult);
+    }   
     
 
     /**
      * Creates a RepairTask object from the View inputs and adds it to an existing RepairOrder.
      * @param repairOrderId The identifer of the RepairOrder to modify.
-     * @param taskDescription The description of the proposed repair task.
+     * @param repairTaskDescription The description of the proposed repair task.
      * @param cost  The cost of the proposed repair task.
      */
     public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
-        RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
+        RepairOrderDTO dto = repairOrderRegistry.getRepairOrderByRepairOrderId(repairOrderId); //gets the DTO from registry
         
-        //RepairOrderDTO dto = repairOrderRegistry.getRepairOrderByRepairOrderId(repairOrderId);
-
-        RepairOrder.addRepairTaskToRepairOrder(repairOrderId, newTask, repairOrderRegistry); //anropa repairORder class för att lägga till
+        RepairOrder repairOrder = new RepairOrder(dto, repairOrderRegistry); //anropa repairORder class för att lägga till
+        RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
+        repairOrder.addRepairTask(newTask); //adds the task to teh report
     }
+
+
 
     public RepairOrderDTO findRepairOrder(String phoneNumber){
         return repairOrderRegistry.findRepairOrder(phoneNumber);

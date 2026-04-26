@@ -54,15 +54,19 @@ public class RepairOrderRegistry {
 
     }
 
-    public RepairOrderDTO getRepairOrderByRepairOrderId (String repairOrderID){
+    /**
+     * finds
+     * @param repairOrderID
+     * @return
+     */
+    public RepairOrderDTO getRepairOrderByRepairOrderId (String repairOrderId){
         for(int i = nrOfRepairOrders - 1; i >= 0; i--){
-            if(repairOrders[i].repairOrderID().equals(repairOrderID)){
+            if(repairOrders[i].repairOrderId().equals(repairOrderId)){
                 return repairOrders[i];
             }
         }
         return null;
     }
-
 
 
     public RepairOrderDTO findRepairOrder(String phoneNumber){
@@ -90,12 +94,7 @@ public class RepairOrderRegistry {
         nrOfRepairOrders++;
     }
 
-    public RepairOrderDTO returnRepairOrderDTO(String repairOrderId){
-
-        //reads repairOrderId for the DTO and then identifies
-        //loop that searches all the DTOs, could be linear to simnplify
-        return null;
-    }
+   
 
     public void acceptRepairOrder(String repairOrderId){
 

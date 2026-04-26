@@ -6,16 +6,25 @@ public class RepairTask {
     private String state;
     private String description;
 
-    //private constructor
+    /**
+     * Defines the objects properties.
+     * @param description The description of the proposed repair task.
+     * @param cost The cost of the proposed repair task.
+     */
     private RepairTask(String description, double cost){
         this.description = description;
         this.cost = cost;
         this.state = "CREATED";
     }
 
-    //<<create>> createRepairTask
-    public static RepairTask createRepairTask(String repairTask, double cost){
-        return new RepairTask(repairTask, cost);
+    /**
+     * Creates a repair task object and returns it.
+     * @param repairTaskDescription The description of the proposed repair task.
+     * @param cost The cost of the proposed repair task.
+     * @return The new object.
+     */
+    public static RepairTask createRepairTask(String repairTaskDescription, double cost){
+        return new RepairTask(repairTaskDescription, cost);
     }
 
     public double getCost(){

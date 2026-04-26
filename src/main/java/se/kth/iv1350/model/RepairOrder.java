@@ -30,7 +30,7 @@ public class RepairOrder {
 
         this.totalCost = 0.0;
         this.diagnosticReport = "";
-        this.estimatedCompletionDate = "";
+        this.estimatedCompletionDate = ""; //ev få in som input eller att sätta här, tex dagens datum plus 2 veckor 
         this.repairTasks = new RepairTask[10];
         this.nrOfRepairTasks = 0;
         this.state = "CREATED";
@@ -44,27 +44,66 @@ public class RepairOrder {
         return repairOrder;
     }
 
+    /**
+     * Structure of a Repair Order object made from DTO
+     * @param dto
+     * @param registry
+     */
+    public RepairOrder(RepairOrderDTO dto, RepairOrderRegistry registry) {
+        
+        this.repairOrderId = dto.getRepairOrderId();
+        this.problemDescr = dto.getProblemDescr();
+        this.phoneNumber = dto.getPhoneNumber();
+        this.bikeSerialNumber = dto.getBikeSerialNumber();
+        this.repairOrderRegistry = registry;
+      
+
+        this.totalCost = dto.getTotalCost();
+        this.diagnosticReport = dto.getDiagnosticReport();
+        this.estimatedCompletionDate = dto.getEstimatedCompletionDate();
+        
+        this.repairTasks = dto.getRepairTasks();
+        this.nrOfRepairTasks = dto.getNrOfRepairTasks();
+        this.state = dto.getState();
+    }
+
     //ev ha två olika create, en där nytt skapas och en där 
     // skapar med RepairTask och RepairOrderId som argument
     //övriga parametrar
      //<<create>> repairOrder med addrepairtask
-    public static void addRepairTaskToRepairOrder(String repairOrderId, RepairTask repairTask, RepairOrderRegistry repairOrderRegistry){
-        
-        String repairOrderId = //hitta DTOn i registret med detta.
+    public void addRepairTask(RepairTask newRepairTask){
+        if (nrOfRepairTasks < repairTasks.length){
+            repairTasks[nrOfRepairTasks] = newRepairTask;
+            nrOfRepairTasks++;
+            this.totalCost = calculateTotalCost(repairTasks);
+        }
 
         //skriv över allt från dton
         //lägga till addRepairtask på en tom plats i vekorn, nästa lediga plats
         //spara DTOn på nytt.
         
-        repairOrderRegistry.updateRepairOrder(repairOrder.createRepairOrderDTO());
+        repairOrderRegistry.updateRepairOrder(this.createRepairOrderDTO());
     }
 
-    //addDiagnosticReport
+    /**
+     * Adds a diagnostic report to the actual Repair Order object and then saves it.
+     * @param diagTaskResult Result of the diagnostic.
+     */
+    public void addDiagnosticReport(String diagTaskResult){
+        this.diagnosticReport = diagTaskResult;
+
+        repairOrderRegistry.updateRepairOrder(this.createRepairOrderDTO());
+    }
+
+
+    /**
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
         this.diagnosticReport = diagTaskResult;
     }
-
-    //addRepairTask
+    */
+    
+    /**
+     //addRepairTask
     //need to call the repairOrderDTO from registry to get it here, calls with identifier repairOrderId.
     public void addRepairTask(String repairOrderId, RepairTask repairTask){
         
@@ -81,9 +120,10 @@ public class RepairOrder {
         repairOrderRegistry.updateRepairOrder(this.createRepairOrderDTO());
         //updates the DTO
     }
+    */
     
     //calculateTotalCost
-    public double calculateTotalCost(RepairTask[] repairTasks){
+    private double calculateTotalCost(RepairTask[] repairTasks){
         double sum = 0;
 
         for(int i = 0; i < repairTasks.length; i++){
@@ -101,14 +141,20 @@ public class RepairOrder {
     }
 
     public RepairOrderDTO createRepairOrderDTO(){
-        return new RepairOrderDTO(repairOrderId,
-                                  problemDescr,
-                                  phoneNumber,
-                                  bikeSerialNumber,
-                                  state,
-                                  totalCost,
-                                  diagnosticReport,
-                                  estimatedCompletionDate);
+        return new RepairOrderDTO (
+            repairOrderId,  
+            problemDescr, 
+            phoneNumber, 
+            bikeSerialNumber, 
+            state,
+            totalCost, 
+            diagnosticReport, 
+            estimatedCompletionDate,
+            nrOfRepairTasks,
+            repairTasks
+        );
+        
+                                  
     }
 
     //getters for printer
