@@ -11,7 +11,18 @@ public class RepairOrderDTO {
     private String diagnosticReport;
     private String estimatedCompletionDate;
 
-    //Skapar RepairOrderDTO
+    /**
+     * Constructs RepairOrderDTO class
+     * @return reference to the class
+     */
+    public static RepairOrderDTO createRepairOrderDTO(){
+        return new RepairOrderDTO();
+    }
+
+    //nollställer referensen? typ
+    public RepairOrderDTO() {}
+
+    //Skapar RepairOrderDTO objekt
     public RepairOrderDTO(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber, String state, double totalCost, String diagnosticReport, String estimatedCompletionDate){
         this.repairOrderId = repairOrderId;
         this.problemDescr = problemDescr;

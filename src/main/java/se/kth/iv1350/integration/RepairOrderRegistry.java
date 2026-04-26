@@ -10,10 +10,16 @@ public class RepairOrderRegistry {
         this.nrOfRepairOrders = 0;
     }
 
-    //<<create>> repairOrderRegistry()
+   
+    /**
+     * Constructs repairOrderRegistry class
+     * @return reference to the class
+     */
     public static RepairOrderRegistry repairOrderRegistry(){
         return new RepairOrderRegistry();
     }
+
+    RepairOrderDTO repairOrderDTO = RepairOrderDTO.createRepairOrderDTO();
 
     public String generateRepairOrderId(){
         return "RO" + (nrOfRepairOrders + 1);
@@ -48,6 +54,17 @@ public class RepairOrderRegistry {
 
     }
 
+    public RepairOrderDTO getRepairOrderByRepairOrderId (String repairOrderID){
+        for(int i = nrOfRepairOrders - 1; i >= 0; i--){
+            if(repairOrders[i].repairOrderID().equals(repairOrderID)){
+                return repairOrders[i];
+            }
+        }
+        return null;
+    }
+
+
+
     public RepairOrderDTO findRepairOrder(String phoneNumber){
         for(int i = nrOfRepairOrders - 1; i >= 0; i--){
             if(repairOrders[i].phoneNumber().equals(phoneNumber)){
@@ -74,6 +91,9 @@ public class RepairOrderRegistry {
     }
 
     public RepairOrderDTO returnRepairOrderDTO(String repairOrderId){
+
+        //reads repairOrderId for the DTO and then identifies
+        //loop that searches all the DTOs, could be linear to simnplify
         return null;
     }
 

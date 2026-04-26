@@ -6,6 +6,7 @@ import se.kth.iv1350.integration.RepairOrderRegistry;
 
 public class RepairOrder {
 
+    private RepairOrderRegistry repairOrderRegistry;
     private String repairOrderId;
     private String date;
     private String problemDescr;
@@ -20,11 +21,13 @@ public class RepairOrder {
     private RepairTask[] repairTasks;
     private int nrOfRepairTasks;
     
-    private RepairOrder(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber){
+    private RepairOrder(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
         this.repairOrderId = repairOrderId;
         this.problemDescr = problemDescr;
         this.phoneNumber = phoneNumber;
         this.bikeSerialNumber = bikeSerialNumber;
+        this.repairOrderRegistry = repairOrderRegistry;
+
         this.totalCost = 0.0;
         this.diagnosticReport = "";
         this.estimatedCompletionDate = "";
@@ -36,23 +39,47 @@ public class RepairOrder {
     //<<create>> repairOrder
     public static RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
         String repairOrderId = repairOrderRegistry.generateRepairOrderId();
-        RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber);
+        RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
         repairOrderRegistry.updateRepairOrder(repairOrder.createRepairOrderDTO());
         return repairOrder;
     }
 
+    //ev ha två olika create, en där nytt skapas och en där 
+    // skapar med RepairTask och RepairOrderId som argument
+    //övriga parametrar
+     //<<create>> repairOrder med addrepairtask
+    public static void addRepairTaskToRepairOrder(String repairOrderId, RepairTask repairTask, RepairOrderRegistry repairOrderRegistry){
+        
+        String repairOrderId = //hitta DTOn i registret med detta.
+
+        //skriv över allt från dton
+        //lägga till addRepairtask på en tom plats i vekorn, nästa lediga plats
+        //spara DTOn på nytt.
+        
+        repairOrderRegistry.updateRepairOrder(repairOrder.createRepairOrderDTO());
+    }
+
     //addDiagnosticReport
-    public void addDiagnosticReport(String repairOrderId, String diagTaskResult, RepairOrderRegistry repairOrderRegistry){
+    public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
         this.diagnosticReport = diagTaskResult;
     }
 
     //addRepairTask
-    public void addRepairTask(RepairTask repairTask, RepairOrderRegistry repairOrderRegistry){
+    //need to call the repairOrderDTO from registry to get it here, calls with identifier repairOrderId.
+    public void addRepairTask(String repairOrderId, RepairTask repairTask){
+        
+        RepairOrderDTO repairOrder = repairOrderRegistry.returnRepairOrderDTO(repairOrderId);
+
+        //perhaps add a privatereadfunction to read DTOs
+        //down below
         if(nrOfRepairTasks < repairTasks.length){
             repairTasks[nrOfRepairTasks] = repairTask;
             nrOfRepairTasks++;
             totalCost = calculateTotalCost(repairTasks);
         }
+
+        repairOrderRegistry.updateRepairOrder(this.createRepairOrderDTO());
+        //updates the DTO
     }
     
     //calculateTotalCost

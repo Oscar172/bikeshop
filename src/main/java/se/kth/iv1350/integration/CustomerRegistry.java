@@ -4,7 +4,10 @@ import se.kth.iv1350.integration.CustomerDTO;
 
 public class CustomerRegistry {
 
-    //<<create>> CustomerRegistry():CustomerRegistry
+    /**
+     * Constructs CustomerRegistry
+     * @return reference to the class
+     */
     public static CustomerRegistry customerRegistry(){
         return new CustomerRegistry();
     }

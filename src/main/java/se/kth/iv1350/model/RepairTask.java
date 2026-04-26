@@ -14,7 +14,7 @@ public class RepairTask {
     }
 
     //<<create>> createRepairTask
-    public static RepairTask createRepairTask(String repairOrderId, String repairTask, double cost){
+    public static RepairTask createRepairTask(String repairTask, double cost){
         return new RepairTask(repairTask, cost);
     }
 
