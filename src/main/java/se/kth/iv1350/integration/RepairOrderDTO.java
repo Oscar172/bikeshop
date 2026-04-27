@@ -24,28 +24,34 @@ public class RepairOrderDTO {
     }
 
     //getters
-    public String repairOrderId(){
+
+    /**
+     * A getter that returns the repairorder id.
+     * @return The repairorder id.
+     */
+    public String getRepairOrderId(){
         return repairOrderId;
     }
-    public String problemDescr(){
+
+    public String getProblemDescr(){
         return problemDescr;
     }
-    public String phoneNumber(){
+    public String getPhoneNumber(){
         return phoneNumber;
     }
-    public String bikeSerialNumber(){
+    public String getBikeSerialNumber(){
         return bikeSerialNumber;
     }
-    public String state(){
+    public String getState(){
         return state;
     }
-    public double totalCost(){
+    public double getTotalCost(){
         return totalCost;
     }
-    public String diagnosticReport(){
+    public String getDiagnosticReport(){
         return diagnosticReport;
     }
-    public String estimatedCompletionDate(){
+    public String getEstimatedCompletionDate(){
         return estimatedCompletionDate;
     }
 

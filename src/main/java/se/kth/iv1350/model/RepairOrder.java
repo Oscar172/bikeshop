@@ -4,6 +4,9 @@ import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 
+/**
+ * Handles logic for a specific repair order.
+ */
 public class RepairOrder {
 
     private String repairOrderId;
