@@ -13,8 +13,8 @@ public class CustomerRegistry {
     /**
      * Creates a new instance of CustomerRegistry. (Constructor)
      */
-    public CustomerRegistry() {
-        customers.add(new CustomerDTO("0763252275", "Tova Norlykke"));
+    public static CustomerRegistry customerRegistry() {
+        return new CustomerRegistry();
         // Example, add a customer here to be able to run fake execution in view
         // Add code that run when the object is created
         // For example, initiate a list of customers or create a DTO.

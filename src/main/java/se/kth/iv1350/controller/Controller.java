@@ -57,8 +57,7 @@ public class Controller {
      * @param diagTaskResult The result of the diagnose.
      */
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
-        RepairOrder repairOrder = new RepairOrder();
-        repairOrder.addDiagnosticReport(repairOrderId, diagTaskResult, this.repairOrderRegistry);
+        repairOrderRegistry.addDiagnosticReport(repairOrderId, diagTaskResult);
     }
 
     public void addRepairTask(String repairOrderId, String repairTask, double cost){
