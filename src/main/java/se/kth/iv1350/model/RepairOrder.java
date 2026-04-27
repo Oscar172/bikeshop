@@ -4,8 +4,10 @@ import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 
+/**
+ * Handles logic for a specific repair order.
+ */
 public class RepairOrder {
-
     private RepairOrderRegistry repairOrderRegistry;
     private String repairOrderId;
     private String date;
@@ -44,86 +46,22 @@ public class RepairOrder {
         return repairOrder;
     }
 
-    /**
-     * Structure of a Repair Order object made from DTO
-     * @param dto
-     * @param registry
-     */
-    public RepairOrder(RepairOrderDTO dto, RepairOrderRegistry registry) {
-        
-        this.repairOrderId = dto.getRepairOrderId();
-        this.problemDescr = dto.getProblemDescr();
-        this.phoneNumber = dto.getPhoneNumber();
-        this.bikeSerialNumber = dto.getBikeSerialNumber();
-        this.repairOrderRegistry = registry;
-      
-
-        this.totalCost = dto.getTotalCost();
-        this.diagnosticReport = dto.getDiagnosticReport();
-        this.estimatedCompletionDate = dto.getEstimatedCompletionDate();
-        
-        this.repairTasks = dto.getRepairTasks();
-        this.nrOfRepairTasks = dto.getNrOfRepairTasks();
-        this.state = dto.getState();
-    }
-
-    //ev ha två olika create, en där nytt skapas och en där 
-    // skapar med RepairTask och RepairOrderId som argument
-    //övriga parametrar
-     //<<create>> repairOrder med addrepairtask
-    public void addRepairTask(RepairTask newRepairTask){
-        if (nrOfRepairTasks < repairTasks.length){
-            repairTasks[nrOfRepairTasks] = newRepairTask;
-            nrOfRepairTasks++;
-            this.totalCost = calculateTotalCost(repairTasks);
-        }
-
-        //skriv över allt från dton
-        //lägga till addRepairtask på en tom plats i vekorn, nästa lediga plats
-        //spara DTOn på nytt.
-        
-        repairOrderRegistry.updateRepairOrder(this.createRepairOrderDTO());
-    }
-
-    /**
-     * Adds a diagnostic report to the actual Repair Order object and then saves it.
-     * @param diagTaskResult Result of the diagnostic.
-     */
-    public void addDiagnosticReport(String diagTaskResult){
-        this.diagnosticReport = diagTaskResult;
-
-        repairOrderRegistry.updateRepairOrder(this.createRepairOrderDTO());
-    }
-
-
-    /**
-    public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
+    //addDiagnosticReport
+    public void addDiagnosticReport(String repairOrderId, String diagTaskResult, RepairOrderRegistry repairOrderRegistry){
         this.diagnosticReport = diagTaskResult;
     }
-    */
-    
-    /**
-     //addRepairTask
-    //need to call the repairOrderDTO from registry to get it here, calls with identifier repairOrderId.
-    public void addRepairTask(String repairOrderId, RepairTask repairTask){
-        
-        RepairOrderDTO repairOrder = repairOrderRegistry.returnRepairOrderDTO(repairOrderId);
 
-        //perhaps add a privatereadfunction to read DTOs
-        //down below
+    //addRepairTask
+    public void addRepairTask(RepairTask repairTask, RepairOrderRegistry repairOrderRegistry){
         if(nrOfRepairTasks < repairTasks.length){
             repairTasks[nrOfRepairTasks] = repairTask;
             nrOfRepairTasks++;
             totalCost = calculateTotalCost(repairTasks);
         }
-
-        repairOrderRegistry.updateRepairOrder(this.createRepairOrderDTO());
-        //updates the DTO
     }
-    */
     
     //calculateTotalCost
-    private double calculateTotalCost(RepairTask[] repairTasks){
+    public double calculateTotalCost(RepairTask[] repairTasks){
         double sum = 0;
 
         for(int i = 0; i < repairTasks.length; i++){

@@ -12,21 +12,30 @@ public class View {
         this.contr = contr;
     }
     
-
     /**
-     * Sample execution of the View in order to make calls to other parts of the program.
+     * Simulates a user input that generates calls to all system operations.
      */
-    public void sampleExecution() {
+    public void runFakeExecution() {
         String phoneNumber = "0000";
-        String repairOrderId = "28981829";
+        String inputPhoneNumber = "0763252275";
+        CustomerDTO foundCustomer = contr.searchForCustomer(inputPhoneNumber);
+        // Alt. handle results
+        if (foundCustomer != null) {
+            System.out.println("Cusomer found: " + foundCustomer.getName());
+        } else {
+            System.out.println("No customer found on this number: " + inputPhoneNumber);
+        }
+
+        String repairOrderId = "123";
+        String diagTaskResult = "Adjust front wheel";
+        contr.addDiagnosticReport(repairOrderId, diagTaskResult);
+        // Alt.
+        System.out.println("Diagnostic results has been sent to the registry for order: " + repairOrderId);
+
         String repairTaskDescription = "Change all brake wires";
         double cost = 249.90;
-
-        CustomerDTO foundCustomer = contr.findCustomer(phoneNumber);
         RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
         RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber);
         contr.addRepairTask(repairOrderId, repairTaskDescription, cost);
     }
-
-   
 }

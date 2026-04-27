@@ -1,5 +1,4 @@
 package se.kth.iv1350.integration;
-import se.kth.iv1350.integration.CustomerRegistry; //behövs verklligen denna? anropas bara av den
 
 public class CustomerDTO {
     

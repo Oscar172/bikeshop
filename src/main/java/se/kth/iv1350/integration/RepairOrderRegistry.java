@@ -19,8 +19,6 @@ public class RepairOrderRegistry {
         return new RepairOrderRegistry();
     }
 
-    RepairOrderDTO repairOrderDTO = RepairOrderDTO.createRepairOrderDTO();
-
     public String generateRepairOrderId(){
         return "RO" + (nrOfRepairOrders + 1);
     }
@@ -54,21 +52,6 @@ public class RepairOrderRegistry {
 
     }
 
-    /**
-     * finds
-     * @param repairOrderID
-     * @return
-     */
-    public RepairOrderDTO getRepairOrderByRepairOrderId (String repairOrderId){
-        for(int i = nrOfRepairOrders - 1; i >= 0; i--){
-            if(repairOrders[i].repairOrderId().equals(repairOrderId)){
-                return repairOrders[i];
-            }
-        }
-        return null;
-    }
-
-
     public RepairOrderDTO findRepairOrder(String phoneNumber){
         for(int i = nrOfRepairOrders - 1; i >= 0; i--){
             if(repairOrders[i].phoneNumber().equals(phoneNumber)){
@@ -94,7 +77,9 @@ public class RepairOrderRegistry {
         nrOfRepairOrders++;
     }
 
-   
+    public RepairOrderDTO returnRepairOrderDTO(String repairOrderId){
+        return null;
+    }
 
     public void acceptRepairOrder(String repairOrderId){
 

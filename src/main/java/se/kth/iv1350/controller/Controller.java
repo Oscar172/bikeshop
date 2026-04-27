@@ -8,27 +8,40 @@ import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
 
+
+
+/**
+ * The applications controller. All calls from view pass through here.
+ */
 public class Controller {
 
     private CustomerRegistry customerRegistry;
     private RepairOrderRegistry repairOrderRegistry;
     private Printer printer;
 
-    public Controller(CustomerRegistry customerRegistry, RepairOrderRegistry repairOrderRegistry, Printer printer){
+    /**
+     * Creates a new instanse of Controller. (Constructor)
+     * @param customerRegistry Reference to the cutsumer registry in the
+     * integration layer.
+     * @param repairOrderRegistry Reference to the order registry in the
+     * integration layer.
+     * @param printer Reference to the printer in the integrations layer.
+     */
+    public Controller(CustomerRegistry customerRegistry,
+                        RepairOrderRegistry repairOrderRegistry,
+                        Printer printer){
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;
     }
 
-    
-    
     /**
-     * Searches for a specific customer in the customer registry
-     * @param phoneNumber The customers phone number
-     * @return Returns the searched for customers CustomerDTO
+     * Searchers for a specific customer by their phonenumber.
+     * @param phoneNumber The phonenumber the search is based on.
+     * @return Information about the customer in the form of a CustomerDTO.
      */
-    public CustomerDTO findCustomer(String phoneNumber){
-        return customerRegistry.searchCustomer(phoneNumber);
+    public CustomerDTO searchForCustomer(String phoneNumber){
+        return customerRegistry.findCustomer(phoneNumber);
     }
 
     public RepairOrderDTO createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
@@ -41,17 +54,14 @@ public class Controller {
     }
 
     /**
-     * Adds a diagnostic result to a specified report.
-     * @param repairOrderId Identifier of the repairOrder.
-     * @param diagTaskResult Result of the diagnostic.
+     * Adds a diagnostic report to an existing repair order.
+     * @param repairOrderId  The id of the order to add a diagnostic report to.
+     * @param diagTaskResult The result of the diagnose.
      */
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
-        
-        RepairOrderDTO dto = repairOrderRegistry.getRepairOrderByRepairOrderId(repairOrderId); //gets the DTO from registry
-        RepairOrder repairOrder = new RepairOrder(dto, repairOrderRegistry); //anropa repairORder class för att lägga till
-        repairOrder.addDiagnosticReport(diagTaskResult);
-    }   
-    
+        RepairOrder repairOrder = new RepairOrder();
+        repairOrder.addDiagnosticReport(repairOrderId, diagTaskResult, this.repairOrderRegistry);
+    }
 
     /**
      * Creates a RepairTask object from the View inputs and adds it to an existing RepairOrder.
@@ -59,17 +69,9 @@ public class Controller {
      * @param repairTaskDescription The description of the proposed repair task.
      * @param cost  The cost of the proposed repair task.
      */
-    public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
-        RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
-        
-        RepairOrderDTO dto = repairOrderRegistry.getRepairOrderByRepairOrderId(repairOrderId); //gets the DTO from registry
-        
-        RepairOrder repairOrder = new RepairOrder(dto, repairOrderRegistry); //anropa repairORder class för att lägga till
-        
-        repairOrder.addRepairTask(newTask); //adds the task to teh report
+    public void addRepairTask(String repairOrderId, String repairTask, double cost){
+        repairOrderRegistry.addRepairTask(repairOrderId, repairTask, cost);
     }
-
-
 
     public RepairOrderDTO findRepairOrder(String phoneNumber){
         return repairOrderRegistry.findRepairOrder(phoneNumber);
