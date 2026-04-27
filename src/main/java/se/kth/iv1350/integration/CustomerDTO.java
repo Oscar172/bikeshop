@@ -1,5 +1,4 @@
 package se.kth.iv1350.integration;
-import se.kth.iv1350.integration.CustomerRegistry;
 
 public class CustomerDTO {
     //skapar CustomerDTO-class

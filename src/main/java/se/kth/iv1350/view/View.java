@@ -2,7 +2,6 @@ package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerDTO;
-import se.kth.iv1350.integration.RepairOrderDTO;
 
 public class View {
 
@@ -12,10 +11,23 @@ public class View {
         this.contr = contr;
     }
     
-    public void sampleExecution() {
-        String phoneNumber = "0000";
-        CustomerDTO foundCustomer = contr.findCustomer(phoneNumber);
-        RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
-        RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber);
+    /**
+     * Simulates a user input that generates calls to all system operations.
+     */
+    public void runFakeExecution() {
+        String inputPhoneNumber = "0763252275";
+        CustomerDTO foundCustomer = contr.searchForCustomer(inputPhoneNumber);
+        // Alt. handle results
+        if (foundCustomer != null) {
+            System.out.println("Cusomer found: " + foundCustomer.getName());
+        } else {
+            System.out.println("No customer found on this number: " + inputPhoneNumber);
+        }
+
+        String repairOrderId = "123";
+        String diagTaskResult = "Adjust front wheel";
+        contr.addDiagnosticReport(repairOrderId, diagTaskResult);
+        // Alt.
+        System.out.println("Diagnostic results has been sent to the registry for order: " + repairOrderId);
     }
 }

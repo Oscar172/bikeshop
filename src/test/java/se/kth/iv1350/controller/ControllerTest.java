@@ -22,12 +22,12 @@ public class ControllerTest {
         RepairOrderDTO createdOrder = controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
 
         assertNotNull(createdOrder);
-        assertNotNull(createdOrder.repairOrderId());
-        assertEquals("broken brakes", createdOrder.problemDescr());
-        assertEquals("123456789", createdOrder.phoneNumber());
-        assertEquals("BIKE123", createdOrder.bikeSerialNumber());
-        assertEquals("CREATED", createdOrder.state());
-        assertEquals(0.0, createdOrder.totalCost(), 0.0);
+        assertNotNull(createdOrder.getRepairOrderId());
+        assertEquals("broken brakes", createdOrder.getProblemDescr());
+        assertEquals("123456789", createdOrder.getPhoneNumber());
+        assertEquals("BIKE123", createdOrder.getBikeSerialNumber());
+        assertEquals("CREATED", createdOrder.getState());
+        assertEquals(0.0, createdOrder.getTotalCost(), 0.0);
     }
 
     @Test
@@ -43,10 +43,10 @@ public class ControllerTest {
         RepairOrderDTO foundOrder = controller.findRepairOrder("123456789");
 
         assertNotNull(foundOrder);
-        assertEquals(latestOrder.repairOrderId(), foundOrder.repairOrderId());
-        assertEquals("broken brakes", foundOrder.problemDescr());
-        assertEquals("123456789", foundOrder.phoneNumber());
-        assertEquals("BIKE123", foundOrder.bikeSerialNumber());
+        assertEquals(latestOrder.getRepairOrderId(), foundOrder.getRepairOrderId());
+        assertEquals("broken brakes", foundOrder.getProblemDescr());
+        assertEquals("123456789", foundOrder.getPhoneNumber());
+        assertEquals("BIKE123", foundOrder.getBikeSerialNumber());
     }
 
     @Test
@@ -58,13 +58,13 @@ public class ControllerTest {
 
         RepairOrderDTO createdOrder = controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
 
-        controller.addRepairTask(createdOrder.repairOrderId(), "Replace brake cable", 250.0);
+        controller.addRepairTask(createdOrder.getRepairOrderId(), "Replace brake cable", 250.0);
 
-        RepairOrderDTO updatedOrder = repairOrderRegistry.returnRepairOrderDTO(createdOrder.repairOrderId());
+        RepairOrderDTO updatedOrder = repairOrderRegistry.returnRepairOrderDTO(createdOrder.getRepairOrderId());
 
         assertNotNull(updatedOrder);
-        assertEquals(createdOrder.repairOrderId(), updatedOrder.repairOrderId());
-        assertEquals(250.0, updatedOrder.totalCost(), 0.0);
+        assertEquals(createdOrder.getRepairOrderId(), updatedOrder.getRepairOrderId());
+        assertEquals(250.0, updatedOrder.getTotalCost(), 0.0);
     }
 
     @Test
@@ -82,11 +82,11 @@ public class ControllerTest {
 
         assertNotNull(foundOrders);
         assertEquals(3, foundOrders.length);
-        assertEquals("123456789", foundOrders[0].phoneNumber());
-        assertEquals("123456789", foundOrders[1].phoneNumber());
-        assertEquals("123456789", foundOrders[2].phoneNumber());
-        assertEquals("broken brakes", foundOrders[0].problemDescr());
-        assertEquals("broken light", foundOrders[1].problemDescr());
-        assertEquals("broken frame", foundOrders[2].problemDescr());
+        assertEquals("123456789", foundOrders[0].getPhoneNumber());
+        assertEquals("123456789", foundOrders[1].getPhoneNumber());
+        assertEquals("123456789", foundOrders[2].getPhoneNumber());
+        assertEquals("broken brakes", foundOrders[0].getProblemDescr());
+        assertEquals("broken light", foundOrders[1].getProblemDescr());
+        assertEquals("broken frame", foundOrders[2].getProblemDescr());
     }
 }

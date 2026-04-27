@@ -17,9 +17,9 @@ public class RepairOrderRegistryTest {
         RepairOrderDTO foundOrder = registry.returnRepairOrderDTO(repairOrder.getRepairOrderId());
 
         assertNotNull(foundOrder);
-        assertEquals(repairOrder.getRepairOrderId(), foundOrder.repairOrderId());
-        assertEquals("broken brakes", foundOrder.problemDescr());
-        assertEquals("123456789", foundOrder.phoneNumber());
+        assertEquals(repairOrder.getRepairOrderId(), foundOrder.getRepairOrderId());
+        assertEquals("broken brakes", foundOrder.getProblemDescr());
+        assertEquals("123456789", foundOrder.getPhoneNumber());
     }
 
     @Test
@@ -32,6 +32,6 @@ public class RepairOrderRegistryTest {
         RepairOrderDTO foundOrder = registry.returnRepairOrderDTO(repairOrder.getRepairOrderId());
 
         assertNotNull(foundOrder);
-        assertEquals(250.0, foundOrder.totalCost(), 0.0);
+        assertEquals(250.0, foundOrder.getTotalCost(), 0.0);
     }
 }
