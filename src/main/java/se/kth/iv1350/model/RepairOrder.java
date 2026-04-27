@@ -8,7 +8,7 @@ import se.kth.iv1350.integration.RepairOrderRegistry;
  * Handles logic for a specific repair order.
  */
 public class RepairOrder {
-
+    private RepairOrderRegistry repairOrderRegistry;
     private String repairOrderId;
     private String date;
     private String problemDescr;
@@ -23,14 +23,16 @@ public class RepairOrder {
     private RepairTask[] repairTasks;
     private int nrOfRepairTasks;
     
-    private RepairOrder(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber){
+    private RepairOrder(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
         this.repairOrderId = repairOrderId;
         this.problemDescr = problemDescr;
         this.phoneNumber = phoneNumber;
         this.bikeSerialNumber = bikeSerialNumber;
+        this.repairOrderRegistry = repairOrderRegistry;
+
         this.totalCost = 0.0;
         this.diagnosticReport = "";
-        this.estimatedCompletionDate = "";
+        this.estimatedCompletionDate = ""; //ev få in som input eller att sätta här, tex dagens datum plus 2 veckor 
         this.repairTasks = new RepairTask[10];
         this.nrOfRepairTasks = 0;
         this.state = "CREATED";
@@ -39,7 +41,7 @@ public class RepairOrder {
     //<<create>> repairOrder
     public static RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
         String repairOrderId = repairOrderRegistry.generateRepairOrderId();
-        RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber);
+        RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
         repairOrderRegistry.updateRepairOrder(repairOrder.createRepairOrderDTO());
         return repairOrder;
     }
@@ -77,14 +79,20 @@ public class RepairOrder {
     }
 
     public RepairOrderDTO createRepairOrderDTO(){
-        return new RepairOrderDTO(repairOrderId,
-                                  problemDescr,
-                                  phoneNumber,
-                                  bikeSerialNumber,
-                                  state,
-                                  totalCost,
-                                  diagnosticReport,
-                                  estimatedCompletionDate);
+        return new RepairOrderDTO (
+            repairOrderId,  
+            problemDescr, 
+            phoneNumber, 
+            bikeSerialNumber, 
+            state,
+            totalCost, 
+            diagnosticReport, 
+            estimatedCompletionDate,
+            nrOfRepairTasks,
+            repairTasks
+        );
+        
+                                  
     }
 
     //getters for printer

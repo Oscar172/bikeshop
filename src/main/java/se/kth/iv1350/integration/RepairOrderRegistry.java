@@ -10,7 +10,11 @@ public class RepairOrderRegistry {
         this.nrOfRepairOrders = 0;
     }
 
-    //<<create>> repairOrderRegistry()
+   
+    /**
+     * Constructs repairOrderRegistry class
+     * @return reference to the class
+     */
     public static RepairOrderRegistry repairOrderRegistry(){
         return new RepairOrderRegistry();
     }

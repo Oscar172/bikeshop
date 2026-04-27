@@ -1,18 +1,32 @@
 package se.kth.iv1350.integration;
+import se.kth.iv1350.model.RepairTask;
 
 public class RepairOrderDTO {
 
-    private String repairOrderId;
-    private String problemDescr;
-    private String phoneNumber;
-    private String bikeSerialNumber;
-    private String state;
-    private double totalCost;
-    private String diagnosticReport;
-    private String estimatedCompletionDate;
+    private final String repairOrderId;
+    private final String problemDescr;
+    private final String phoneNumber;
+    private final String bikeSerialNumber;
+    private final String state;
+    private final double totalCost;
+    private final String diagnosticReport;
+    private final String estimatedCompletionDate;
+    private final int nrOfRepairTasks;
+    private final RepairTask[] repairTasks;
 
-    //Skapar RepairOrderDTO
-    public RepairOrderDTO(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber, String state, double totalCost, String diagnosticReport, String estimatedCompletionDate){
+
+    /**
+     * Declares the RepairOrderDTO object.
+     * @param repairOrderId
+     * @param problemDescr
+     * @param phoneNumber
+     * @param bikeSerialNumber
+     * @param state
+     * @param totalCost
+     * @param diagnosticReport
+     * @param estimatedCompletionDate
+     */
+    public RepairOrderDTO(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber, String state, double totalCost, String diagnosticReport, String estimatedCompletionDate, int nrOfRepairTasks, RepairTask[] repairTasks){
         this.repairOrderId = repairOrderId;
         this.problemDescr = problemDescr;
         this. phoneNumber = phoneNumber;
@@ -21,9 +35,11 @@ public class RepairOrderDTO {
         this.totalCost = totalCost;
         this.diagnosticReport = diagnosticReport;
         this.estimatedCompletionDate = estimatedCompletionDate;
+        this.nrOfRepairTasks = nrOfRepairTasks;
+        this.repairTasks = repairTasks;
+        
     }
 
-    //getters
 
     /**
      * A getter that returns the repairorder id.
@@ -55,5 +71,12 @@ public class RepairOrderDTO {
         return estimatedCompletionDate;
     }
 
+    public int getNrOfRepairTasks(){
+        return nrOfRepairTasks;
+    }
+
+     public RepairTask [] getRepairTasks(){
+        return repairTasks;
+    }
 
 }

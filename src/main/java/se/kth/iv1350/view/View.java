@@ -2,6 +2,7 @@ package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerDTO;
+import se.kth.iv1350.integration.RepairOrderDTO;
 
 public class View {
 
@@ -15,6 +16,7 @@ public class View {
      * Simulates a user input that generates calls to all system operations.
      */
     public void runFakeExecution() {
+        String phoneNumber = "0000";
         String inputPhoneNumber = "0763252275";
         CustomerDTO foundCustomer = contr.searchForCustomer(inputPhoneNumber);
         // Alt. handle results
@@ -29,5 +31,11 @@ public class View {
         contr.addDiagnosticReport(repairOrderId, diagTaskResult);
         // Alt.
         System.out.println("Diagnostic results has been sent to the registry for order: " + repairOrderId);
+
+        String repairTaskDescription = "Change all brake wires";
+        double cost = 249.90;
+        RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
+        RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber);
+        contr.addRepairTask(repairOrderId, repairTaskDescription, cost);
     }
 }
