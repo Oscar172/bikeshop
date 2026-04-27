@@ -37,7 +37,7 @@ public class RepairOrder {
     
     /**
     * Creates a new instance of RepairOrder. 
-    * Is used by the COntroller to gain access to methods in the class.
+    * Is used by the Controller to gain access to methods in the class.
      */
     public RepairOrder() {
         // Denna kan vara tom
