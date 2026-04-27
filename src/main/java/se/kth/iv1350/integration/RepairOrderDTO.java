@@ -48,6 +48,4 @@ public class RepairOrderDTO {
     public String estimatedCompletionDate(){
         return estimatedCompletionDate;
     }
-
-
 }

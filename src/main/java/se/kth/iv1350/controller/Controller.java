@@ -13,9 +13,7 @@ public class Controller {
     private RepairOrderRegistry repairOrderRegistry;
     private Printer printer;
 
-    public Controller(CustomerRegistry customerRegistry,
-                        RepairOrderRegistry repairOrderRegistry,
-                        Printer printer){
+    public Controller(CustomerRegistry customerRegistry, RepairOrderRegistry repairOrderRegistry, Printer printer){
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;

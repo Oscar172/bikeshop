@@ -1,13 +1,11 @@
 package se.kth.iv1350.model;
 
-import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 
 public class RepairOrder {
 
     private String repairOrderId;
-    private String date;
     private String problemDescr;
     private String state;
     private double totalCost;
@@ -15,8 +13,6 @@ public class RepairOrder {
     private String diagnosticReport;
     private String estimatedCompletionDate;
     private String phoneNumber;
-    private String diagTaskResult;
-
     private RepairTask[] repairTasks;
     private int nrOfRepairTasks;
     
@@ -37,17 +33,17 @@ public class RepairOrder {
     public static RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
         String repairOrderId = repairOrderRegistry.generateRepairOrderId();
         RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber);
-        repairOrderRegistry.updateRepairOrder(repairOrder.createRepairOrderDTO());
+        repairOrderRegistry.updateRepairOrder(repairOrder);
         return repairOrder;
     }
 
     //addDiagnosticReport
-    public void addDiagnosticReport(String repairOrderId, String diagTaskResult, RepairOrderRegistry repairOrderRegistry){
+    public void addDiagnosticReport(String diagTaskResult){
         this.diagnosticReport = diagTaskResult;
     }
 
     //addRepairTask
-    public void addRepairTask(RepairTask repairTask, RepairOrderRegistry repairOrderRegistry){
+    public void addRepairTask(RepairTask repairTask){
         if(nrOfRepairTasks < repairTasks.length){
             repairTasks[nrOfRepairTasks] = repairTask;
             nrOfRepairTasks++;
@@ -68,9 +64,8 @@ public class RepairOrder {
     }
 
     //updateRepairOrder
-    public void updateRepairOrderStatus(String repairOrderId, String repairStatus, Printer printer){
+    public void updateRepairOrderStatus(String repairStatus){
         this.state = repairStatus;
-        printer.printRepairOrder(this);
     }
 
     public RepairOrderDTO createRepairOrderDTO(){
