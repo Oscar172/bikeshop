@@ -60,10 +60,12 @@ public class Controller {
      * @param cost  The cost of the proposed repair task.
      */
     public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
+        RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
+        
         RepairOrderDTO dto = repairOrderRegistry.getRepairOrderByRepairOrderId(repairOrderId); //gets the DTO from registry
         
         RepairOrder repairOrder = new RepairOrder(dto, repairOrderRegistry); //anropa repairORder class för att lägga till
-        RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
+        
         repairOrder.addRepairTask(newTask); //adds the task to teh report
     }
 
