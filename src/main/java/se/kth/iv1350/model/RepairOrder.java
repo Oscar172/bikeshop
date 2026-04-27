@@ -23,56 +23,30 @@ public class RepairOrder {
     private RepairTask[] repairTasks;
     private int nrOfRepairTasks;
     
-    public RepairOrder(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber){
+    private RepairOrder(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber){
         this.repairOrderId = repairOrderId;
         this.problemDescr = problemDescr;
         this.phoneNumber = phoneNumber;
         this.bikeSerialNumber = bikeSerialNumber;
         this.totalCost = 0.0;
         this.diagnosticReport = "";
+        this.estimatedCompletionDate = "";
         this.repairTasks = new RepairTask[10];
         this.nrOfRepairTasks = 0;
         this.state = "CREATED";
     }
     
-    /**
-    * Creates a new instance of RepairOrder. 
-    * Is used by the Controller to gain access to methods in the class.
-     */
-    public RepairOrder() {
-        // Denna kan vara tom
-    }
-
     //<<create>> repairOrder
     public static RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
-        String repairOrderId = "RO1";
-        return new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber);
+        String repairOrderId = repairOrderRegistry.generateRepairOrderId();
+        RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber);
+        repairOrderRegistry.updateRepairOrder(repairOrder.createRepairOrderDTO());
+        return repairOrder;
     }
 
-    /**
-     * Adds a diagnostic report to a specific repair order.
-     * The method retrieves current order data, updates it localy and then
-     * creates a new DTO that is saved.
-     * @param repairOrderId Id for the order that is handled.
-     * @param diagTaskResult Description of the diagnosis to add.
-     * @param repairOrderRegistry Reference to the registry where tha order is stored.
-     */
+    //addDiagnosticReport
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult, RepairOrderRegistry repairOrderRegistry){
-        this.diagTaskResult = diagTaskResult;
-        RepairOrderDTO oldOrderData = repairOrderRegistry.returnRepairOrderDTO(repairOrderId);
-        
-        RepairOrderDTO updatedOrderData = new RepairOrderDTO(
-            oldOrderData.getRepairOrderId(),
-            oldOrderData.getProblemDescr(),
-            oldOrderData.getPhoneNumber(),
-            oldOrderData.getBikeSerialNumber(),
-            oldOrderData.getState(),
-            oldOrderData.getTotalCost(),
-            diagTaskResult,
-            oldOrderData.getEstimatedCompletionDate()
-        );
-
-        repairOrderRegistry.updateRepairOrder(updatedOrderData);
+        this.diagnosticReport = diagTaskResult;
     }
 
     //addRepairTask
@@ -102,7 +76,18 @@ public class RepairOrder {
         printer.printRepairOrder(this);
     }
 
-    //getters för printer
+    public RepairOrderDTO createRepairOrderDTO(){
+        return new RepairOrderDTO(repairOrderId,
+                                  problemDescr,
+                                  phoneNumber,
+                                  bikeSerialNumber,
+                                  state,
+                                  totalCost,
+                                  diagnosticReport,
+                                  estimatedCompletionDate);
+    }
+
+    //getters for printer
     public String getRepairOrderId(){
         return repairOrderId;
     }
@@ -124,5 +109,4 @@ public class RepairOrder {
     public String getPhoneNumber(){
         return phoneNumber;
     }
-
 }

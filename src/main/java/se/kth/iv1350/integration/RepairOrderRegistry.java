@@ -1,69 +1,79 @@
 package se.kth.iv1350.integration;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import se.kth.iv1350.model.RepairOrder;
-
-/**
- * Represents a register of all repair orders.
- */
 public class RepairOrderRegistry {
-    private List<RepairOrderDTO> repairOrders = new ArrayList<>();
 
-    /**
-     * Creates a new instace of RepairOrderRegistry. (Constructor)
-     */
-    public RepairOrderRegistry() {
-        // Example order so this is not empty for now
-        repairOrders.add(new RepairOrderDTO(null, null, null, null, null, 0, null, null));
+    private RepairOrderDTO[] repairOrders;
+    private int nrOfRepairOrders;
+    
+    private RepairOrderRegistry(){
+        this.repairOrders = new RepairOrderDTO[100];
+        this.nrOfRepairOrders = 0;
     }
 
-    //createRepairOrder
-    public RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        return RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, this);
+    //<<create>> repairOrderRegistry()
+    public static RepairOrderRegistry repairOrderRegistry(){
+        return new RepairOrderRegistry();
+    }
+
+    public String generateRepairOrderId(){
+        return "RO" + (nrOfRepairOrders + 1);
     }
 
     //findAllRepairOrders
     public RepairOrderDTO[] findAllRepairOrders(String phoneNumber){
-        return new RepairOrderDTO[0];
+        RepairOrderDTO[] foundRepairOrders = new RepairOrderDTO[nrOfRepairOrders];
+        int nrOfFoundRepairOrders = 0;
+
+        for(int i = 0; i < nrOfRepairOrders; i++){
+            if(repairOrders[i].phoneNumber().equals(phoneNumber)){
+                foundRepairOrders[nrOfFoundRepairOrders] = repairOrders[i];
+                nrOfFoundRepairOrders++;
+            }
+        }
+
+        RepairOrderDTO[] repairOrders = new RepairOrderDTO[nrOfFoundRepairOrders];
+        for(int i = 0; i < nrOfFoundRepairOrders; i++){
+            repairOrders[i] = foundRepairOrders[i];
+        }
+
+        return repairOrders;
+    }
+
+    //addDiagnosticReport
+    public void addDiagnosticReport(String repairOrderId, String diagRepairTask){
+
     }
 
     public void addRepairTask(String repairOrderId, String repairTask, double cost){
 
     }
 
-    public RepairOrderDTO findRepairOrder(String phoneString){
+    public RepairOrderDTO findRepairOrder(String phoneNumber){
+        for(int i = nrOfRepairOrders - 1; i >= 0; i--){
+            if(repairOrders[i].phoneNumber().equals(phoneNumber)){
+                return repairOrders[i];
+            }
+        }
         return null;
     }
 
     /**
-     * Recieves an object (repairOrder) that has been updated with new information
-     * and saves it in the list.
-     * @param repairOrder The repair order object that has been changed.
+     * Saves a new or overwrites a repair order
+     * @param repairOrder the specific repair order object
      */
-    public void updateRepairOrder(RepairOrderDTO repairOrder) {
-        for (int i = 0; i < repairOrders.size(); i++) {
-            if (repairOrders.get(i).getRepairOrderId().equals(repairOrder.getRepairOrderId())) {
-                repairOrders.set(i, repairOrder);
-                //Alt.
-                System.out.println("Order: " + repairOrder.getRepairOrderId() + "has been updated");
+    public void updateRepairOrder(RepairOrderDTO repairOrder){
+        for(int i = 0; i < nrOfRepairOrders; i++){
+            if(repairOrders[i].repairOrderId().equals(repairOrder.repairOrderId())){
+                repairOrders[i] = repairOrder;
                 return;
             }
         }
+
+        repairOrders[nrOfRepairOrders] = repairOrder;
+        nrOfRepairOrders++;
     }
 
-    /**
-     * Retrieves a specific repairorder based on its id.
-     * @param repairOrderId The id of the order to fetch.
-     * @return The found order returns as a DTO, or null if not found.
-     */
-    public RepairOrderDTO returnRepairOrderDTO(String repairOrderId) {
-        for (RepairOrderDTO order : repairOrders) {
-            if (order.getRepairOrderId().equals(repairOrderId)) {
-                return order;
-            }
-        }
+    public RepairOrderDTO returnRepairOrderDTO(String repairOrderId){
         return null;
     }
 
@@ -74,10 +84,4 @@ public class RepairOrderRegistry {
     public void rejectRepairOrder(String repairOrderId){
         
     }
-
-
-
-
-
 }
-

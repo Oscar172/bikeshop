@@ -42,8 +42,9 @@ public class Controller {
         return customerRegistry.findCustomer(phoneNumber);
     }
 
-    public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        repairOrderRegistry.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber);
+    public RepairOrderDTO createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
+        RepairOrder repairOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
+        return repairOrder.createRepairOrderDTO();
     }
 
     public RepairOrderDTO[] findAllRepairOrders(String phoneNumber){
@@ -75,11 +76,4 @@ public class Controller {
     public void rejectRepairOrder(String repairOrderId){
         repairOrderRegistry.rejectRepairOrder(repairOrderId);
     }
-
-
-
-
-
-
-
 }
