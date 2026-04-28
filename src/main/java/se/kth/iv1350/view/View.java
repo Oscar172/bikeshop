@@ -21,7 +21,7 @@ public class View {
         CustomerDTO foundCustomer = contr.searchForCustomer(inputPhoneNumber);
         // Alt. handle results
         if (foundCustomer != null) {
-            System.out.println("Cusomer found: " + foundCustomer.getName());
+            System.out.println("Customer found: " + foundCustomer.getName());
         } else {
             System.out.println("No customer found on this number: " + inputPhoneNumber);
         }

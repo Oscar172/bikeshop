@@ -14,9 +14,9 @@ public class Main
      */
     public static void main( String[] args )
     {
-        CustomerRegistry customerRegistry = CustomerRegistry.customerRegistry();
-        RepairOrderRegistry repairOrderRegistry = RepairOrderRegistry.repairOrderRegistry();
-        Printer printer = Printer.createPrinter();
+        CustomerRegistry customerRegistry = new CustomerRegistry();
+        RepairOrderRegistry repairOrderRegistry =  new RepairOrderRegistry();
+        Printer printer = new Printer();
 
         Controller contr = new Controller(customerRegistry, repairOrderRegistry, printer);
         View view = new View(contr);

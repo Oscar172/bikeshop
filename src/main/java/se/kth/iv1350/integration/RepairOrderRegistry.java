@@ -8,18 +8,9 @@ public class RepairOrderRegistry {
     private RepairOrder[] repairOrders;
     private int nrOfRepairOrders;
     
-    private RepairOrderRegistry(){
+    public RepairOrderRegistry(){
         this.repairOrders = new RepairOrder[100];
         this.nrOfRepairOrders = 0;
-    }
-
-   
-    /**
-     * Constructs repairOrderRegistry class
-     * @return reference to the class
-     */
-    public static RepairOrderRegistry repairOrderRegistry(){
-        return new RepairOrderRegistry();
     }
 
     public String generateRepairOrderId(){

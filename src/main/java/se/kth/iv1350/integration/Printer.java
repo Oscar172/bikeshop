@@ -4,8 +4,7 @@ import se.kth.iv1350.model.RepairOrder;
 public class Printer {
 
     //<<create>> printer() : Printer
-    public static Printer createPrinter(){
-        return new Printer();
+    public Printer(){
     }
 
     //

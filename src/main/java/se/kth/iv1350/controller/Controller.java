@@ -33,6 +33,7 @@ public class Controller {
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;
+
     }
 
     /**

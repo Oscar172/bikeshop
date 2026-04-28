@@ -12,10 +12,9 @@ public class CustomerRegistry {
     private List<CustomerDTO> customers = new ArrayList<>();
 
     /**
-     * Creates a new instance of CustomerRegistry. (Constructor)
+     * Initiates the class
      */
-    public static CustomerRegistry customerRegistry() {
-        return new CustomerRegistry();
+    public CustomerRegistry() {
         // Example, add a customer here to be able to run fake execution in view
         // Add code that run when the object is created
         // For example, initiate a list of customers or create a DTO.
