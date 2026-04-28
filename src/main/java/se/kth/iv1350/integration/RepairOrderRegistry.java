@@ -38,10 +38,10 @@ public class RepairOrderRegistry {
     }
 
     //addDiagnosticReport
-    public void addDiagnosticReport(String repairOrderId, String diagRepairTask){
+    public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
-            repairOrder.addDiagnosticReport(diagRepairTask);
+            repairOrder.addDiagnosticReport(diagTaskResult);
         }
     }
 

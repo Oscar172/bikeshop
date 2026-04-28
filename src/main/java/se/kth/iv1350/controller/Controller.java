@@ -69,6 +69,9 @@ public class Controller {
      * @param cost  The cost of the proposed repair task.
      */
     public void addRepairTask(String repairOrderId, String repairTask, double cost){
+        
+        repairTask = RepairTask.createRepairTask(repairTask, cost);
+
         repairOrderRegistry.addRepairTask(repairOrderId, repairTask, cost);
     }
 

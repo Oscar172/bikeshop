@@ -34,8 +34,11 @@ public class View {
 
         String repairTaskDescription = "Change all brake wires";
         double cost = 249.90;
+        
         RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
+
         RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber);
+
         contr.addRepairTask(repairOrderId, repairTaskDescription, cost);
     }
 }
