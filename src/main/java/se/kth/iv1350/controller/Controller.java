@@ -33,6 +33,7 @@ public class Controller {
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;
+
     }
 
     /**
@@ -44,9 +45,8 @@ public class Controller {
         return customerRegistry.findCustomer(phoneNumber);
     }
 
-    public RepairOrderDTO createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        RepairOrder repairOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
-        return repairOrder.createRepairOrderDTO();
+    public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber,  RepairOrderRegistry repairOrderRegistry){
+        RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
     }
 
     public RepairOrderDTO[] findAllRepairOrders(String phoneNumber){
@@ -68,8 +68,11 @@ public class Controller {
      * @param repairTaskDescription The description of the proposed repair task.
      * @param cost  The cost of the proposed repair task.
      */
-    public void addRepairTask(String repairOrderId, String repairTask, double cost){
-        repairOrderRegistry.addRepairTask(repairOrderId, repairTask, cost);
+    public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
+        
+        RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
+
+        repairOrderRegistry.addRepairTask(repairOrderId, newTask);
     }
 
     public RepairOrderDTO findRepairOrder(String phoneNumber){
@@ -77,7 +80,8 @@ public class Controller {
     }
 
     public void acceptRepairOrder(String repairOrderId){
-        repairOrderRegistry.acceptRepairOrder(repairOrderId);
+        RepairOrder repairOrder = repairOrderRegistry.acceptRepairOrder(repairOrderId);
+        printer.printRepairOrder(repairOrder);
     }
 
     public void rejectRepairOrder(String repairOrderId){

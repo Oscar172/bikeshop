@@ -2,17 +2,6 @@ package se.kth.iv1350.integration;
 
 public class CustomerDTO {
     
-     /**
-     * Constructs CustomerDTO class
-     * @return reference to the class
-     */
-    public static CustomerDTO createCustomerDTO(){
-        return new CustomerDTO();
-    }
-
-    //nollställer referensen? typ
-    public CustomerDTO() {}
-
     private String phoneNumber;
     private String name;
 
@@ -37,23 +26,4 @@ public class CustomerDTO {
         return name;
     }
 
-    /**
-     * 
-     * Hardcoded examples of CustomerDTOs
-     */
-    public String customerEx(String phoneNumber){
-        return phoneNumber;
-    }
-
-    public String customerEx2(String phoneNumber){
-        return phoneNumber;
-    }
-
-    public String customerEx3(String phoneNumber){
-        return phoneNumber;
-    }
-
-    public String customerEx4(String phoneNumber){
-        return phoneNumber;
-    }
 }
