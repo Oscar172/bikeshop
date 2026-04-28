@@ -6,11 +6,15 @@ import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.view.View;
 
+/**
+ * Starts the application.
+ */
 public class Main 
 {
     /**
-     * main starts all the classes below.
-     * @param args allows inputs.
+     * Starts the entire application
+     * 
+     * @param args Command line arguments.
      */
     public static void main(String[] args )
     {
