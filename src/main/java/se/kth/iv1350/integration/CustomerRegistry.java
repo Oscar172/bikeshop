@@ -5,27 +5,24 @@ import java.util.List;
 
 
 /**
- * Represents a register of customers and contains the logic
- * to search for customers in the system.
+ * Represents a customer registry and conatains logic for searching for customers.
  */
 public class CustomerRegistry {
     private List<CustomerDTO> customers = new ArrayList<>();
 
     /**
-     * Initiates the class
+     * Creates a new CustomerReigstry and initializes it with existing customers.
      */
     public CustomerRegistry() {
-        // Example, add a customer here to be able to run fake execution in view
-        // Add code that run when the object is created
-        // For example, initiate a list of customers or create a DTO.
         customers.add(new CustomerDTO("1234", "Gustaf"));
         customers.add(new CustomerDTO("5678", "Tova"));
     }
   
     /**
      * Retrieves information about an existing customer based on their phonenumber.
-     * @param phoneNumber The customers phonenumber.
-     * @return The matching customer found in the registry.
+     * 
+     * @param phoneNumber The customer's phone number.
+     * @return The matching customer, or null if no customer is found.
      */
     public CustomerDTO findCustomer(String phoneNumber) {
         for (CustomerDTO customer : customers) {
@@ -33,7 +30,7 @@ public class CustomerRegistry {
                 return customer;
             }
         }
-        return null; // Alternativ flow?
+        return null;
     }
 
 }

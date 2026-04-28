@@ -2,9 +2,9 @@ package se.kth.iv1350.model;
 
 public class RepairTask {
 
-    private double cost;
-    private String state;
-    private String description;
+    private final double cost;
+    private final String state;
+    private final String description;
 
     /**
      * Defines the objects properties.

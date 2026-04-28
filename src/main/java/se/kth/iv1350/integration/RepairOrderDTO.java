@@ -1,6 +1,9 @@
 package se.kth.iv1350.integration;
 import se.kth.iv1350.model.RepairTask;
 
+/**
+ * Contains information about a repair order transferred between layers.
+ */
 public class RepairOrderDTO {
 
     private final String repairOrderId;
@@ -16,15 +19,18 @@ public class RepairOrderDTO {
 
 
     /**
-     * Declares the RepairOrderDTO object.
-     * @param repairOrderId
-     * @param problemDescr
-     * @param phoneNumber
-     * @param bikeSerialNumber
-     * @param state
-     * @param totalCost
-     * @param diagnosticReport
-     * @param estimatedCompletionDate
+     * Creates a new RepairOrderDTO containing repair order information.
+     * 
+     * @param repairOrderId The id of the reapir order.
+     * @param problemDescr The description of the reported problem.
+     * @param phoneNumber The customer's phone number
+     * @param bikeSerialNumber The bike's serial number
+     * @param state The current state of the repair order.
+     * @param totalCost The total cost of the repair order.
+     * @param diagnosticReport The diagnostic report for the repair order.
+     * @param estimatedCompletionDate The estimated completion date.
+     * @param nrOfRepairTasks The number of repair tasks in the order.
+     * @param repairTasks The repair tasks included in the order.
      */
     public RepairOrderDTO(String repairOrderId, String problemDescr, String phoneNumber, String bikeSerialNumber, String state, double totalCost, String diagnosticReport, String estimatedCompletionDate, int nrOfRepairTasks, RepairTask[] repairTasks){
         this.repairOrderId = repairOrderId;
@@ -42,41 +48,92 @@ public class RepairOrderDTO {
 
 
     /**
-     * A getter that returns the repairorder id.
-     * @return The repairorder id.
+     * Returns the repair order id.
+     *
+     * @return The repair order id.
      */
-    public String getRepairOrderId(){
+    public String getRepairOrderId() {
         return repairOrderId;
     }
 
-    public String getProblemDescr(){
+    /**
+     * Returns the problem description.
+     *
+     * @return The problem description.
+     */
+    public String getProblemDescr() {
         return problemDescr;
     }
-    public String getPhoneNumber(){
+
+    /**
+     * Returns the customer's phone number.
+     *
+     * @return The customer's phone number.
+     */
+    public String getPhoneNumber() {
         return phoneNumber;
     }
-    public String getBikeSerialNumber(){
+
+    /**
+     * Returns the bike's serial number.
+     *
+     * @return The bike's serial number.
+     */
+    public String getBikeSerialNumber() {
         return bikeSerialNumber;
     }
-    public String getState(){
+
+    /**
+     * Returns the current state of the repair order.
+     *
+     * @return The current state.
+     */
+    public String getState() {
         return state;
     }
-    public double getTotalCost(){
+
+    /**
+     * Returns the total cost of the repair order.
+     *
+     * @return The total cost.
+     */
+    public double getTotalCost() {
         return totalCost;
     }
-    public String getDiagnosticReport(){
+
+    /**
+     * Returns the diagnostic report.
+     *
+     * @return The diagnostic report.
+     */
+    public String getDiagnosticReport() {
         return diagnosticReport;
     }
-    public String getEstimatedCompletionDate(){
+
+    /**
+     * Returns the estimated completion date.
+     *
+     * @return The estimated completion date.
+     */
+    public String getEstimatedCompletionDate() {
         return estimatedCompletionDate;
     }
 
-    public int getNrOfRepairTasks(){
+    /**
+     * Returns the number of repair tasks.
+     *
+     * @return The number of repair tasks.
+     */
+    public int getNrOfRepairTasks() {
         return nrOfRepairTasks;
     }
 
-     public RepairTask [] getRepairTasks(){
+    /**
+     * Returns all repair tasks in the repair order.
+     *
+     * @return An array of repair tasks.
+     */
+    public RepairTask[] getRepairTasks() {
         return repairTasks;
     }
-
 }

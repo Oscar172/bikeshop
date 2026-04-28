@@ -2,16 +2,30 @@ package se.kth.iv1350.integration;
 
 import se.kth.iv1350.model.RepairOrder;
 
+/**
+ * Represents a printer used to print text and repair order information.
+ */
 public class Printer {
 
+    /**
+     * Creates a new Printer.
+     */
     public Printer(){
     }
-
+    /**
+     * Prints a text message.
+     * 
+     * @param text The text to print.
+     */
     public void print(String text){
         System.out.println(text);
     }
 
-    //writes repairorder
+    /**
+     * Prints information about a repair order.
+     * 
+     * @param repairOrder The repair order to print.
+     */
     public void printRepairOrder(RepairOrder repairOrder){
         System.out.println("");
         System.out.println("This repair order: ");
