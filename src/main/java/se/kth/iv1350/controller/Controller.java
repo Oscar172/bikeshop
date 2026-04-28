@@ -45,9 +45,8 @@ public class Controller {
         return customerRegistry.findCustomer(phoneNumber);
     }
 
-    public RepairOrderDTO createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        RepairOrder repairOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
-        return repairOrder.createRepairOrderDTO();
+    public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber,  RepairOrderRegistry repairOrderRegistry){
+        RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
     }
 
     public RepairOrderDTO[] findAllRepairOrders(String phoneNumber){
