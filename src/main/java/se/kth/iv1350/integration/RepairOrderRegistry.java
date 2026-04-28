@@ -85,11 +85,13 @@ public class RepairOrderRegistry {
         return null;
     }
 
-    public void acceptRepairOrder(String repairOrderId){
+    public RepairOrder acceptRepairOrder(String repairOrderId){
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
             repairOrder.updateRepairOrderStatus("ACCEPTED");
+            return repairOrder;
         }
+        return null;
     }
 
     public void rejectRepairOrder(String repairOrderId){

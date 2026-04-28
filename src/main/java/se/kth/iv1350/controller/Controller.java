@@ -80,7 +80,8 @@ public class Controller {
     }
 
     public void acceptRepairOrder(String repairOrderId){
-        repairOrderRegistry.acceptRepairOrder(repairOrderId);
+        RepairOrder repairOrder = repairOrderRegistry.acceptRepairOrder(repairOrderId);
+        printer.printRepairOrder(repairOrder);
     }
 
     public void rejectRepairOrder(String repairOrderId){
