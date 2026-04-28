@@ -3,6 +3,7 @@ package se.kth.iv1350.integration;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Represents a register of customers and contains the logic
  * to search for customers in the system.

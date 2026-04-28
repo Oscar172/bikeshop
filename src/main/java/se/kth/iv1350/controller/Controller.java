@@ -6,6 +6,8 @@ import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.model.RepairOrder;
+import se.kth.iv1350.model.RepairTask;
+
 
 
 /**
@@ -60,6 +62,12 @@ public class Controller {
         repairOrderRegistry.addDiagnosticReport(repairOrderId, diagTaskResult);
     }
 
+    /**
+     * Creates a RepairTask object from the View inputs and adds it to an existing RepairOrder.
+     * @param repairOrderId The identifer of the RepairOrder to modify.
+     * @param repairTaskDescription The description of the proposed repair task.
+     * @param cost  The cost of the proposed repair task.
+     */
     public void addRepairTask(String repairOrderId, String repairTask, double cost){
         repairOrderRegistry.addRepairTask(repairOrderId, repairTask, cost);
     }
