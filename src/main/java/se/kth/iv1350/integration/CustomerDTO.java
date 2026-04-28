@@ -36,24 +36,4 @@ public class CustomerDTO {
     public String getName(){
         return name;
     }
-
-    /**
-     * 
-     * Hardcoded examples of CustomerDTOs
-     */
-    public String customerEx(String phoneNumber){
-        return phoneNumber;
-    }
-
-    public String customerEx2(String phoneNumber){
-        return phoneNumber;
-    }
-
-    public String customerEx3(String phoneNumber){
-        return phoneNumber;
-    }
-
-    public String customerEx4(String phoneNumber){
-        return phoneNumber;
-    }
 }

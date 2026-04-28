@@ -11,16 +11,12 @@ import java.util.List;
 public class CustomerRegistry {
     private List<CustomerDTO> customers = new ArrayList<>();
 
-    /**
-     * Creates a new instance of CustomerRegistry. (Constructor)
-     */
-    public static CustomerRegistry customerRegistry() {
-        return new CustomerRegistry();
-        // Example, add a customer here to be able to run fake execution in view
-        // Add code that run when the object is created
-        // For example, initiate a list of customers or create a DTO.
+    public CustomerRegistry(){
+        customers.add(new CustomerDTO("0763252275", "Oscar"));
+        customers.add(new CustomerDTO("0701111111", "Gustav"));
+        customers.add(new CustomerDTO("0702222222", "Tova"));
     }
-
+  
     /**
      * Retrieves information about an existing customer based on their phonenumber.
      * @param phoneNumber The customers phonenumber.

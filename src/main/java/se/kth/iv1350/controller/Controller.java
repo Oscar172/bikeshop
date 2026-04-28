@@ -44,9 +44,8 @@ public class Controller {
         return customerRegistry.findCustomer(phoneNumber);
     }
 
-    public RepairOrderDTO createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        RepairOrder repairOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
-        return repairOrder.createRepairOrderDTO();
+    public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
+        RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
     }
 
     public RepairOrderDTO[] findAllRepairOrders(String phoneNumber){
@@ -69,16 +68,21 @@ public class Controller {
      * @param cost  The cost of the proposed repair task.
      */
     public void addRepairTask(String repairOrderId, String repairTask, double cost){
-        repairOrderRegistry.addRepairTask(repairOrderId, repairTask, cost);
+        RepairTask newTask = RepairTask.createRepairTask(repairTask, cost);
+        repairOrderRegistry.addRepairTask(repairOrderId, newTask);
     }
 
     public RepairOrderDTO findRepairOrder(String phoneNumber){
         return repairOrderRegistry.findRepairOrder(phoneNumber);
     }
 
-    public void acceptRepairOrder(String repairOrderId){
-        repairOrderRegistry.acceptRepairOrder(repairOrderId);
-    }
+  public void acceptRepairOrder(String repairOrderId){
+      repairOrderRegistry.acceptRepairOrder(repairOrderId);
+      RepairOrderDTO repairOrder = repairOrderRegistry.returnRepairOrderDTO(repairOrderId);
+      if(repairOrder != null){
+        printer.printRepairOrderDTO(repairOrder);
+      }
+  }
 
     public void rejectRepairOrder(String repairOrderId){
         repairOrderRegistry.rejectRepairOrder(repairOrderId);

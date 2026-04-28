@@ -3,9 +3,7 @@ import se.kth.iv1350.model.RepairOrder;
 
 public class Printer {
 
-    //<<create>> printer() : Printer
-    public static Printer createPrinter(){
-        return new Printer();
+    public Printer(){
     }
 
     //
@@ -13,10 +11,8 @@ public class Printer {
         System.out.println(text);
     }
 
-
-
     //writes repairorder
-    public void printRepairOrder(RepairOrder repairOrder){
+    public void printRepairOrderDTO(RepairOrderDTO repairOrder){
         System.out.println("");
         System.out.println("This repair order: ");
         System.out.println("ID: " + repairOrder.getRepairOrderId());
@@ -26,8 +22,4 @@ public class Printer {
         System.out.println("The total cost " + repairOrder.getTotalCost());
         System.out.println("");
     }
-
-
-
-
 }

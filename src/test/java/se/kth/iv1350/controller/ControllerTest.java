@@ -14,12 +14,13 @@ public class ControllerTest {
 
     @Test
     public void testCreateRepairOrderCreatesRepairOrderWithCorrectValues(){
-        CustomerRegistry customerRegistry = CustomerRegistry.customerRegistry();
-        RepairOrderRegistry repairOrderRegistry = RepairOrderRegistry.repairOrderRegistry();
-        Printer printer = Printer.createPrinter();
+        CustomerRegistry customerRegistry = new CustomerRegistry();
+        RepairOrderRegistry repairOrderRegistry = new RepairOrderRegistry();
+        Printer printer = new Printer();
         Controller controller = new Controller(customerRegistry, repairOrderRegistry, printer);
 
-        RepairOrderDTO createdOrder = controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
+        controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
+        RepairOrderDTO createdOrder = controller.findRepairOrder("123456789");
 
         assertNotNull(createdOrder);
         assertNotNull(createdOrder.getRepairOrderId());
@@ -32,31 +33,32 @@ public class ControllerTest {
 
     @Test
     public void testFindRepairOrderReturnsLatestMatchingRepairOrder(){
-        CustomerRegistry customerRegistry = CustomerRegistry.customerRegistry();
-        RepairOrderRegistry repairOrderRegistry = RepairOrderRegistry.repairOrderRegistry();
-        Printer printer = Printer.createPrinter();
+        CustomerRegistry customerRegistry = new CustomerRegistry();
+        RepairOrderRegistry repairOrderRegistry = new RepairOrderRegistry();
+        Printer printer = new Printer();
         Controller controller = new Controller(customerRegistry, repairOrderRegistry, printer);
 
         controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
-        RepairOrderDTO latestOrder = controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
+        controller.createRepairOrder("broken gears", "123456789", "BIKE456");
 
         RepairOrderDTO foundOrder = controller.findRepairOrder("123456789");
 
         assertNotNull(foundOrder);
-        assertEquals(latestOrder.getRepairOrderId(), foundOrder.getRepairOrderId());
-        assertEquals("broken brakes", foundOrder.getProblemDescr());
+        assertEquals("Repair Order: 2", foundOrder.getRepairOrderId());
+        assertEquals("broken gears", foundOrder.getProblemDescr());
         assertEquals("123456789", foundOrder.getPhoneNumber());
-        assertEquals("BIKE123", foundOrder.getBikeSerialNumber());
+        assertEquals("BIKE456", foundOrder.getBikeSerialNumber());
     }
 
     @Test
     public void testAddRepairTaskUpdatesExistingRepairOrder(){
-        CustomerRegistry customerRegistry = CustomerRegistry.customerRegistry();
-        RepairOrderRegistry repairOrderRegistry = RepairOrderRegistry.repairOrderRegistry();
-        Printer printer = Printer.createPrinter();
+        CustomerRegistry customerRegistry = new CustomerRegistry();
+        RepairOrderRegistry repairOrderRegistry = new RepairOrderRegistry();
+        Printer printer = new Printer();
         Controller controller = new Controller(customerRegistry, repairOrderRegistry, printer);
 
-        RepairOrderDTO createdOrder = controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
+        controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
+        RepairOrderDTO createdOrder = controller.findRepairOrder("123456789");
 
         controller.addRepairTask(createdOrder.getRepairOrderId(), "Replace brake cable", 250.0);
 
@@ -69,9 +71,9 @@ public class ControllerTest {
 
     @Test
     public void testFindAllRepairOrdersReturnsAllMatchingRepairOrders(){
-        CustomerRegistry customerRegistry = CustomerRegistry.customerRegistry();
-        RepairOrderRegistry repairOrderRegistry = RepairOrderRegistry.repairOrderRegistry();
-        Printer printer = Printer.createPrinter();
+        CustomerRegistry customerRegistry = new CustomerRegistry();
+        RepairOrderRegistry repairOrderRegistry = new RepairOrderRegistry();
+        Printer printer = new Printer();
         Controller controller = new Controller(customerRegistry, repairOrderRegistry, printer);
 
         controller.createRepairOrder("broken brakes", "123456789", "BIKE123");
