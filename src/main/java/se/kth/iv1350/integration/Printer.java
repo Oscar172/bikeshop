@@ -1,4 +1,5 @@
 package se.kth.iv1350.integration;
+
 import se.kth.iv1350.model.RepairOrder;
 
 public class Printer {
@@ -6,13 +7,12 @@ public class Printer {
     public Printer(){
     }
 
-    //
     public void print(String text){
         System.out.println(text);
     }
 
     //writes repairorder
-    public void printRepairOrderDTO(RepairOrderDTO repairOrder){
+    public void printRepairOrder(RepairOrder repairOrder){
         System.out.println("");
         System.out.println("This repair order: ");
         System.out.println("ID: " + repairOrder.getRepairOrderId());

@@ -11,7 +11,6 @@ public class RepairOrderRegistry {
     public RepairOrderRegistry(){
         this.repairOrders = new RepairOrder[100];
         this.nrOfRepairOrders = 0;
-
     }
 
     public String generateRepairOrderId(){
@@ -86,11 +85,13 @@ public class RepairOrderRegistry {
         return null;
     }
 
-    public void acceptRepairOrder(String repairOrderId){
+    public RepairOrder acceptRepairOrder(String repairOrderId){
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
             repairOrder.updateRepairOrderStatus("ACCEPTED");
+            return repairOrder;
         }
+        return null;
     }
 
     public void rejectRepairOrder(String repairOrderId){

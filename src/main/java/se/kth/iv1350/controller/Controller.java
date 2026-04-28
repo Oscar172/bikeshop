@@ -33,6 +33,7 @@ public class Controller {
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;
+
     }
 
     /**
@@ -67,8 +68,8 @@ public class Controller {
      * @param repairTaskDescription The description of the proposed repair task.
      * @param cost  The cost of the proposed repair task.
      */
-    public void addRepairTask(String repairOrderId, String repairTask, double cost){
-        RepairTask newTask = RepairTask.createRepairTask(repairTask, cost);
+    public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
+        RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
         repairOrderRegistry.addRepairTask(repairOrderId, newTask);
     }
 
@@ -76,13 +77,11 @@ public class Controller {
         return repairOrderRegistry.findRepairOrder(phoneNumber);
     }
 
-  public void acceptRepairOrder(String repairOrderId){
-      repairOrderRegistry.acceptRepairOrder(repairOrderId);
-      RepairOrderDTO repairOrder = repairOrderRegistry.returnRepairOrderDTO(repairOrderId);
-      if(repairOrder != null){
-        printer.printRepairOrderDTO(repairOrder);
-      }
-  }
+    public void acceptRepairOrder(String repairOrderId){
+        RepairOrder repairOrder = repairOrderRegistry.acceptRepairOrder(repairOrderId);
+        if(repairOrder != null)
+            printer.printRepairOrder(repairOrder);
+    }
 
     public void rejectRepairOrder(String repairOrderId){
         repairOrderRegistry.rejectRepairOrder(repairOrderId);

@@ -2,8 +2,8 @@ package se.kth.iv1350.startup;
 
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerRegistry;
-import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderRegistry;
+import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.view.View;
 
 public class Main 

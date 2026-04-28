@@ -11,10 +11,15 @@ import java.util.List;
 public class CustomerRegistry {
     private List<CustomerDTO> customers = new ArrayList<>();
 
-    public CustomerRegistry(){
-        customers.add(new CustomerDTO("0763252275", "Oscar"));
-        customers.add(new CustomerDTO("0701111111", "Gustav"));
-        customers.add(new CustomerDTO("0702222222", "Tova"));
+    /**
+     * Initiates the class
+     */
+    public CustomerRegistry() {
+        // Example, add a customer here to be able to run fake execution in view
+        // Add code that run when the object is created
+        // For example, initiate a list of customers or create a DTO.
+        customers.add(new CustomerDTO("1234", "Gustaf"));
+        customers.add(new CustomerDTO("5678", "Tova"));
     }
   
     /**
@@ -30,4 +35,6 @@ public class CustomerRegistry {
         }
         return null; // Alternativ flow?
     }
+
 }
+
