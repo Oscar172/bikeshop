@@ -45,10 +45,10 @@ public class RepairOrderRegistry {
         }
     }
 
-    public void addRepairTask(String repairOrderId, String repairTask, double cost){
+    public void addRepairTask(String repairOrderId, RepairTask repairTask){
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
-            repairOrder.addRepairTask(RepairTask.createRepairTask(repairOrderId, repairTask, cost));
+            repairOrder.addRepairTask(repairTask);
         }
     }
 

@@ -68,11 +68,11 @@ public class Controller {
      * @param repairTaskDescription The description of the proposed repair task.
      * @param cost  The cost of the proposed repair task.
      */
-    public void addRepairTask(String repairOrderId, String repairTask, double cost){
+    public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
         
-        repairTask = RepairTask.createRepairTask(repairTask, cost);
+        RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
 
-        repairOrderRegistry.addRepairTask(repairOrderId, repairTask, cost);
+        repairOrderRegistry.addRepairTask(repairOrderId, newTask);
     }
 
     public RepairOrderDTO findRepairOrder(String phoneNumber){
