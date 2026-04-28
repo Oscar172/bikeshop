@@ -18,6 +18,9 @@ public class CustomerRegistry {
         // Example, add a customer here to be able to run fake execution in view
         // Add code that run when the object is created
         // For example, initiate a list of customers or create a DTO.
+
+        customers.add(new CustomerDTO("0982989", "Karl Karlsson"));
+        customers.add(new CustomerDTO("0982989", "Lisa Lisadotter"));
     }
 
     /**
@@ -33,4 +36,6 @@ public class CustomerRegistry {
         }
         return null; // Alternativ flow?
     }
+
 }
+
