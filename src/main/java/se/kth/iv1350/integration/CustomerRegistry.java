@@ -18,11 +18,10 @@ public class CustomerRegistry {
         // Example, add a customer here to be able to run fake execution in view
         // Add code that run when the object is created
         // For example, initiate a list of customers or create a DTO.
-
-        customers.add(new CustomerDTO("0982989", "Karl Karlsson"));
-        customers.add(new CustomerDTO("0982989", "Lisa Lisadotter"));
+        customers.add(new CustomerDTO("1234", "Gustaf"));
+        customers.add(new CustomerDTO("5678", "Tova"));
     }
-
+  
     /**
      * Retrieves information about an existing customer based on their phonenumber.
      * @param phoneNumber The customers phonenumber.

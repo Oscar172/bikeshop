@@ -12,11 +12,12 @@ public class Main
      * main starts all the classes below.
      * @param args allows inputs.
      */
-    public static void main( String[] args )
+    public static void main(String[] args )
     {
         CustomerRegistry customerRegistry = new CustomerRegistry();
         Printer printer = new Printer();
-        RepairOrderRegistry repairOrderRegistry =  new RepairOrderRegistry();
+        RepairOrderRegistry repairOrderRegistry = new RepairOrderRegistry();
+
         Controller contr = new Controller(customerRegistry, repairOrderRegistry, printer);
         View view = new View(contr);
     }

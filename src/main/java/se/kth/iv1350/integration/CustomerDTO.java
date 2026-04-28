@@ -25,5 +25,4 @@ public class CustomerDTO {
     public String getName(){
         return name;
     }
-
 }

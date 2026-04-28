@@ -45,7 +45,7 @@ public class Controller {
         return customerRegistry.findCustomer(phoneNumber);
     }
 
-    public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber,  RepairOrderRegistry repairOrderRegistry){
+    public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
         RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
     }
 
@@ -69,9 +69,7 @@ public class Controller {
      * @param cost  The cost of the proposed repair task.
      */
     public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
-        
         RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
-
         repairOrderRegistry.addRepairTask(repairOrderId, newTask);
     }
 
@@ -81,7 +79,8 @@ public class Controller {
 
     public void acceptRepairOrder(String repairOrderId){
         RepairOrder repairOrder = repairOrderRegistry.acceptRepairOrder(repairOrderId);
-        printer.printRepairOrder(repairOrder);
+        if(repairOrder != null)
+            printer.printRepairOrder(repairOrder);
     }
 
     public void rejectRepairOrder(String repairOrderId){

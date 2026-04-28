@@ -1,18 +1,15 @@
 package se.kth.iv1350.integration;
+
 import se.kth.iv1350.model.RepairOrder;
 
 public class Printer {
 
-    //<<create>> printer() : Printer
     public Printer(){
     }
 
-    //
     public void print(String text){
         System.out.println(text);
     }
-
-
 
     //writes repairorder
     public void printRepairOrder(RepairOrder repairOrder){
@@ -25,8 +22,4 @@ public class Printer {
         System.out.println("The total cost " + repairOrder.getTotalCost());
         System.out.println("");
     }
-
-
-
-
 }
