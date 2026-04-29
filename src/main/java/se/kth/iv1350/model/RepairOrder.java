@@ -192,8 +192,12 @@ public class RepairOrder {
     public RepairTask[] getRepairTasks(){
         return repairTasks;
     }
-    
+
     public String getEstimatedCompletionDate() {
         return estimatedCompletionDate;
+    }
+
+    public int getNrOfRepairTasks() {
+        return nrOfRepairTasks;
     }
 }
