@@ -44,9 +44,9 @@ public class RepairOrderTest {
     
     @After
         public void tearDown() {
-            problemDescr = "broken brakes"; 
-            phoneNumber = "123456789"; 
-            bikeSerialNumber = "BIKE123"; 
+            problemDescr = null; 
+            phoneNumber = null; 
+            bikeSerialNumber = null; 
             diagTaskResult = null;
             repairOrderRegistry = null;
             testRepairOrder = null;
