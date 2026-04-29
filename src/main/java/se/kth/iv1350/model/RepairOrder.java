@@ -189,7 +189,6 @@ public class RepairOrder {
      *
      * @return The repair tasks.
      */
-
     public RepairTask[] getRepairTasks(){
         return repairTasks;
     }
