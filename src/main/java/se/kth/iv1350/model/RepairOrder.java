@@ -183,4 +183,15 @@ public class RepairOrder {
     public String getPhoneNumber(){
         return phoneNumber;
     }
+
+     /**
+     * Returns the Repair Orders repair tasks.
+     *
+     * @return The repair tasks.
+     */
+
+    public RepairTask[] getRepairTasks(){
+        return repairTasks;
+    }
+
 }
