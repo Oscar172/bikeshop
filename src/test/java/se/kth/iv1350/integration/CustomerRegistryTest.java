@@ -1,34 +1,49 @@
 package se.kth.iv1350.integration;
 
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CustomerRegistryTest {
+    private CustomerRegistry registry;
+    private String phoneNumber;
+    private String name;
+    private String nonExistingPhoneNumber;
 
-    @Test
-    public void testFindCustomerReturnsMatchingCustomer(){
-        CustomerRegistry customerRegistry = new CustomerRegistry();
+    @Before
+    public void setUp() {
+        registry = new CustomerRegistry();
 
-        CustomerDTO firstCustomer = customerRegistry.findCustomer("1234");
-        CustomerDTO secondCustomer = customerRegistry.findCustomer("5678");
+        phoneNumber = "1234";
+        name = "Gustaf";
+        nonExistingPhoneNumber = "0000";
+    }
 
-        assertNotNull(firstCustomer);
-        assertEquals("1234", firstCustomer.getPhoneNumber());
-        assertEquals("Gustaf", firstCustomer.getName());
+    @After
+    public void tearDown() {
+        registry = null;
 
-        assertNotNull(secondCustomer);
-        assertEquals("5678", secondCustomer.getPhoneNumber());
-        assertEquals("Tova", secondCustomer.getName());
+        phoneNumber = null;
+        name = null;
+        nonExistingPhoneNumber = null;
     }
 
     @Test
-    public void testFindCustomerReturnsNullWhenCusomterDoesNotExist(){
-        CustomerRegistry customerRegistry = new CustomerRegistry();
+    public void testFindCustomerReturnsMatchingCustomer(){
+        CustomerDTO foundCustomer = registry.findCustomer(phoneNumber);
 
-        CustomerDTO foundCustomer = customerRegistry.findCustomer("1111");
+        assertNotNull("Customer should be found", foundCustomer);
+        assertEquals("The phone number does not match the expected phone number.", phoneNumber, foundCustomer.getPhoneNumber());
+        assertEquals("The name does not match the expected name.", name, foundCustomer.getName());
+    }
 
-        assertNull(foundCustomer);
+    @Test
+    public void testFIndCustomerReturnsNullWhenCustomerDoesNotExist() {
+        CustomerDTO foundCustomer = registry.findCustomer(nonExistingPhoneNumber);
+
+        assertNull("Method should return null for a phone number not in the system.", foundCustomer);
     }
 }

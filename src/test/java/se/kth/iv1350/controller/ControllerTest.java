@@ -39,12 +39,12 @@ public class ControllerTest {
         controller.createRepairOrder(description, phoneNumber, bikeSerialNumber);
         RepairOrderDTO createdOrder = controller.findRepairOrder(phoneNumber);
 
-        assertNotNull("Order should have been created", createdOrder);
-        assertNotNull(createdOrder.getRepairOrderId());
-        assertEquals(description, createdOrder.getProblemDescr());
-        assertEquals(phoneNumber, createdOrder.getPhoneNumber());
-        assertEquals("CREATED", createdOrder.getState());
-        assertEquals(totalCost, createdOrder.getTotalCost(), 0.0001);
+        assertNotNull("Order should have been created.", createdOrder);
+        assertNotNull("The repair order id should not be null after it has been created.", createdOrder.getRepairOrderId());
+        assertEquals("The problem description in the order does not match the description entered at creation.", description, createdOrder.getProblemDescr());
+        assertEquals("The phone number in the created order does not match the customer's phone number.", phoneNumber, createdOrder.getPhoneNumber());
+        assertEquals("The order state should be 'CREATED' immediately after the order is created.", "CREATED", createdOrder.getState());
+        assertEquals("The total cost of the order was not calculated correctly.", totalCost, createdOrder.getTotalCost(), 0.0001);
     }
 
     @Test
@@ -56,11 +56,11 @@ public class ControllerTest {
 
         RepairOrderDTO foundOrder = controller.findRepairOrder(phoneNumber);
 
-        assertNotNull(foundOrder);
-        assertEquals("Repair Order: 2", foundOrder.getRepairOrderId());
-        assertEquals(anotherDescription, foundOrder.getProblemDescr());
-        assertEquals(phoneNumber, foundOrder.getPhoneNumber());
-        assertEquals(anotherBikeSerialNumber, foundOrder.getBikeSerialNumber());
+        assertNotNull("Search failed to return an order.", foundOrder);
+        assertEquals("The found order does not have the expected id.", "Repair Order: 2", foundOrder.getRepairOrderId());
+        assertEquals("The problem description in the found order does not match the expected description.", anotherDescription, foundOrder.getProblemDescr());
+        assertEquals("The phone number in the found order does not match the customer's phone number.", phoneNumber, foundOrder.getPhoneNumber());
+        assertEquals("The bike serial number in the found order does not match the expected serial number.", anotherBikeSerialNumber, foundOrder.getBikeSerialNumber());
     }
 
     @Test
@@ -74,9 +74,9 @@ public class ControllerTest {
 
         RepairOrderDTO updatedOrder = repairOrderRegistry.returnRepairOrderDTO(createdOrder.getRepairOrderId());
 
-        assertNotNull(updatedOrder);
-        assertEquals(createdOrder.getRepairOrderId(), updatedOrder.getRepairOrderId());
-        assertEquals(taskCost, updatedOrder.getTotalCost(), 0.0001);
+        assertNotNull("Updated order should not be null.", updatedOrder);
+        assertEquals("The repair order id should remain the same after update.", createdOrder.getRepairOrderId(), updatedOrder.getRepairOrderId());
+        assertEquals("The total cost in the updated order does not match the expected cost.", taskCost, updatedOrder.getTotalCost(), 0.0001);
     }
 
     @Test
@@ -87,16 +87,16 @@ public class ControllerTest {
 
         RepairOrderDTO[] foundOrders = controller.findAllRepairOrders(phoneNumber);
 
-        assertNotNull(foundOrders);
-        assertEquals(3, foundOrders.length);
-        assertEquals(phoneNumber, foundOrders[0].getPhoneNumber());
-        assertEquals(phoneNumber, foundOrders[1].getPhoneNumber());
-        assertEquals(phoneNumber, foundOrders[2].getPhoneNumber());
-        assertEquals("BIKE1", foundOrders[0].getBikeSerialNumber());
-        assertEquals("BIKE2", foundOrders[1].getBikeSerialNumber());
-        assertEquals("BIKE3", foundOrders[2].getBikeSerialNumber());
-        assertEquals("Change breaks", foundOrders[0].getProblemDescr());
-        assertEquals("Oil the chain", foundOrders[1].getProblemDescr());
-        assertEquals("Pump the tires", foundOrders[2].getProblemDescr());
+        assertNotNull("The search result array should not be null.", foundOrders);
+        assertEquals("The search should have returned exactly 3 orders.", 3, foundOrders.length);
+        assertEquals("The phone number does not match at index 0.", phoneNumber, foundOrders[0].getPhoneNumber());
+        assertEquals("The phone number does not match at index 1.", phoneNumber, foundOrders[1].getPhoneNumber());
+        assertEquals("The phone number does not match at index 2.", phoneNumber, foundOrders[2].getPhoneNumber());
+        assertEquals("The bike serial number does not match at index 0.", "BIKE1", foundOrders[0].getBikeSerialNumber());
+        assertEquals("The bike serial number does not match at index 1.", "BIKE2", foundOrders[1].getBikeSerialNumber());
+        assertEquals("The bike serial number does not match at index 2.", "BIKE3", foundOrders[2].getBikeSerialNumber());
+        assertEquals("The problem description does not match at index 0.", "Change breaks", foundOrders[0].getProblemDescr());
+        assertEquals("The problem description does not match at index 1.", "Oil the chain", foundOrders[1].getProblemDescr());
+        assertEquals("The problem description does not match at index 2.", "Pump the tires", foundOrders[2].getProblemDescr());
     }
 }

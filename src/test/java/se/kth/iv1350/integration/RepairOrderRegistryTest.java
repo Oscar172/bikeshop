@@ -42,9 +42,9 @@ public class RepairOrderRegistryTest {
         RepairOrderDTO foundOrder = registry.returnRepairOrderDTO(createdOrder.getRepairOrderId());
 
         assertNotNull("Order should be found in registry", foundOrder);
-        assertEquals(createdOrder.getRepairOrderId(), foundOrder.getRepairOrderId());
-        assertEquals(description, foundOrder.getProblemDescr());
-        assertEquals(phoneNumber, foundOrder.getPhoneNumber());
+        assertEquals("The repair order id does not match.", createdOrder.getRepairOrderId(), foundOrder.getRepairOrderId());
+        assertEquals("The problem description does not match.", description, foundOrder.getProblemDescr());
+        assertEquals("The phone number does not match.", phoneNumber, foundOrder.getPhoneNumber());
     }
 
     @Test
@@ -55,8 +55,8 @@ public class RepairOrderRegistryTest {
         registry.addRepairTask(order.getRepairOrderId(), task);
 
         RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
-        assertNotNull("Order could not be found after updating", updatedOrder);
-        assertEquals(taskCost, updatedOrder.getTotalCost(), 0.0001);
+        assertNotNull("Order should be found after updating.", updatedOrder);
+        assertEquals("The cost does not match.", taskCost, updatedOrder.getTotalCost(), 0.0001);
     }
 
     @Test
