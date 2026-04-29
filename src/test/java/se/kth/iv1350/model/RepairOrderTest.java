@@ -30,30 +30,30 @@ public class RepairOrderTest {
     }
 
     @Before
-        public void setUp() {
-            problemDescr = "broken brakes"; 
-            phoneNumber = "123456789"; 
-            bikeSerialNumber = "BIKE123"; 
-            diagTaskResult = "broken brakes indeed";
-            repairOrderRegistry= new RepairOrderRegistry();
-            testRepairOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
-            repairOrderId = repairOrderRegistry.generateRepairOrderId();
-            createTestRepairTask();
-            repairTasks = new RepairTask[10];
+    public void setUp() {
+        problemDescr = "broken brakes"; 
+        phoneNumber = "123456789"; 
+        bikeSerialNumber = "BIKE123"; 
+        diagTaskResult = "broken brakes indeed";
+        repairOrderRegistry= new RepairOrderRegistry();
+        testRepairOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
+        repairOrderId = repairOrderRegistry.generateRepairOrderId();
+        createTestRepairTask();
+        repairTasks = new RepairTask[10];
     }
     
     @After
-        public void tearDown() {
-            problemDescr = null; 
-            phoneNumber = null; 
-            bikeSerialNumber = null; 
-            diagTaskResult = null;
-            repairOrderRegistry = null;
-            testRepairOrder = null;
-            repairOrderId = null;
-            repairTask = null;
-            repairTasks = null;
-            testDto = null;
+    public void tearDown() {
+        problemDescr = null; 
+        phoneNumber = null; 
+        bikeSerialNumber = null; 
+        diagTaskResult = null;
+        repairOrderRegistry = null;
+        testRepairOrder = null;
+        repairOrderId = null;
+        repairTask = null;
+        repairTasks = null;
+        testDto = null;
     }
 
     @Test
@@ -69,6 +69,7 @@ public class RepairOrderTest {
     @Test
     public void testAddDiagnosticReportWithCorrectValues(){
         testRepairOrder.addDiagnosticReport(diagTaskResult);
+        
         assertNotNull("There is no Diagnostic Report", testRepairOrder.getDiagnosticReport());
         assertEquals("Diagnotic Report not the same", "broken brakes indeed", testRepairOrder.getDiagnosticReport());
     }
