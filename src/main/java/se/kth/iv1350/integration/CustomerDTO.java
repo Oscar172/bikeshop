@@ -1,11 +1,9 @@
 package se.kth.iv1350.integration;
 
 public class CustomerDTO {
-    
     private final String phoneNumber;
     private final String name;
 
-    
     /**
      * Creates a new CustomerDTO containing customer information.
      * 

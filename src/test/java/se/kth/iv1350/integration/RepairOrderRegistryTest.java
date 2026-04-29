@@ -2,7 +2,6 @@ package se.kth.iv1350.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 
 import se.kth.iv1350.model.RepairOrder;

@@ -33,7 +33,7 @@ public class RepairOrder {
         this.bikeSerialNumber = bikeSerialNumber;
         this.totalCost = 0.0;
         this.diagnosticReport = "";
-        this.estimatedCompletionDate = "";
+        this.estimatedCompletionDate = "One week after accepted offer"; 
         this.repairTasks = new RepairTask[10];
         this.nrOfRepairTasks = 0;
         this.state = "CREATED";
