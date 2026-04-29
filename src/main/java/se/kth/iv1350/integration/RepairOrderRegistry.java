@@ -45,7 +45,6 @@ public class RepairOrderRegistry {
                 nrOfFoundRepairOrders++;
             }
         }
-
         RepairOrderDTO[] repairOrders = new RepairOrderDTO[nrOfFoundRepairOrders];
         for(int i = 0; i < nrOfFoundRepairOrders; i++){
             repairOrders[i] = foundRepairOrders[i];
@@ -125,7 +124,7 @@ public class RepairOrderRegistry {
         }
         return null;
     }
-
+    
     /**
      * Accepts a repair order.
      * 

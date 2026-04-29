@@ -5,7 +5,6 @@ import se.kth.iv1350.model.RepairTask;
  * Contains information about a repair order transferred between layers.
  */
 public class RepairOrderDTO {
-
     private final String repairOrderId;
     private final String problemDescr;
     private final String phoneNumber;
@@ -16,7 +15,6 @@ public class RepairOrderDTO {
     private final String estimatedCompletionDate;
     private final int nrOfRepairTasks;
     private final RepairTask[] repairTasks;
-
 
     /**
      * Creates a new RepairOrderDTO containing repair order information.
@@ -43,9 +41,7 @@ public class RepairOrderDTO {
         this.estimatedCompletionDate = estimatedCompletionDate;
         this.nrOfRepairTasks = nrOfRepairTasks;
         this.repairTasks = repairTasks;
-        
     }
-
 
     /**
      * Returns the repair order id.

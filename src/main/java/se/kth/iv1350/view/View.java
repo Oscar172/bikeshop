@@ -8,7 +8,6 @@ import se.kth.iv1350.integration.RepairOrderDTO;
  * Simulates user interaction with the system.
  */
 public class View {
-
     private final Controller contr;
 
     /**
@@ -43,9 +42,9 @@ public class View {
         double cost = 249.90;
         contr.addRepairTask(repairOrderId, repairTaskDescription, cost);
 
-        // RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
-        // RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber);
+        RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
+        RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber); 
 
-        
+        // Lägg till repairORderStatus(accept/reject)
     }
 }

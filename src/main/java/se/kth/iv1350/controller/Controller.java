@@ -8,8 +8,6 @@ import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
 
-
-
 /**
  * The applications controller. All calls from view pass through here
  */
