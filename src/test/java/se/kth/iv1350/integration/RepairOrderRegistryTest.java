@@ -43,19 +43,6 @@ public class RepairOrderRegistryTest {
         assertEquals(createdOrder.getRepairOrderId(), foundOrder.getRepairOrderId());
         assertEquals(description, foundOrder.getProblemDescr());
         assertEquals(phoneNumber, foundOrder.getPhoneNumber());
-
-        /* 
-        RepairOrderRegistry registry = new RepairOrderRegistry();
-        RepairOrder.createRepairOrder("broken brakes", "123456789", "BIKE123", registry);
-        RepairOrderDTO createdOrder = registry.findRepairOrder("123456789");
-
-        RepairOrderDTO foundOrder = registry.returnRepairOrderDTO(createdOrder.getRepairOrderId());
-
-        assertNotNull(foundOrder);
-        assertEquals(createdOrder.getRepairOrderId(), foundOrder.getRepairOrderId());
-        assertEquals("broken brakes", foundOrder.getProblemDescr());
-        assertEquals("123456789", foundOrder.getPhoneNumber());
-        */
     }
 
     @Test
@@ -71,20 +58,6 @@ public class RepairOrderRegistryTest {
         RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
         assertNotNull("Order could not be found after updating", updatedOrder);
         assertEquals(taskCost, updatedOrder.getTotalCost(), 0.0001);
-
-        /* 
-        RepairOrderRegistry registry = new RepairOrderRegistry();
-        RepairOrder.createRepairOrder("broken brakes", "123456789", "BIKE123", registry);
-        RepairOrderDTO createdOrder = registry.findRepairOrder("123456789");
-
-        RepairTask repairTask = RepairTask.createRepairTask("Replace brake cable", 250.0);
-        registry.addRepairTask(createdOrder.getRepairOrderId(), repairTask);
-
-        RepairOrderDTO foundOrder = registry.returnRepairOrderDTO(createdOrder.getRepairOrderId());
-
-        assertNotNull(foundOrder);
-        assertEquals(250.0, foundOrder.getTotalCost(), 0.0);
-        */
     }
 
     @Test
