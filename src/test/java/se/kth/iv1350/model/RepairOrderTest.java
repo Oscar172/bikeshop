@@ -5,7 +5,6 @@ import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import se.kth.iv1350.model.RepairTask;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 
