@@ -41,7 +41,7 @@ public class CustomerRegistryTest {
     }
 
     @Test
-    public void testFIndCustomerReturnsNullWhenCustomerDoesNotExist() {
+    public void testFindCustomerReturnsNullWhenCustomerDoesNotExist() {
         CustomerDTO foundCustomer = registry.findCustomer(nonExistingPhoneNumber);
 
         assertNull("Method should return null for a phone number not in the system.", foundCustomer);
