@@ -47,10 +47,12 @@ public class RepairOrder {
      * @param bikeSerialNumber The bike's serial number.
      * @param repairOrderRegistry The registry where the repair order is stored.
      */
-    public static void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
+    public static RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
         String repairOrderId = repairOrderRegistry.generateRepairOrderId();
         RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
         repairOrderRegistry.updateRepairOrder(repairOrder);
+
+        return repairOrder;
     }
 
     /**
