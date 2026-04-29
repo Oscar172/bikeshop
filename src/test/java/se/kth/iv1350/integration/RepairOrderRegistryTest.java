@@ -12,6 +12,7 @@ import se.kth.iv1350.model.RepairTask;
 
 public class RepairOrderRegistryTest {
     private RepairOrderRegistry registry;
+    private RepairOrderDTO order;
 
     private final String phoneNumber = "123456789";
     private final String description = "Broken breaks";
@@ -19,23 +20,24 @@ public class RepairOrderRegistryTest {
     private final String taskDescription = "Oil the chain";
     private final String diagResult = "Bad breaks";
 
+    private void createTestOrder() {
+        RepairOrder.createRepairOrder(description, phoneNumber, bikeSerialNumber, registry);
+    }
     @Before
     public void setUp() {
         registry = new RepairOrderRegistry();
+        createTestOrder();
+        order = registry.findRepairOrder(phoneNumber);
     }
 
     @After
     public void tearDown() {
         registry = null;
-    }
-
-    private void createTestOrder() {
-        RepairOrder.createRepairOrder(description, phoneNumber, bikeSerialNumber, registry);
+        order = null;
     }
 
     @Test
     public void testReturnRepairOrderDTOReturnsStoredRepairOrder() {
-        createTestOrder();
         RepairOrderDTO createdOrder = registry.findRepairOrder(phoneNumber);
         RepairOrderDTO foundOrder = registry.returnRepairOrderDTO(createdOrder.getRepairOrderId());
 
@@ -47,9 +49,6 @@ public class RepairOrderRegistryTest {
 
     @Test
     public void testAddRepairTaskUpdatesExistingRepairOrder() {
-        createTestOrder();
-        RepairOrderDTO order = registry.findRepairOrder(phoneNumber);
-
         double taskCost = 250.0;
         RepairTask task = RepairTask. createRepairTask(taskDescription, taskCost);
 
@@ -62,9 +61,6 @@ public class RepairOrderRegistryTest {
 
     @Test
     public void testAddDiagnosticReport() {
-        createTestOrder();
-        RepairOrderDTO order = registry.findRepairOrder(phoneNumber);
-
         registry.addDiagnosticReport(order.getRepairOrderId(), diagResult);
 
         RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
@@ -74,8 +70,6 @@ public class RepairOrderRegistryTest {
 
     @Test
     public void testAcceptRepairOrder() {
-        createTestOrder();
-        RepairOrderDTO order = registry.findRepairOrder(phoneNumber);
         registry.acceptRepairOrder(order.getRepairOrderId());
 
         RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
@@ -85,8 +79,6 @@ public class RepairOrderRegistryTest {
 
     @Test
     public void testRejectRepairOrder() {
-        createTestOrder();
-        RepairOrderDTO order = registry.findRepairOrder(phoneNumber);
         registry.rejectRepairOrder(order.getRepairOrderId());
 
         RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
@@ -96,7 +88,6 @@ public class RepairOrderRegistryTest {
 
     @Test
     public void testFindAllRepairOrders() {
-        createTestOrder();
         createTestOrder();
 
         RepairOrderDTO[] results = registry.findAllRepairOrders(phoneNumber);
