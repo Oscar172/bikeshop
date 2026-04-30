@@ -28,7 +28,7 @@ public class Printer {
      */
     public void printRepairOrder(RepairOrder repairOrder){
         System.out.println("");
-        System.out.println("This repair order: ");
+        System.out.println("----- This Repair Order ----- ");
         System.out.println("ID: " + repairOrder.getRepairOrderId());
         System.out.println("Problem: " + repairOrder.getProblemDescr());
         System.out.println("Bike Serial Number: " + repairOrder.getBikeSerialNumber());

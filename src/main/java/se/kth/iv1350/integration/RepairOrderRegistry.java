@@ -26,7 +26,7 @@ public class RepairOrderRegistry {
      * @return A unique repair order id.
      */
     public String generateRepairOrderId(){
-        return "Repair Order: " + (nrOfRepairOrders + 1);
+        return "RO-" + (nrOfRepairOrders + 1);
     }
 
     /**
