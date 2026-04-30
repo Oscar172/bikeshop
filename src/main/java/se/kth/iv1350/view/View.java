@@ -1,8 +1,12 @@
 package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
+import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.CustomerDTO;
 import se.kth.iv1350.integration.RepairOrderDTO;
+import se.kth.iv1350.integration.Printer;
+import se.kth.iv1350.integration.RepairOrderRegistry;
+import se.kth.iv1350.view.View;
 
 /**
  * Simulates user interaction with the system.
@@ -23,28 +27,32 @@ public class View {
      * Simulates a user input that generates calls to system operations.
      */
     public void runFakeExecution() {
-        String phoneNumber = "0000";
-        String inputPhoneNumber = "0763252275";
-        CustomerDTO foundCustomer = contr.searchForCustomer(inputPhoneNumber);
+        String phoneNumber = "1234";
+        CustomerDTO foundCustomer = contr.searchForCustomer(phoneNumber);
+        System.out.println("----- Sample Execution -----");
 
         if (foundCustomer != null) {
             System.out.println("Customer found: " + foundCustomer.getName());
         } else {
-            System.out.println("No customer found on this number: " + inputPhoneNumber);
+            System.out.println("No customer found on this number: " + phoneNumber);
         }
 
-        String repairOrderId = "123";
-        String diagTaskResult = "Adjust front wheel";
-        contr.addDiagnosticReport(repairOrderId, diagTaskResult);
-        System.out.println("Diagnostic results has been sent to the registry for order: " + repairOrderId);
+        contr.createRepairOrder("Flat tire and a broken front-light", phoneNumber, "BIKE-001");
 
-        String repairTaskDescription = "Change all brake wires";
-        double cost = 249.90;
-        contr.addRepairTask(repairOrderId, repairTaskDescription, cost);
+        String repairOrderId = "RO-1";
+        contr.addDiagnosticReport(repairOrderId, "Fix flat tire and other stuff");
+        System.out.println("Diagnostic report added to: " + repairOrderId);
+
+        contr.addRepairTask(repairOrderId, "Change all brake wires", 249.90);
+        System.out.println("Repair task added to: " + repairOrderId);
 
         RepairOrderDTO repairOrder = contr.findRepairOrder(phoneNumber);
-        RepairOrderDTO[] repairOrders = contr.findAllRepairOrders(phoneNumber); 
-
-        // Lägg till repairORderStatus(accept/reject)
+        if(repairOrder != null){
+            System.out.println("Latest repair order: " + repairOrder.getRepairOrderId());
+            System.out.println("Status: " + repairOrder.getState());
+            System.out.println("Total cost: " + repairOrder.getTotalCost());
+        }
+        contr.acceptRepairOrder(repairOrderId);
     }
+
 }
