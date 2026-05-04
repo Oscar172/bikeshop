@@ -57,7 +57,7 @@ public class ControllerTest {
         RepairOrderDTO foundOrder = controller.findRepairOrder(phoneNumber);
 
         assertNotNull("Search failed to return an order.", foundOrder);
-        assertEquals("The found order does not have the expected id.", "Repair Order: 2", foundOrder.getRepairOrderId());
+        assertEquals("The found order does not have the expected id.", "RO-2", foundOrder.getRepairOrderId());
         assertEquals("The problem description in the found order does not match the expected description.", anotherDescription, foundOrder.getProblemDescr());
         assertEquals("The phone number in the found order does not match the customer's phone number.", phoneNumber, foundOrder.getPhoneNumber());
         assertEquals("The bike serial number in the found order does not match the expected serial number.", anotherBikeSerialNumber, foundOrder.getBikeSerialNumber());
