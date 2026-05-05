@@ -52,3 +52,6 @@ Kort nödförklaring om de frågar “varför så här?”:
 
 “Vi har delat upp det i lager för att minska koppling och göra koden tydligare. View pratar bara med controller, controller
 samordnar, och modellen håller i själva datan och logiken.”
+
+- RepairOrder = en lapp med all info om en cykelreparation
+- RepairOrderRegistry = lådan där alla lappar ligger
