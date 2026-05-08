@@ -27,15 +27,6 @@ public class CustomerRegistry {
      * @return Information about the customer in the form of a CustomerDTO.
      * @throws UserNotFoundException if no customer with the specified phone
      * number can be found in the customer registry.
-     * @throws 
-     */
-
-    /**
-     * Retrieves information about an existing customer based on their phonenumber.
-     * @param phoneNumber The customer's phone number.
-     * @return Information about the customer in the form of a CustomerDTO.
-     * @throws UserNotFoundException if no customer with the specified phone
-     * number can be found in the customer registry.
      * @throws DatabaseFailureException if the database can not be reached.
      */
     public CustomerDTO findCustomer(String phoneNumber) throws UserNotFoundException, DatabaseFailureException {

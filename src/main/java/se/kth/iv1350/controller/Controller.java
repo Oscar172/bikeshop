@@ -6,6 +6,7 @@ import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
+import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
 
@@ -40,7 +41,7 @@ public class Controller {
      * @throws UserNotFoundException if no customer with the specified phone
      * number can be found in the customer registry.
      */
-    public CustomerDTO searchForCustomer(String phoneNumber) throws UserNotFoundException {
+    public CustomerDTO searchForCustomer(String phoneNumber) throws UserNotFoundException, DatabaseFailureException {
         return customerRegistry.findCustomer(phoneNumber);
     }
 
