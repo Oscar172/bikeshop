@@ -10,6 +10,7 @@ import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
+import se.kth.iv1350.util.Logger;
 
 public class ControllerTest {
     private Controller controller;
@@ -19,13 +20,14 @@ public class ControllerTest {
     private final String description = "Broken breaks";
     private final String bikeSerialNumber = "BIKE123";
     private final double totalCost = 0.0;
+    private Logger logger;
 
     @Before
     public void setUp() {
-        CustomerRegistry customerRegistry = new CustomerRegistry();
+        CustomerRegistry customerRegistry = new CustomerRegistry(logger);
         repairOrderRegistry = new RepairOrderRegistry();
         Printer printer = new Printer();
-        controller = new Controller(customerRegistry, repairOrderRegistry, printer);
+        controller = new Controller(customerRegistry, repairOrderRegistry, printer, logger);
     }
 
     @After
