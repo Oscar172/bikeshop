@@ -4,6 +4,7 @@ import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerDTO;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
+import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
 
 /**
  * Simulates user interaction with the system.
@@ -24,12 +25,14 @@ public class View {
      * Simulates a user input that generates calls to system operations.
      */
     public void runFakeExecution() {
-        String phoneNumber = "1224";
+        String phoneNumber = "1223";
         CustomerDTO foundCustomer = null;
         try {
             foundCustomer = contr.searchForCustomer(phoneNumber);
         } catch (UserNotFoundException e) {
             System.out.println("ERROR: " + e.getMessage());
+        } catch (DatabaseFailureException e) {
+            System.out.println("ERROR: Something went wrong when trying to reach server. Please try again later.");
         }
         
         System.out.println("----- Sample Execution -----");
