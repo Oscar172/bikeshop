@@ -30,6 +30,7 @@ public class FileLogger implements Logger{
     *
     * @param message The string that will be printed to the log file.
     */
+   @Override
     public void log(String message) {
     java.time.LocalDateTime timeStampDateTime = java.time.LocalDateTime.now();
     logStream.println(timeStampDateTime + ">" + message);
