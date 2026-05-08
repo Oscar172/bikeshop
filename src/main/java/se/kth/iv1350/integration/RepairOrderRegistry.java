@@ -2,6 +2,11 @@ package se.kth.iv1350.integration;
 
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
+import se.kth.iv1350.view.RepairOrderObserver;
+
+//nytt
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a registry of repair orders and contains logic for storing
@@ -11,6 +16,9 @@ public class RepairOrderRegistry {
 
     private final RepairOrder[] repairOrders;
     private int nrOfRepairOrders;
+
+    //nytt
+    private final List<RepairOrderObserver> repairOrderObservers;
     
     /**
      * Creates a new RepairOrderRegistry.
@@ -18,6 +26,7 @@ public class RepairOrderRegistry {
     public RepairOrderRegistry(){
         this.repairOrders = new RepairOrder[100];
         this.nrOfRepairOrders = 0;
+        this.repairOrderObservers = new ArrayList<>(); //nytt
     }
 
     /**
@@ -49,7 +58,6 @@ public class RepairOrderRegistry {
         for(int i = 0; i < nrOfFoundRepairOrders; i++){
             repairOrders[i] = foundRepairOrders[i];
         }
-
         return repairOrders;
     }
 
@@ -103,12 +111,13 @@ public class RepairOrderRegistry {
         for(int i = 0; i < nrOfRepairOrders; i++){
             if(repairOrders[i].getRepairOrderId().equals(repairOrder.getRepairOrderId())){
                 repairOrders[i] = repairOrder;
+                notifyObservers(repairOrder); //nytt (om ordern finns, notifiera observerare)
                 return;
             }
         }
-
         repairOrders[nrOfRepairOrders] = repairOrder;
         nrOfRepairOrders++;
+        notifyObservers(repairOrder); //nytt (om ordern är ny, notifiera observerare)
     }
 
     /**
@@ -165,5 +174,28 @@ public class RepairOrderRegistry {
             }
         }
         return null;
+    }
+
+    //nytt
+    /**
+     * Adds an observer that will be notified when a repair order is updated.
+     * @param observer The observer to add.
+     */
+    public void addRepairOrderObserver(RepairOrderObserver observer){
+        repairOrderObservers.add(observer);
+    }
+
+    /**
+     * Notifies all observers that a repair order has been updated.
+     * @param repairOrder The updated repair order.
+     */
+    private void notifyObservers(RepairOrder repairOrder){
+
+        RepairOrderDTO repairOrderDTO = repairOrder.createRepairOrderDTO();
+
+        //Gå igenom varje observer i listan, för varje observer anropa repairOrderUpdated(..), skicka in repairOrderDTO
+        for(RepairOrderObserver observer : repairOrderObservers){
+            observer.repairOrderUpdated(repairOrderDTO);
+        }
     }
 }
