@@ -24,7 +24,7 @@ public class Main
      * @param args Command line arguments.
      */
     public static void main(String[] args ){   
-        Logger logger = new FileLogger();
+        Logger logger = new FileLogger("logs/repair-order-log.txt");
         CustomerRegistry customerRegistry = new CustomerRegistry();
         Printer printer = new Printer();
         RepairOrderRegistry repairOrderRegistry = new RepairOrderRegistry();
@@ -32,7 +32,7 @@ public class Main
         Controller contr = new Controller(customerRegistry, repairOrderRegistry, printer, logger);
 
         repairOrderRegistry.addRepairOrderObserver(new RepairOrderView());
-        repairOrderRegistry.addRepairOrderObserver(new RepairOrderLogger());
+        repairOrderRegistry.addRepairOrderObserver(new RepairOrderLogger(logger));
 
         View view = new View(contr);
         view.runFakeExecution();
