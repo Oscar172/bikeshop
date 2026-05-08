@@ -3,6 +3,8 @@ package se.kth.iv1350.integration;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.kth.iv1350.integration.exceptions.UserNotFoundException;
+
 
 /**
  * Represents a customer registry and conatains logic for searching for customers.
@@ -17,20 +19,21 @@ public class CustomerRegistry {
         customers.add(new CustomerDTO("1234", "Gustaf"));
         customers.add(new CustomerDTO("5678", "Tova"));
     }
-  
+
     /**
      * Retrieves information about an existing customer based on their phonenumber.
-     * 
      * @param phoneNumber The customer's phone number.
-     * @return The matching customer, or null if no customer is found.
+     * @return Information about the customer in the form of a CustomerDTO.
+     * @throws UserNotFoundException if no customer with the specified phone
+     * number can be found in the customer registry.
      */
-    public CustomerDTO findCustomer(String phoneNumber) {
+    public CustomerDTO findCustomer(String phoneNumber) throws UserNotFoundException {
         for (CustomerDTO customer : customers) {
             if(customer.getPhoneNumber().equals(phoneNumber)) {
                 return customer;
             }
         }
-        return null;
+        throw new UserNotFoundException("No customer was found under this phonenumber: " + phoneNumber);
     }
 
 }

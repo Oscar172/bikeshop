@@ -5,6 +5,7 @@ import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
+import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
 
@@ -36,8 +37,10 @@ public class Controller {
      * Searchers for a specific customer by phone number.
      * @param phoneNumber The phone number used to search for the cusomter.
      * @return Information about the customer in the form of a CustomerDTO.
+     * @throws UserNotFoundException if no customer with the specified phone
+     * number can be found in the customer registry.
      */
-    public CustomerDTO searchForCustomer(String phoneNumber){
+    public CustomerDTO searchForCustomer(String phoneNumber) throws UserNotFoundException {
         return customerRegistry.findCustomer(phoneNumber);
     }
 

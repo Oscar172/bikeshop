@@ -1,12 +1,9 @@
 package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
-import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.CustomerDTO;
 import se.kth.iv1350.integration.RepairOrderDTO;
-import se.kth.iv1350.integration.Printer;
-import se.kth.iv1350.integration.RepairOrderRegistry;
-import se.kth.iv1350.view.View;
+import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 
 /**
  * Simulates user interaction with the system.
@@ -27,8 +24,14 @@ public class View {
      * Simulates a user input that generates calls to system operations.
      */
     public void runFakeExecution() {
-        String phoneNumber = "1234";
-        CustomerDTO foundCustomer = contr.searchForCustomer(phoneNumber);
+        String phoneNumber = "1224";
+        CustomerDTO foundCustomer = null;
+        try {
+            foundCustomer = contr.searchForCustomer(phoneNumber);
+        } catch (UserNotFoundException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        
         System.out.println("----- Sample Execution -----");
 
         if (foundCustomer != null) {
