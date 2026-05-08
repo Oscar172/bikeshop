@@ -2,7 +2,7 @@ package se.kth.iv1350.util;
 
 /**
 * Prints log messages to <code>System.out</code>.
-* Is used for console outputs for logging. Filelogger is default.
+* Is used for console outputs for logging. ConsoleLogger is not the default option.
 */
 public class ConsoleLogger implements Logger {
 
