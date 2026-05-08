@@ -7,6 +7,8 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
+import se.kth.iv1350.integration.exceptions.UserNotFoundException;
+
 public class CustomerRegistryTest {
     private CustomerRegistry registry;
     private String phoneNumber;
@@ -32,7 +34,7 @@ public class CustomerRegistryTest {
     }
 
     @Test
-    public void testFindCustomerReturnsMatchingCustomer(){
+    public void testFindCustomerReturnsMatchingCustomer() throws UserNotFoundException {
         CustomerDTO foundCustomer = registry.findCustomer(phoneNumber);
 
         assertNotNull("Customer should be found", foundCustomer);
@@ -41,7 +43,7 @@ public class CustomerRegistryTest {
     }
 
     @Test
-    public void testFindCustomerReturnsNullWhenCustomerDoesNotExist() {
+    public void testFindCustomerReturnsNullWhenCustomerDoesNotExist() throws UserNotFoundException {
         CustomerDTO foundCustomer = registry.findCustomer(nonExistingPhoneNumber);
 
         assertNull("Method should return null for a phone number not in the system.", foundCustomer);
