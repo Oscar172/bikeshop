@@ -35,7 +35,7 @@ public class FileLogger implements Logger{
    @Override
     public void log(String message) {
     java.time.LocalDateTime timeStampDateTime = java.time.LocalDateTime.now();
-    logStream.println(timeStampDateTime + ">" + message);
+    logStream.println(timeStampDateTime + " \n" + message);
     }
  }
 
