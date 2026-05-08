@@ -2,7 +2,6 @@ package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerDTO;
-import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
 
@@ -20,7 +19,7 @@ public class View {
     public View(Controller contr) {
         this.contr = contr;
     }
-    
+
       /**
        * Simulates a user input that generates calls to system operations.
        */
