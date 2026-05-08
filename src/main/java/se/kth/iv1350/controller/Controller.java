@@ -7,6 +7,7 @@ import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
+import se.kth.iv1350.util.Logger;
 
 /**
  * The applications controller. All calls from view pass through here
@@ -16,6 +17,7 @@ public class Controller {
     private final CustomerRegistry customerRegistry;
     private final RepairOrderRegistry repairOrderRegistry;
     private final Printer printer;
+    private final Logger logger;
 
     /**
     * Creates a new instance of Controller.
@@ -26,10 +28,12 @@ public class Controller {
     */
     public Controller(CustomerRegistry customerRegistry,
                         RepairOrderRegistry repairOrderRegistry,
-                        Printer printer){
+                        Printer printer,
+                        Logger logger){
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;
+        this.logger = logger;
     }
 
     /**
