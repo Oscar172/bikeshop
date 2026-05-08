@@ -25,6 +25,7 @@ public class Controller {
     * @param customerReigstry Reference to the customer Registry in the integration layer.
     * @param repairOrderRegistry Reference to the repair order registry in the integration layer.
     * @param printer Refernce to the printer in the integration layer. 
+    * @param logger The logger used to log errors.
     */
     public Controller(CustomerRegistry customerRegistry,
                         RepairOrderRegistry repairOrderRegistry,
