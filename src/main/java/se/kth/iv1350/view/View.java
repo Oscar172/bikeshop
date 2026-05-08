@@ -2,9 +2,8 @@ package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerDTO;
-import se.kth.iv1350.integration.RepairOrderDTO;
-import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
+import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 
 /**
  * Simulates user interaction with the system.
@@ -14,13 +13,13 @@ public class View {
 
     /**
      * Creates a new View.
-     * 
+     *
      * @param contr The controller used for all system operations.
      */
     public View(Controller contr) {
         this.contr = contr;
     }
-    
+
     /**
      * Simulates a user input that generates calls to system operations.
      */
@@ -29,11 +28,11 @@ public class View {
         String repairOrderId = "RO-1";
 
         System.out.println("----- Sample Execution -----");
-    
-        try{
+
+        try {
             CustomerDTO foundCustomer = contr.searchForCustomer(phoneNumber);
 
-                System.out.println("----- Sample Execution -----");
+            if (foundCustomer != null) {
                 System.out.println("Customer found: " + foundCustomer.getName());
                 System.out.println("");
             } else {
@@ -44,12 +43,10 @@ public class View {
             contr.addDiagnosticReport(repairOrderId, "Fix flat tire and other stuff");
             contr.addRepairTask(repairOrderId, "Change all brake wires", 249.90);
             contr.acceptRepairOrder(repairOrderId);
-
-            } catch (UserNotFoundException e) {
-                System.out.println("ERROR: " + e.getMessage());
-            } catch (DatabaseFailureException e) {
-                System.out.println("ERROR: Something went wrong when trying to reach server. Please try again later.");
-            }
+        } catch (UserNotFoundException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        } catch (DatabaseFailureException e) {
+            System.out.println("ERROR: Something went wrong when trying to reach server. Please try again later.");
         }
     }
-}   
+}
