@@ -27,7 +27,6 @@ public class Printer {
      * @param repairOrder The repair order to print.
      */
     public void printRepairOrder(RepairOrder repairOrder){
-        System.out.println("");
         System.out.println("----- This Repair Order ----- ");
         System.out.println("ID: " + repairOrder.getRepairOrderId());
         System.out.println("Problem: " + repairOrder.getProblemDescr());

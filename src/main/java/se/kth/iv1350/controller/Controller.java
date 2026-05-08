@@ -10,6 +10,7 @@ import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
 import se.kth.iv1350.util.Logger;
+import se.kth.iv1350.util.ConsoleLogger;
 
 /**
  * The applications controller. All calls from view pass through here

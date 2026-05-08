@@ -14,4 +14,6 @@ public interface RepairOrderObserver {
  */
     void repairOrderUpdated(RepairOrderDTO repairOrderDTO);
 
+    
+
 }
