@@ -5,18 +5,21 @@ import java.util.List;
 
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
-
+import se.kth.iv1350.util.Logger;
 
 /**
- * Represents a customer registry and conatains logic for searching for customers.
+ * Represents a customer registry and contains logic for searching for customers.
  */
-public class CustomerRegistry {
+public class CustomerRegistry{
     private List<CustomerDTO> customers = new ArrayList<>();
+    private Logger logger;
 
     /**
      * Creates a new CustomerReigstry and initializes it with existing customers.
+     * @param logger reference to logger object.
      */
-    public CustomerRegistry() {
+    public CustomerRegistry(Logger logger) {
+        this.logger = logger;
         customers.add(new CustomerDTO("1234", "Gustaf"));
         customers.add(new CustomerDTO("5678", "Tova"));
     }
@@ -31,6 +34,7 @@ public class CustomerRegistry {
      */
     public CustomerDTO findCustomer(String phoneNumber) throws UserNotFoundException, DatabaseFailureException {
         if (phoneNumber.equals("0000")) {
+            logger.log("Database failure triggered by phone number: " + phoneNumber);
             throw new DatabaseFailureException("Could not reach database.");
         }
 
