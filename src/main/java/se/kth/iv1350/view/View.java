@@ -1,12 +1,10 @@
 package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
-import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.CustomerDTO;
 import se.kth.iv1350.integration.RepairOrderDTO;
-import se.kth.iv1350.integration.Printer;
-import se.kth.iv1350.integration.RepairOrderRegistry;
-import se.kth.iv1350.view.View;
+import se.kth.iv1350.integration.exceptions.UserNotFoundException;
+import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
 
 /**
  * Simulates user interaction with the system.
@@ -32,21 +30,26 @@ public class View {
 
         System.out.println("----- Sample Execution -----");
     
-        CustomerDTO foundCustomer = contr.searchForCustomer(phoneNumber);
+        try{
+            CustomerDTO foundCustomer = contr.searchForCustomer(phoneNumber);
 
-        if (foundCustomer != null) {
-            System.out.println("Customer found: " + foundCustomer.getName());
-            System.out.println("");
-        } else {
-            System.out.println("No customer found on this number: " + phoneNumber);
+                System.out.println("----- Sample Execution -----");
+                System.out.println("Customer found: " + foundCustomer.getName());
+                System.out.println("");
+            } else {
+                System.out.println("No customer found on this number: " + phoneNumber);
+            }
+
+            contr.createRepairOrder("Flat tire and a broken front-light", phoneNumber, "BIKE-001");
+            contr.addDiagnosticReport(repairOrderId, "Fix flat tire and other stuff");
+            contr.addRepairTask(repairOrderId, "Change all brake wires", 249.90);
+            contr.acceptRepairOrder(repairOrderId);
+
+            } catch (UserNotFoundException e) {
+                System.out.println("ERROR: " + e.getMessage());
+            } catch (DatabaseFailureException e) {
+                System.out.println("ERROR: Something went wrong when trying to reach server. Please try again later.");
+            }
         }
-
-        contr.createRepairOrder("Flat tire and a broken front-light", phoneNumber, "BIKE-001");
-        contr.addDiagnosticReport(repairOrderId, "Fix flat tire and other stuff");
-        contr.addRepairTask(repairOrderId, "Change all brake wires", 249.90);
-        contr.acceptRepairOrder(repairOrderId);
-
-
     }
-
-}
+}   
