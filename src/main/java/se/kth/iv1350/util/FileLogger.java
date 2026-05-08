@@ -9,20 +9,22 @@ import java.io.PrintWriter;
  * current directory and will be called log.txt.
  */
 public class FileLogger implements Logger{
-    private PrintWriter logStream;
+    private final PrintWriter logStream;
 
     /**
     * Creates a new instance and also creates a new log file.
     * An existing log file will be deleted.
     */
-    public FileLogger() {
+    public FileLogger(String fileName) {
+        PrintWriter stream;
         try {
-            logStream = new PrintWriter(
-                        new FileWriter("log.txt"), true);
+            stream = new PrintWriter(new FileWriter(fileName, true), true);
         } catch (IOException ioe) {
             System.out.println("CAN NOT LOG.");
             ioe.printStackTrace();
+            stream = new PrintWriter(System.err, true);
         }
+        this.logStream = stream;
     }
 
     /**

@@ -11,6 +11,9 @@ import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 
+import se.kth.iv1350.util.Logger;
+import se.kth.iv1350.util.ConsoleLogger;
+
 public class ControllerTest {
     private Controller controller;
     private RepairOrderRegistry repairOrderRegistry;
@@ -25,7 +28,8 @@ public class ControllerTest {
         CustomerRegistry customerRegistry = new CustomerRegistry();
         repairOrderRegistry = new RepairOrderRegistry();
         Printer printer = new Printer();
-        controller = new Controller(customerRegistry, repairOrderRegistry, printer);
+        Logger logger = new ConsoleLogger();
+        controller = new Controller(customerRegistry, repairOrderRegistry, printer, logger);
     }
 
     @After

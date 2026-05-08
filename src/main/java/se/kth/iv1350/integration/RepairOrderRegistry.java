@@ -71,6 +71,7 @@ public class RepairOrderRegistry {
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
             repairOrder.addDiagnosticReport(diagTaskResult);
+            notifyObservers(repairOrder);
         }
     }
 
@@ -84,6 +85,7 @@ public class RepairOrderRegistry {
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
             repairOrder.addRepairTask(repairTask);
+            notifyObservers(repairOrder);
         }
     }
 
@@ -144,6 +146,7 @@ public class RepairOrderRegistry {
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
             repairOrder.updateRepairOrderStatus("ACCEPTED");
+            notifyObservers(repairOrder);
             return repairOrder;
         }
         return null;
@@ -158,6 +161,7 @@ public class RepairOrderRegistry {
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
             repairOrder.updateRepairOrderStatus("REJECTED");
+            notifyObservers(repairOrder);
         }
     }
 
