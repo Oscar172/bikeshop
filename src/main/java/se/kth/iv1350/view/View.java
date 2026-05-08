@@ -31,7 +31,7 @@ public class View {
         String repairOrderId = "RO-1";
 
         System.out.println("----- Sample Execution -----");
-        
+    
         CustomerDTO foundCustomer = contr.searchForCustomer(phoneNumber);
 
         if (foundCustomer != null) {
@@ -45,6 +45,8 @@ public class View {
         contr.addDiagnosticReport(repairOrderId, "Fix flat tire and other stuff");
         contr.addRepairTask(repairOrderId, "Change all brake wires", 249.90);
         contr.acceptRepairOrder(repairOrderId);
+
+
     }
 
 }
