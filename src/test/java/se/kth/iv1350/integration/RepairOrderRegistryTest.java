@@ -2,13 +2,17 @@ package se.kth.iv1350.integration;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
+import se.kth.iv1350.view.RepairOrderObserver;
 
 public class RepairOrderRegistryTest {
     private RepairOrderRegistry registry;
@@ -34,6 +38,29 @@ public class RepairOrderRegistryTest {
     public void tearDown() {
         registry = null;
         order = null;
+    }
+
+        private class TestObserver implements RepairOrderObserver{
+        private boolean updated = false;
+
+        @Override
+        public void repairOrderUpdated(RepairOrderDTO repairOrderDTO){
+            updated = true;
+        }
+    }
+
+    //Test observer used to verufy that observers are notified whena  arepair order is updated.
+    @Test
+    public void testObserverIsNotifiedWhenRepairOrderIsUpdated(){
+        TestObserver observer = new TestObserver();
+        registry.addRepairOrderObserver(observer);
+
+        assertFalse("Observer should not have been notified before update.", observer.updated);
+
+        registry.addDiagnosticReport(order.getRepairOrderId(), "Flat tire");
+
+        assertTrue("Observer should have been notified when repair order was updated.", observer.updated);
+
     }
 
     @Test
