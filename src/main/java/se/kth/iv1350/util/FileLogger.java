@@ -5,15 +5,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
  /**
- * Prints log messages to a file. The log file will be in the
- * current directory and will be called log.txt.
+ * Prints log messages to a specified file.
  */
 public class FileLogger implements Logger{
     private final PrintWriter logStream;
 
     /**
-    * Creates a new instance and also creates a new log file.
-    * An existing log file will be deleted.
+    * Creates a new instance and opens the specified log file.
+    * New log messages are appended to the existing file.
     */
     public FileLogger(String fileName) {
         PrintWriter stream;
@@ -34,8 +33,8 @@ public class FileLogger implements Logger{
     */
    @Override
     public void log(String message) {
-    java.time.LocalDateTime timeStampDateTime = java.time.LocalDateTime.now();
-    logStream.println(timeStampDateTime + " \n" + message);
+        java.time.LocalDateTime timeStampDateTime = java.time.LocalDateTime.now();
+        logStream.println(timeStampDateTime + " \n" + message);
     }
  }
 

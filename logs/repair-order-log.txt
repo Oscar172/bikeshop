@@ -1,0 +1,88 @@
+2026-05-08T14:03:21.350437600 
+-----Repair Order Log-----
+Repair order ID: RO-1
+Phone number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total cost: 0.0
+Diagnostic report: 
+ETA: One week after accepted offer
+
+2026-05-08T14:03:21.354441300 
+-----Repair Order Log-----
+Repair order ID: RO-1
+Phone number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total cost: 0.0
+Diagnostic report: Fix flat tire and other stuff
+ETA: One week after accepted offer
+
+2026-05-08T14:03:21.354441300 
+-----Repair Order Log-----
+Repair order ID: RO-1
+Phone number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total cost: 249.9
+Diagnostic report: Fix flat tire and other stuff
+ETA: One week after accepted offer
+
+2026-05-08T14:03:21.355443100 
+-----Repair Order Log-----
+Repair order ID: RO-1
+Phone number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: ACCEPTED
+Total cost: 249.9
+Diagnostic report: Fix flat tire and other stuff
+ETA: One week after accepted offer
+
+2026-05-10T13:20:04.441095800 
+-----Repair Order Log-----
+Repair order ID: RO-1
+Phone number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total cost: 0.0
+Diagnostic report: 
+ETA: One week after accepted offer
+
+2026-05-10T13:20:04.443832200 
+-----Repair Order Log-----
+Repair order ID: RO-1
+Phone number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total cost: 0.0
+Diagnostic report: Fix flat tire and other stuff
+ETA: One week after accepted offer
+
+2026-05-10T13:20:04.447152400 
+-----Repair Order Log-----
+Repair order ID: RO-1
+Phone number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total cost: 249.9
+Diagnostic report: Fix flat tire and other stuff
+ETA: One week after accepted offer
+
+2026-05-10T13:20:04.448276800 
+-----Repair Order Log-----
+Repair order ID: RO-1
+Phone number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: ACCEPTED
+Total cost: 249.9
+Diagnostic report: Fix flat tire and other stuff
+ETA: One week after accepted offer
+

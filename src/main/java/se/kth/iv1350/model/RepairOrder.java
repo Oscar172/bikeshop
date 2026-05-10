@@ -2,7 +2,6 @@ package se.kth.iv1350.model;
 
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
-
 /**
  * Represents a specific repair order and contains its business logic.
  */

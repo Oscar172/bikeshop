@@ -8,7 +8,6 @@ import se.kth.iv1350.util.Logger;
  * Writes updated repair orders to a log file.
  */
 public class RepairOrderLogger implements RepairOrderObserver {
-    
     private final Logger logger;
 
     public RepairOrderLogger(Logger logger){
@@ -31,6 +30,7 @@ public class RepairOrderLogger implements RepairOrderObserver {
               "Total cost: " + repairOrderDTO.getTotalCost() + "\n" +
               "Diagnostic report: " + repairOrderDTO.getDiagnosticReport() + "\n" +
               "ETA: " + repairOrderDTO.getEstimatedCompletionDate() + "\n";
-              logger.log(message);
+            
+        logger.log(message);
     }
 }

@@ -10,8 +10,6 @@ import org.junit.Test;
 
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
-import se.kth.iv1350.util.ConsoleLogger;
-import se.kth.iv1350.util.Logger;
 
 public class CustomerRegistryTest {
     private CustomerRegistry registry;
@@ -19,19 +17,17 @@ public class CustomerRegistryTest {
     private String name;
     private String nonExistingPhoneNumber;
     private String phoneNumberTriggersDatabaseFailureException;
-    private Logger logger;
 
     @Before
     public void setUp() {
-        this.logger = new ConsoleLogger();
-        registry = new CustomerRegistry(this.logger);
+        registry = new CustomerRegistry();
         phoneNumber = "1234";
         name = "Gustaf";
         nonExistingPhoneNumber = "1223";
         phoneNumberTriggersDatabaseFailureException = "0000";
 
     }
-@After
+    @After
     public void tearDown() {
         registry = null;
 

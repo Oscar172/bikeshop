@@ -2,25 +2,28 @@ package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerDTO;
-import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
+import se.kth.iv1350.util.Logger;
 
 /**
  * Simulates user interaction with the system.
  */
 public class View {
     private final Controller contr;
+    private final Logger logger;
 
     /**
      * Creates a new View.
      * 
      * @param contr The controller used for all system operations.
+     * @param logger The logger used to log caught exceptions.
      */
-    public View(Controller contr) {
+    public View(Controller contr, Logger logger) {
         this.contr = contr;
+        this.logger = logger;
     }
-    
+
       /**
        * Simulates a user input that generates calls to system operations.
        */
@@ -46,8 +49,10 @@ public class View {
               contr.acceptRepairOrder(repairOrderId);
           } catch (UserNotFoundException e) {
               System.out.println("ERROR: " + e.getMessage());
+              logger.log("UserNotFoundException: " + e.getMessage());
           } catch (DatabaseFailureException e) {
               System.out.println("ERROR: Something went wrong when trying to reach server. Please try again later.");
+              logger.log("DatabaseFailureException: " + e.getMessage());
           }
       }
   }
