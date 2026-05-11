@@ -81,7 +81,6 @@ public class RepairOrder {
         return state.getStateName();
     }
 
-
     /**
      * Adds a diagnostic report to the repair order.
      * 

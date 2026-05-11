@@ -11,7 +11,6 @@ import se.kth.iv1350.util.Logger;
  */
 public class View {
     private final Controller contr;
-    private final Logger logger;
 
     /**
      * Creates a new View.
@@ -21,11 +20,10 @@ public class View {
      */
     public View(Controller contr, Logger logger) {
         this.contr = contr;
-        this.logger = logger;
     }
 
       /**
-       * Simulates a user input that generates calls to system operations.
+       * Simulates a sample execution of the program.
        */
       public void runFakeExecution() {
           String phoneNumber = "1234";
@@ -49,10 +47,8 @@ public class View {
               contr.acceptRepairOrder(repairOrderId);
           } catch (UserNotFoundException e) {
               System.out.println("ERROR: " + e.getMessage());
-              logger.log("UserNotFoundException: " + e.getMessage());
           } catch (DatabaseFailureException e) {
               System.out.println("ERROR: Something went wrong when trying to reach server. Please try again later.");
-              logger.log("DatabaseFailureException: " + e.getMessage());
           }
       }
   }

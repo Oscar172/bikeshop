@@ -10,6 +10,8 @@ import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
+import se.kth.iv1350.util.FileLogger;
+import se.kth.iv1350.util.Logger;
 
 public class ControllerTest {
     private Controller controller;
@@ -24,7 +26,8 @@ public class ControllerTest {
 
     @Before
     public void setUp() {
-        CustomerRegistry customerRegistry = new CustomerRegistry();
+        Logger dataBaseFileLogger = new FileLogger("logs/database-log.txt");
+        CustomerRegistry customerRegistry = new CustomerRegistry(dataBaseFileLogger);
         repairOrderRegistry = new RepairOrderRegistry();
         Printer printer = new Printer();
         controller = new Controller(customerRegistry, repairOrderRegistry, printer);
