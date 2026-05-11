@@ -5,8 +5,8 @@ import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.Printer;
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
-import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
+import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
 
