@@ -5,22 +5,21 @@ import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerRegistry;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.integration.Printer;
-
 import se.kth.iv1350.view.View;
 import se.kth.iv1350.view.RepairOrderLogger;
 import se.kth.iv1350.view.RepairOrderView;
-
 import se.kth.iv1350.util.Logger;
 import se.kth.iv1350.util.FileLogger;
+
 /**
  * Starts the application.
  */
 public class Main 
 {
     /**
-     * Starts the entire application
+     * Starts the entire program.
      * 
-     * @param args Command line arguments.
+     * @param args Command line arguments, not used.
      */
     public static void main(String[] args ){   
         Logger repairOrderFileLogger = new FileLogger("logs/repair-order-log.txt");

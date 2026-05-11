@@ -47,7 +47,9 @@ public class CustomerRegistry{
      * number can be found in the customer registry.
      * @throws DatabaseFailureException if the database can not be reached.
      */
-    public CustomerDTO findCustomer(String phoneNumber) throws UserNotFoundException, DatabaseFailureException {
+    public CustomerDTO findCustomer(String phoneNumber) 
+                throws UserNotFoundException, DatabaseFailureException {
+        
         if (phoneNumber.equals("0000")) {
             if (logger != null) {
                 logger.log("Database failure occured");

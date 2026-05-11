@@ -2,10 +2,8 @@ package se.kth.iv1350.model;
 
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
-import se.kth.iv1350.model.state.RepairOrderState;
-
-import se.kth.iv1350.model.state.RepairOrderState;
 import se.kth.iv1350.model.state.CreatedState;
+import se.kth.iv1350.model.state.RepairOrderState;
 
 /**
  * Represents a specific repair order and contains its business logic.
@@ -54,7 +52,6 @@ public class RepairOrder {
     public static RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
         String repairOrderId = repairOrderRegistry.generateRepairOrderId();
         RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
-        repairOrderRegistry.updateRepairOrder(repairOrder);
 
         return repairOrder;
     }
@@ -77,13 +74,12 @@ public class RepairOrder {
     }
 
     public void readyForApproval() {
-        state.payed(this);
+        state.payed(this); // Fel eller? bör va readyForApproval(this)?
     }
 
     public String getState() {
         return state.getStateName();
     }
-
 
     /**
      * Adds a diagnostic report to the repair order.

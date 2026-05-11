@@ -1,21 +1,26 @@
 package se.kth.iv1350.view;
 
 import se.kth.iv1350.integration.RepairOrderDTO;
-
 import se.kth.iv1350.util.Logger;
 
  /**
- * Writes updated repair orders to a log file.
+ * Logs repair order updates to a file.
  */
-public class RepairOrderLogger implements RepairOrderObserver {
+public class RepairOrderLogger implements RepairOrderObserver{
     private final Logger logger;
 
+    /**
+     * Creates a new instance that logs repair order updates.
+     * 
+     * @param logger The logger used to write repair order updates.
+     */
     public RepairOrderLogger(Logger logger){
         this.logger = logger;
     }
 
     /**
-     * Writes the upddated repair Order to the log file.
+     * Writes the upddated repair order to the log file.
+     * 
      * @param repairOrderDTO The updated repair order.
      */
     @Override
@@ -34,3 +39,5 @@ public class RepairOrderLogger implements RepairOrderObserver {
         logger.log(message);
     }
 }
+
+
