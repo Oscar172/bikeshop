@@ -27,12 +27,13 @@ public class RepairOrderRegistryTest {
     @Before
     public void setUp() {
         registry = new RepairOrderRegistry();
-        contr = new Controller(new CustomerRegistry(), registry, new Printer());
+        contr = new Controller(CustomerRegistry.getCustomerRegistry(), registry, new Printer());
         createTestOrder();
     }
 
     @After
     public void tearDown() {
+        contr = null;
         registry = null;
     }
 
