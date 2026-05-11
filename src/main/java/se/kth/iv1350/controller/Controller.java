@@ -18,6 +18,7 @@ public class Controller {
     private final CustomerRegistry customerRegistry;
     private final RepairOrderRegistry repairOrderRegistry;
     private final Printer printer;
+    private final RepairTask repairTask;
 
     /**
     * Creates a new instance of Controller.
@@ -28,10 +29,11 @@ public class Controller {
     */
     public Controller(CustomerRegistry customerRegistry,
                         RepairOrderRegistry repairOrderRegistry,
-                        Printer printer){
+                        Printer printer, RepairTask repairTask){
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;
+        this.repairTask = repairTask;
     }
 
     /**
@@ -69,23 +71,30 @@ public class Controller {
     /**
      * Adds a diagnostic report to an existing repair order.
      * 
-     * @param repairOrderId  The id of the repair order to update
+     * @param repairOrderId The id of the reapir order to update.
      * @param diagTaskResult The result of the diagnostic task.
      */
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
-        repairOrderRegistry.addDiagnosticReport(repairOrderId, diagTaskResult);
+        RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
+        if(repairOrder != null){
+            repairOrder.addDiagnosticReport(diagTaskResult);
+            repairOrderRegistry.updateRepairOrder(repairOrder);
+        }
     }
 
     /**
-     * Creates a repair task object from the View inputs and adds it to an existing repair order.
-     *  
-     * @param repairOrderId The identifer of the RepairOrder to update.
-     * @param repairTaskDescription The description of the repair task.
-     * @param cost  The cost of the proposed repair task.
+     * Adds a repair task to an existing repair order.
+     * 
+     * @param repairOrderId The id of the repair order to update.
+     * @param repairTask The repair task to add.
      */
     public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
+        RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
         RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
-        repairOrderRegistry.addRepairTask(repairOrderId, newTask);
+        if(repairOrder != null){
+            repairOrder.addRepairTask(newTask);
+            repairOrderRegistry.updateRepairOrder(repairOrder);
+        }
     }
 
     /**

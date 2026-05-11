@@ -1,11 +1,10 @@
 package se.kth.iv1350.integration;
 
-import se.kth.iv1350.model.RepairOrder;
-import se.kth.iv1350.model.RepairTask;
-import se.kth.iv1350.view.RepairOrderObserver;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import se.kth.iv1350.model.RepairOrder;
+import se.kth.iv1350.view.RepairOrderObserver;
 
 /**
  * Represents a registry of repair orders and contains logic for storing
@@ -58,12 +57,15 @@ public class RepairOrderRegistry {
         return repairOrders;
     }
 
+    //Ta bort
+    
     /**
      * Adds a diagnostic report to an existing repair order.
      * 
      * @param repairOrderId The id of the reapir order to update.
      * @param diagTaskResult The result of the diagnostic task.
      */
+    /* 
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
@@ -71,6 +73,7 @@ public class RepairOrderRegistry {
             notifyObservers(repairOrder);
         }
     }
+    */
 
     /**
      * Adds a repair task to an existing repair order.
@@ -78,6 +81,7 @@ public class RepairOrderRegistry {
      * @param repairOrderId The id of the repair order to update.
      * @param repairTask The repair task to add.
      */
+    /* 
     public void addRepairTask(String repairOrderId, RepairTask repairTask){
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
@@ -85,6 +89,7 @@ public class RepairOrderRegistry {
             notifyObservers(repairOrder);
         }
     }
+    */
 
     /**
      * Finds the latest repair order for a specific phone number.
@@ -168,7 +173,7 @@ public class RepairOrderRegistry {
      * @param repairOrderId The id of the repair order.
      * @return The matching repair order, or null if none is found.
      */
-    private RepairOrder findRepairOrderById(String repairOrderId){
+    public RepairOrder findRepairOrderById(String repairOrderId){
         for (int i = 0; i < nrOfRepairOrders; i++) {
             if (repairOrders[i].getRepairOrderId().equals(repairOrderId)) {
                 return repairOrders[i];
@@ -190,7 +195,7 @@ public class RepairOrderRegistry {
      * Notifies all observers that a repair order has been updated.
      * @param repairOrder The updated repair order.
      */
-    private void notifyObservers(RepairOrder repairOrder){
+    public void notifyObservers(RepairOrder repairOrder){
 
         RepairOrderDTO repairOrderDTO = repairOrder.createRepairOrderDTO();
 
