@@ -98,7 +98,7 @@ public class RepairOrderTest {
     public void testUpdateRepairOrderStatus(){
         assertEquals("Its not CREATED to begin with","CREATED", testRepairOrder.getState());
 
-        testRepairOrder.updateRepairOrderStatus("REJECTED");
+        testRepairOrder.reject();
 
         assertEquals("Its not REJECTED","REJECTED", testRepairOrder.getState());
     }

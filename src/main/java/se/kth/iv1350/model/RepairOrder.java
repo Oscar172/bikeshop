@@ -2,6 +2,11 @@ package se.kth.iv1350.model;
 
 import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
+import se.kth.iv1350.model.state.RepairOrderState;
+
+import se.kth.iv1350.model.state.RepairOrderState;
+import se.kth.iv1350.model.state.CreatedState;
+
 /**
  * Represents a specific repair order and contains its business logic.
  */
@@ -12,7 +17,7 @@ public class RepairOrder {
     private final String estimatedCompletionDate;
     private final String phoneNumber;
     private final RepairTask[] repairTasks;
-    private String state;
+    private RepairOrderState state;
     private double totalCost;
     private String diagnosticReport;
     private int nrOfRepairTasks;
@@ -35,7 +40,7 @@ public class RepairOrder {
         this.estimatedCompletionDate = "One week after accepted offer"; 
         this.repairTasks = new RepairTask[10];
         this.nrOfRepairTasks = 0;
-        this.state = "CREATED";
+        this .state = new CreatedState();
     }
     
     /**
@@ -53,6 +58,32 @@ public class RepairOrder {
 
         return repairOrder;
     }
+
+    
+    public void setState(RepairOrderState newState){
+        this.state = newState;
+    }
+    
+    public void accept() {
+        state.accept(this);
+    }
+
+    public void reject() {
+        state.reject(this);
+    }
+
+    public void payed() {
+        state.payed(this);
+    }
+
+    public void readyForApproval() {
+        state.payed(this);
+    }
+
+    public String getState() {
+        return state.getStateName();
+    }
+
 
     /**
      * Adds a diagnostic report to the repair order.
@@ -94,15 +125,6 @@ public class RepairOrder {
     }
 
     /**
-     * Updates the status of the repair order.
-     * 
-     * @param repairStatus The new status of the reapir order.
-     */
-    public void updateRepairOrderStatus(String repairStatus){
-        this.state = repairStatus;
-    }
-
-    /**
      * Creates a DTO containing the reapir order information.
      * 
      * @return A RepairOrderDTO representing this repair order.
@@ -112,7 +134,7 @@ public class RepairOrder {
                                    problemDescr, 
                                    phoneNumber, 
                                    bikeSerialNumber, 
-                                   state,
+                                   state.getStateName(),
                                    totalCost, 
                                    diagnosticReport, 
                                    estimatedCompletionDate,
@@ -145,15 +167,6 @@ public class RepairOrder {
      */
     public String getBikeSerialNumber(){
         return bikeSerialNumber;
-    }
-
-    /**
-     * Returns the current state of the repair order.
-     *
-     * @return The current state of the repair order.
-     */
-    public String getState(){
-        return state;
     }
 
     /**
