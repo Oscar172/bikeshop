@@ -53,7 +53,8 @@ public class Controller {
      * @param bikeSerialNumber The bike's serial number.
      */
     public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
+        RepairOrder newOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
+        this.updateRepairOrder(newOrder);
     }
 
     /**
@@ -69,23 +70,83 @@ public class Controller {
     /**
      * Adds a diagnostic report to an existing repair order.
      * 
-     * @param repairOrderId  The id of the repair order to update
+     * @param repairOrderId The id of the reapir order to update.
      * @param diagTaskResult The result of the diagnostic task.
      */
     public void addDiagnosticReport(String repairOrderId, String diagTaskResult){
-        repairOrderRegistry.addDiagnosticReport(repairOrderId, diagTaskResult);
+        RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
+        if(repairOrder != null){
+            repairOrder.addDiagnosticReport(diagTaskResult);
+            updateRepairOrder(repairOrder);
+        }
     }
 
     /**
-     * Creates a repair task object from the View inputs and adds it to an existing repair order.
-     *  
-     * @param repairOrderId The identifer of the RepairOrder to update.
-     * @param repairTaskDescription The description of the repair task.
-     * @param cost  The cost of the proposed repair task.
+     * Adds a repair task to an existing repair order.
+     * 
+     * @param repairOrderId The id of the repair order to update.
+     * @param repairTask The repair task to add.
      */
     public void addRepairTask(String repairOrderId, String repairTaskDescription, double cost){
+        RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
         RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
-        repairOrderRegistry.addRepairTask(repairOrderId, newTask);
+        if(repairOrder != null){
+            repairOrder.addRepairTask(newTask);
+            updateRepairOrder(repairOrder);
+        }
+    }
+
+    /**
+     * Saves a new repair order or updates an exisitng one.
+     * 
+     * @param repairOrder The specific order to save.
+     */
+    public void updateRepairOrder(RepairOrder updatedOrder){
+        RepairOrder[] orders = repairOrderRegistry.getRepairOrders();
+        int countRepairOrders = repairOrderRegistry.getNrOfRepairOrders();
+        String idOfUpdatedOrder = updatedOrder.getRepairOrderId();
+
+        for (int i = 0; i < countRepairOrders; i++) {
+            if (orders[i].getRepairOrderId().equals(idOfUpdatedOrder)) {
+                orders[i] = updatedOrder;
+                repairOrderRegistry.notifyObservers(updatedOrder);
+                return;
+            }
+        }
+        orders[countRepairOrders] = updatedOrder;
+        repairOrderRegistry.incrementNrOfRepairOrders();
+        repairOrderRegistry.notifyObservers(updatedOrder);
+    }
+
+    /**
+     * Accepts a repair order and prints out.
+     * 
+     * @param repairOrderId The id of the repair order.
+     * @return The accepted repair order, or null if no matching order is found.
+     */
+    public RepairOrder acceptRepairOrder(String repairOrderId) {
+        RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
+        if(repairOrder != null){
+            repairOrder.accept();
+            this.updateRepairOrder(repairOrder);
+            printer.printRepairOrder(repairOrder);
+            return repairOrder;
+        }
+        return null;
+    }
+        /**
+     * Rejects a repair order.
+     * 
+     * @param repairOrderId The id of the repair order.
+     */
+    public RepairOrder rejectRepairOrder(String repairOrderId) {
+        RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
+        if(repairOrder != null){
+            repairOrder.reject();
+            this.updateRepairOrder(repairOrder);
+            return repairOrder;
+        }
+        return null;
     }
 
     /**
@@ -96,26 +157,5 @@ public class Controller {
      */
     public RepairOrderDTO findRepairOrder(String phoneNumber){
         return repairOrderRegistry.findRepairOrder(phoneNumber);
-    }
-
-    /**
-     * Accepts a repair order and prints it.
-     * 
-     * @param repairOrderId The id of the repair order to accept.
-     */
-    public void acceptRepairOrder(String repairOrderId){
-        RepairOrder repairOrder = repairOrderRegistry.acceptRepairOrder(repairOrderId);
-        if(repairOrder != null){
-            printer.printRepairOrder(repairOrder);
-        }
-    }
-
-    /**
-     * Rejects a repair order.
-     * 
-     * @param repairOrderId The id of the reapir order to reject.
-     */
-    public void rejectRepairOrder(String repairOrderId){
-        repairOrderRegistry.rejectRepairOrder(repairOrderId);
     }
 }

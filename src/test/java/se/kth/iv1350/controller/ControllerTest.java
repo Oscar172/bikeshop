@@ -20,6 +20,7 @@ public class ControllerTest {
     private final String phoneNumber = "1234567";
     private final String description = "Broken breaks";
     private final String bikeSerialNumber = "BIKE123";
+    private final String diagReport = "Needs new brakes";
     private final double totalCost = 0.0;
 
 
@@ -102,5 +103,41 @@ public class ControllerTest {
         assertEquals("The problem description does not match at index 0.", "Change breaks", foundOrders[0].getProblemDescr());
         assertEquals("The problem description does not match at index 1.", "Oil the chain", foundOrders[1].getProblemDescr());
         assertEquals("The problem description does not match at index 2.", "Pump the tires", foundOrders[2].getProblemDescr());
+    }
+
+    @Test
+    public void testAddDiagnosticReportUpdatesOrder() {
+        controller.createRepairOrder(description, phoneNumber, bikeSerialNumber);
+        RepairOrderDTO order = controller.findRepairOrder(phoneNumber);
+
+        controller.addDiagnosticReport(order.getRepairOrderId(), diagReport);
+        RepairOrderDTO updatedOrder = controller.findRepairOrder(phoneNumber);
+
+        assertNotNull("Updated order should exist", updatedOrder);
+        assertEquals("Diagnostic report was not saved correctly.", diagReport, updatedOrder.getDiagnosticReport());
+    }
+
+    @Test
+    public void testAcceptRepairOrderChangesState() {
+        controller.createRepairOrder(description, phoneNumber, bikeSerialNumber);
+        RepairOrderDTO order = controller.findRepairOrder(phoneNumber);
+        String id = order.getRepairOrderId();
+
+        controller.acceptRepairOrder(id);
+
+        RepairOrderDTO acceptedOrder = controller.findRepairOrder(phoneNumber);
+        assertEquals("Order state should be 'ACCEPTED'", "ACCEPTED", acceptedOrder.getState());
+    }
+
+    @Test
+    public void testRejectRepairOrderChangesState() {
+        controller.createRepairOrder(description, phoneNumber, bikeSerialNumber);
+        RepairOrderDTO order = controller.findRepairOrder(phoneNumber);
+        String id = order.getRepairOrderId();
+    
+        controller.rejectRepairOrder(id);
+    
+        RepairOrderDTO rejectedOrder = controller.findRepairOrder(phoneNumber);
+        assertEquals("Order state should be 'REJECTED'", "REJECTED", rejectedOrder.getState());
     }
 }
