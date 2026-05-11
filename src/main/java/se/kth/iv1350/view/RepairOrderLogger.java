@@ -27,14 +27,14 @@ public class RepairOrderLogger implements RepairOrderObserver{
     public void repairOrderUpdated(RepairOrderDTO repairOrderDTO){
         String message = 
             "-----Repair Order Log-----\n" +
-              "Repair order ID: " + repairOrderDTO.getRepairOrderId() + "\n" +
-              "Phone number: " + repairOrderDTO.getPhoneNumber() + "\n" +
+              "Repair Order ID: " + repairOrderDTO.getRepairOrderId() + "\n" +
+              "Phone Number: " + repairOrderDTO.getPhoneNumber() + "\n" +
               "Problem Description: " + repairOrderDTO.getProblemDescr() + "\n" +
               "Serial Number: " + repairOrderDTO.getBikeSerialNumber() + "\n" +
               "Status: " + repairOrderDTO.getState() + "\n" +
-              "Total cost: " + repairOrderDTO.getTotalCost() + "\n" +
-              "Diagnostic report: " + repairOrderDTO.getDiagnosticReport() + "\n" +
-              "ETA: " + repairOrderDTO.getEstimatedCompletionDate() + "\n";
+              "Total Cost: " + repairOrderDTO.getTotalCost() + "\n" +
+              "Diagnostic Report: " + repairOrderDTO.getDiagnosticReport() + "\n" +
+              "Etimated Repair Time: " + repairOrderDTO.getEstimatedCompletionDate() + "\n";
             
         logger.log(message);
     }

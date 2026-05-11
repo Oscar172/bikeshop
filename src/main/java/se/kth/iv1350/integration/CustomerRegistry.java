@@ -45,6 +45,4 @@ public class CustomerRegistry{
         }
         throw new UserNotFoundException("No customer was found under this phonenumber: " + phoneNumber);
     }
-
 }
-
