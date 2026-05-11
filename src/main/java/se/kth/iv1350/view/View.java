@@ -4,7 +4,6 @@ import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.integration.CustomerDTO;
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
-import se.kth.iv1350.util.Logger;
 
 /**
  * Simulates user interaction with the system.
@@ -16,9 +15,8 @@ public class View {
      * Creates a new View.
      * 
      * @param contr The controller used for all system operations.
-     * @param logger The logger used to log caught exceptions.
      */
-    public View(Controller contr, Logger logger) {
+    public View(Controller contr) {
         this.contr = contr;
     }
 
