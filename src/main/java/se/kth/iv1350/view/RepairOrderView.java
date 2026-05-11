@@ -3,13 +3,13 @@ package se.kth.iv1350.view;
 import se.kth.iv1350.integration.RepairOrderDTO;
 
 /**
- * Prints a message when a repair order has been updated.
+ * Prints updated repair order information to the user.
  */
 public class RepairOrderView implements RepairOrderObserver {
 
     /**
-     * Called when a repair order has been updated.
-     *
+     * Prints the updated repair order.
+     * 
      * @param repairOrderDTO The updated repair order.
      */
     @Override
