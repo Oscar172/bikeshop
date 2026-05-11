@@ -28,6 +28,7 @@ public class CustomerRegistry{
 
     /**
      * Method for access to CustomerRegistry due to Singleton GoF.
+     * 
      * @return INSTANCE of CustomerRegistry.
      */
     public static CustomerRegistry getCustomerRegistry(){
