@@ -4,7 +4,6 @@ import se.kth.iv1350.integration.RepairOrderDTO;
 import se.kth.iv1350.integration.RepairOrderRegistry;
 import se.kth.iv1350.model.state.RepairOrderState;
 
-import se.kth.iv1350.model.state.RepairOrderState;
 import se.kth.iv1350.model.state.CreatedState;
 
 /**
@@ -83,7 +82,6 @@ public class RepairOrder {
     public String getState() {
         return state.getStateName();
     }
-
 
     /**
      * Adds a diagnostic report to the repair order.
