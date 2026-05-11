@@ -23,7 +23,7 @@ public class ControllerTest {
 
     @Before
     public void setUp() {
-        CustomerRegistry customerRegistry = new CustomerRegistry();
+        CustomerRegistry customerRegistry = CustomerRegistry.getCustomerRegistry();
         repairOrderRegistry = new RepairOrderRegistry();
         Printer printer = new Printer();
         controller = new Controller(customerRegistry, repairOrderRegistry, printer);
