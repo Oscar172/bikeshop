@@ -20,7 +20,7 @@ public class CustomerRegistryTest {
 
     @Before
     public void setUp() {
-        registry = new CustomerRegistry();
+        registry = CustomerRegistry.getCustomerRegistry();
         phoneNumber = "1234";
         name = "Gustaf";
         nonExistingPhoneNumber = "1223";
