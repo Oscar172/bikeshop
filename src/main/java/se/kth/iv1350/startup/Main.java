@@ -35,7 +35,7 @@ public class Main
         repairOrderRegistry.addRepairOrderObserver(new RepairOrderView());
         repairOrderRegistry.addRepairOrderObserver(new RepairOrderLogger(repairOrderFileLogger));
 
-        View view = new View(contr, logger);
+        View view = new View(contr);
         view.runFakeExecution();
     }
 }
