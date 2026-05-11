@@ -86,20 +86,6 @@ public class RepairOrderRegistry {
         }
         return null;
     }
-    
-
-    /**
-     * Rejects a repair order.
-     * 
-     * @param repairOrderId The id of the repair order.
-     */
-    public void rejectRepairOrder(String repairOrderId){
-        RepairOrder repairOrder = findRepairOrderById(repairOrderId);
-        if(repairOrder != null){
-            repairOrder.reject();
-            notifyObservers(repairOrder);
-        }
-    }
 
     /**
      * Finds a repair order by its id.
@@ -117,7 +103,7 @@ public class RepairOrderRegistry {
     }
 
     /**
-     * A methos that is called when a new Repair Order is created to increment the total
+     * A method that is called when a new Repair Order is created to increment the total
      * number of Repair Orders. 
      */
     public void incrementNrOfRepairOrders() {

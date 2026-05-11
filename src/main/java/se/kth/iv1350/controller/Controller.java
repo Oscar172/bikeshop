@@ -119,7 +119,7 @@ public class Controller {
     }
 
     /**
-     * Accepts a repair order.
+     * Accepts a repair order and prints out.
      * 
      * @param repairOrderId The id of the repair order.
      * @return The accepted repair order, or null if no matching order is found.
@@ -128,6 +128,21 @@ public class Controller {
         RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
         if(repairOrder != null){
             repairOrder.accept();
+            this.updateRepairOrder(repairOrder);
+            printer.printRepairOrder(repairOrder);
+            return repairOrder;
+        }
+        return null;
+    }
+        /**
+     * Rejects a repair order.
+     * 
+     * @param repairOrderId The id of the repair order.
+     */
+    public RepairOrder rejectRepairOrder(String repairOrderId) {
+        RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
+        if(repairOrder != null){
+            repairOrder.reject();
             this.updateRepairOrder(repairOrder);
             return repairOrder;
         }
@@ -142,27 +157,5 @@ public class Controller {
      */
     public RepairOrderDTO findRepairOrder(String phoneNumber){
         return repairOrderRegistry.findRepairOrder(phoneNumber);
-    }
-
-    /**
-     * Accepts a repair order and prints it.
-     * 
-     * @param repairOrderId The id of the repair order to accept.
-     */
-    /* 
-    public void acceptRepairOrder(String repairOrderId){
-        RepairOrder repairOrder = repairOrderRegistry.acceptRepairOrder(repairOrderId);
-        if(repairOrder != null){
-            printer.printRepairOrder(repairOrder);
-        }
-    }*/
-
-    /**
-     * Rejects a repair order.
-     * 
-     * @param repairOrderId The id of the reapir order to reject.
-     */
-    public void rejectRepairOrder(String repairOrderId){
-        repairOrderRegistry.rejectRepairOrder(repairOrderId);
     }
 }
