@@ -15,7 +15,6 @@ public class View {
      * Creates a new View.
      * 
      * @param contr The controller used for all system operations.
-     * @param logger The logger used to log caught exceptions.
      */
     public View(Controller contr) {
         this.contr = contr;
