@@ -18,7 +18,6 @@ public class Controller {
     private final CustomerRegistry customerRegistry;
     private final RepairOrderRegistry repairOrderRegistry;
     private final Printer printer;
-    private final RepairTask repairTask;
 
     /**
     * Creates a new instance of Controller.
@@ -29,11 +28,10 @@ public class Controller {
     */
     public Controller(CustomerRegistry customerRegistry,
                         RepairOrderRegistry repairOrderRegistry,
-                        Printer printer, RepairTask repairTask){
+                        Printer printer){
         this.customerRegistry = customerRegistry;
         this.repairOrderRegistry = repairOrderRegistry;
         this.printer = printer;
-        this.repairTask = repairTask;
     }
 
     /**
@@ -55,7 +53,8 @@ public class Controller {
      * @param bikeSerialNumber The bike's serial number.
      */
     public void createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber){
-        RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
+        RepairOrder newOrder = RepairOrder.createRepairOrder(problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
+        this.updateRepairOrder(newOrder);
     }
 
     /**
@@ -78,7 +77,7 @@ public class Controller {
         RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
         if(repairOrder != null){
             repairOrder.addDiagnosticReport(diagTaskResult);
-            repairOrderRegistry.updateRepairOrder(repairOrder);
+            updateRepairOrder(repairOrder);
         }
     }
 
@@ -93,8 +92,46 @@ public class Controller {
         RepairTask newTask = RepairTask.createRepairTask(repairTaskDescription, cost);
         if(repairOrder != null){
             repairOrder.addRepairTask(newTask);
-            repairOrderRegistry.updateRepairOrder(repairOrder);
+            updateRepairOrder(repairOrder);
         }
+    }
+
+    /**
+     * Saves a new repair order or updates an exisitng one.
+     * 
+     * @param repairOrder The specific order to save.
+     */
+    public void updateRepairOrder(RepairOrder updatedOrder){
+        RepairOrder[] orders = repairOrderRegistry.getRepairOrders();
+        int countRepairOrders = repairOrderRegistry.getNrOfRepairOrders();
+        String idOfUpdatedOrder = updatedOrder.getRepairOrderId();
+
+        for (int i = 0; i < countRepairOrders; i++) {
+            if (orders[i].getRepairOrderId().equals(idOfUpdatedOrder)) {
+                orders[i] = updatedOrder;
+                repairOrderRegistry.notifyObservers(updatedOrder);
+                return;
+            }
+        }
+        orders[countRepairOrders] = updatedOrder;
+        repairOrderRegistry.incrementNrOfRepairOrders();
+        repairOrderRegistry.notifyObservers(updatedOrder);
+    }
+
+    /**
+     * Accepts a repair order.
+     * 
+     * @param repairOrderId The id of the repair order.
+     * @return The accepted repair order, or null if no matching order is found.
+     */
+    public RepairOrder acceptRepairOrder(String repairOrderId) {
+        RepairOrder repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
+        if(repairOrder != null){
+            repairOrder.accept();
+            this.updateRepairOrder(repairOrder);
+            return repairOrder;
+        }
+        return null;
     }
 
     /**
@@ -112,12 +149,13 @@ public class Controller {
      * 
      * @param repairOrderId The id of the repair order to accept.
      */
+    /* 
     public void acceptRepairOrder(String repairOrderId){
         RepairOrder repairOrder = repairOrderRegistry.acceptRepairOrder(repairOrderId);
         if(repairOrder != null){
             printer.printRepairOrder(repairOrder);
         }
-    }
+    }*/
 
     /**
      * Rejects a repair order.

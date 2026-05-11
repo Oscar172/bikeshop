@@ -52,7 +52,6 @@ public class RepairOrder {
     public static RepairOrder createRepairOrder(String problemDescr, String phoneNumber, String bikeSerialNumber, RepairOrderRegistry repairOrderRegistry){
         String repairOrderId = repairOrderRegistry.generateRepairOrderId();
         RepairOrder repairOrder = new RepairOrder(repairOrderId, problemDescr, phoneNumber, bikeSerialNumber, repairOrderRegistry);
-        repairOrderRegistry.updateRepairOrder(repairOrder);
 
         return repairOrder;
     }
