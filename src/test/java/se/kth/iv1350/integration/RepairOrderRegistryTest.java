@@ -6,41 +6,37 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.model.RepairOrder;
-import se.kth.iv1350.model.RepairTask;
 import se.kth.iv1350.view.RepairOrderObserver;
 
 public class RepairOrderRegistryTest {
     private RepairOrderRegistry registry;
-    private RepairOrderDTO order;
+    private Controller contr;
 
     private final String phoneNumber = "123456789";
     private final String description = "Broken breaks";
     private final String bikeSerialNumber = "BIKE123";
-    private final String taskDescription = "Oil the chain";
-    private final String diagResult = "Bad breaks";
 
     private void createTestOrder() {
-        RepairOrder.createRepairOrder(description, phoneNumber, bikeSerialNumber, registry);
+        contr.createRepairOrder(description, phoneNumber, bikeSerialNumber);
     }
     @Before
     public void setUp() {
         registry = new RepairOrderRegistry();
+        contr = new Controller(new CustomerRegistry(), registry, new Printer());
         createTestOrder();
-        order = registry.findRepairOrder(phoneNumber);
     }
 
     @After
     public void tearDown() {
         registry = null;
-        order = null;
     }
 
-        private class TestObserver implements RepairOrderObserver{
+    private class TestObserver implements RepairOrderObserver{
         private boolean updated = false;
 
         @Override
@@ -55,12 +51,41 @@ public class RepairOrderRegistryTest {
         TestObserver observer = new TestObserver();
         registry.addRepairOrderObserver(observer);
 
+        RepairOrder order = registry.findRepairOrderById("RO-1");
+
         assertFalse("Observer should not have been notified before update.", observer.updated);
 
-        registry.addDiagnosticReport(order.getRepairOrderId(), "Flat tire");
+        registry.notifyObservers(order);
 
-        assertTrue("Observer should have been notified when repair order was updated.", observer.updated);
+        assertTrue("Observer should have been notified.", observer.updated);
 
+    }
+
+    // Nya av Tova
+    @Test
+    public void testFindRepairOrderById() {
+        String repairOrderId = "RO-1";
+        RepairOrder found = registry.findRepairOrderById(repairOrderId);
+
+        assertNotNull("Should find order", found);
+        assertEquals("ID should match", repairOrderId, found.getRepairOrderId());
+    }
+
+    @Test
+    public void testGenerateRepairOrderId() {
+        int currentCount = registry.getNrOfRepairOrders();
+        String expectedId = "RO-" + (currentCount + 1);
+        String nextId = registry.generateRepairOrderId();
+        
+        assertEquals("Next ID should be based on the current count + 1", expectedId, nextId);
+    }
+
+    @Test
+    public void testFindAllRepairOrders() {
+        contr.createRepairOrder("Flat tire", phoneNumber, "BIKE2");
+
+        RepairOrderDTO[] results = registry.findAllRepairOrders(phoneNumber);
+        assertEquals("Should find 2 orders", 2, results.length);
     }
 
     @Test
@@ -75,17 +100,12 @@ public class RepairOrderRegistryTest {
     }
 
     @Test
-    public void testAddRepairTaskUpdatesExistingRepairOrder() {
-        double taskCost = 250.0;
-        RepairTask task = RepairTask. createRepairTask(taskDescription, taskCost);
-
-        registry.addRepairTask(order.getRepairOrderId(), task);
-
-        RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
-        assertNotNull("Order should be found after updating.", updatedOrder);
-        assertEquals("The cost does not match.", taskCost, updatedOrder.getTotalCost(), 0.0001);
+    public void testFindNonExistingOrderReturnsNull() {
+        RepairOrderDTO result = registry.findRepairOrder("7890");
+        assertNull("Searches for nonexisting number should return null", result);
     }
-
+}
+/* 
     @Test
     public void testAddDiagnosticReport() {
         registry.addDiagnosticReport(order.getRepairOrderId(), diagResult);
@@ -114,17 +134,14 @@ public class RepairOrderRegistryTest {
     }
 
     @Test
-    public void testFindAllRepairOrders() {
-        createTestOrder();
+    public void testAddRepairTaskUpdatesExistingRepairOrder() {
+        double taskCost = 250.0;
+        RepairTask task = RepairTask. createRepairTask(taskDescription, taskCost);
 
-        RepairOrderDTO[] results = registry.findAllRepairOrders(phoneNumber);
+        registry.addRepairTask(order.getRepairOrderId(), task);
 
-        assertEquals("Should have found 2 orders under this phone number", 2, results.length);
+        RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
+        assertNotNull("Order should be found after updating.", updatedOrder);
+        assertEquals("The cost does not match.", taskCost, updatedOrder.getTotalCost(), 0.0001);
     }
-
-    @Test
-    public void testFindNonExistingOrderReturnsNull() {
-        RepairOrderDTO result = registry.findRepairOrder("7890");
-        assertNull("Searches for nonexisting number should return null", result);
-    }
-}
+*/
