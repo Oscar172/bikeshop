@@ -57,7 +57,6 @@ public class RepairOrderRegistry {
         return repairOrders;
     }
 
-
     /**
      * Finds the latest repair order for a specific phone number.
      * 

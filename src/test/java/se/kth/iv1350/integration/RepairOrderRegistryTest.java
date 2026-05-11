@@ -84,7 +84,6 @@ public class RepairOrderRegistryTest {
     public void testFindAllRepairOrders() {
         contr.createRepairOrder("Flat tire", phoneNumber, "BIKE2");
 
-
         RepairOrderDTO[] results = registry.findAllRepairOrders(phoneNumber);
         assertEquals("Should find 2 orders", 2, results.length);
     }
@@ -106,43 +105,3 @@ public class RepairOrderRegistryTest {
         assertNull("Searches for nonexisting number should return null", result);
     }
 }
-/* 
-    @Test
-    public void testAddDiagnosticReport() {
-        registry.addDiagnosticReport(order.getRepairOrderId(), diagResult);
-
-        RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
-        assertNotNull("Order should be found after updating", updatedOrder);
-        assertEquals("Diagnostic report not saved correctly", diagResult, updatedOrder.getDiagnosticReport());
-    }
-
-    @Test
-    public void testAcceptRepairOrder() {
-        registry.acceptRepairOrder(order.getRepairOrderId());
-
-        RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
-        assertNotNull("Order should be possible to find after changed status", updatedOrder);
-        assertEquals("Order status should be ACCEPTED", "ACCEPTED", updatedOrder.getState());
-    }
-
-    @Test
-    public void testRejectRepairOrder() {
-        registry.rejectRepairOrder(order.getRepairOrderId());
-
-        RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
-        assertNotNull("Order should be possible to find after changed status", updatedOrder);
-        assertEquals("Order status should be REJECTED", "REJECTED", updatedOrder.getState());
-    }
-
-    @Test
-    public void testAddRepairTaskUpdatesExistingRepairOrder() {
-        double taskCost = 250.0;
-        RepairTask task = RepairTask. createRepairTask(taskDescription, taskCost);
-
-        registry.addRepairTask(order.getRepairOrderId(), task);
-
-        RepairOrderDTO updatedOrder = registry.returnRepairOrderDTO(order.getRepairOrderId());
-        assertNotNull("Order should be found after updating.", updatedOrder);
-        assertEquals("The cost does not match.", taskCost, updatedOrder.getTotalCost(), 0.0001);
-    }
-*/
