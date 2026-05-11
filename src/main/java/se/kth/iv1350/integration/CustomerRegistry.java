@@ -52,7 +52,7 @@ public class CustomerRegistry{
         
         if (phoneNumber.equals("0000")) {
             if (logger != null) {
-                logger.log("Database failure occured when customer searched for" + phoneNumber);
+                logger.log("Database not accessable occured when system searched for: " + phoneNumber);
             }
             throw new DatabaseFailureException("Could not reach database.");
         }

@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
+import se.kth.iv1350.util.FileLogger;
+import se.kth.iv1350.util.Logger;
 
 public class CustomerRegistryTest {
     private CustomerRegistry registry;
@@ -21,6 +23,11 @@ public class CustomerRegistryTest {
     @Before
     public void setUp() {
         registry = CustomerRegistry.getCustomerRegistry();
+
+        Logger logger = new FileLogger("logs/database-log.txt");
+        registry.setLogger(logger);
+
+
         phoneNumber = "1234";
         name = "Gustaf";
         nonExistingPhoneNumber = "1223";

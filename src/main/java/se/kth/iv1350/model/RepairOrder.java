@@ -74,7 +74,7 @@ public class RepairOrder {
     }
 
     public void readyForApproval() {
-        state.payed(this); // Fel eller? bör va readyForApproval(this)?
+        state.readyForApproval(this);
     }
 
     public String getState() {
