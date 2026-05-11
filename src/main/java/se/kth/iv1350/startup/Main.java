@@ -23,9 +23,9 @@ public class Main
      */
     public static void main(String[] args ){   
         Logger repairOrderFileLogger = new FileLogger("logs/repair-order-log.txt");
-        Logger dataBaseFileLogger = new FileLogger("logs/database-log.txt");
-
-        CustomerRegistry customerRegistry = new CustomerRegistry(dataBaseFileLogger);
+        Logger logger = new FileLogger("logs/database-log.txt");
+        CustomerRegistry customerRegistry = CustomerRegistry.getCustomerRegistry();
+        customerRegistry.setLogger(logger);
         Printer printer = new Printer();
         RepairOrderRegistry repairOrderRegistry = new RepairOrderRegistry();
 
@@ -34,7 +34,7 @@ public class Main
         repairOrderRegistry.addRepairOrderObserver(new RepairOrderView());
         repairOrderRegistry.addRepairOrderObserver(new RepairOrderLogger(repairOrderFileLogger));
 
-        View view = new View(contr, dataBaseFileLogger);
+        View view = new View(contr);
         view.runFakeExecution();
     }
 }

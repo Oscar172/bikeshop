@@ -11,20 +11,36 @@ import se.kth.iv1350.util.Logger;
  * Represents a customer registry and contains logic for searching for customers.
  */
 public class CustomerRegistry{
+
+    private static final CustomerRegistry INSTANCE = new CustomerRegistry();
+
+    private Logger logger;
+
     private List<CustomerDTO> customers = new ArrayList<>();
-    private final Logger logger;
 
     /**
-     * Creates a new CustomerReigstry and initializes it with existing customers.
+     * Creates a new CustomerRegistry and initializes it with existing customers.
      */
-    public CustomerRegistry(Logger logger) {
-        this.logger = logger;
+    private CustomerRegistry() {
         customers.add(new CustomerDTO("1234", "Gustaf"));
         customers.add(new CustomerDTO("5678", "Tova"));
     }
 
     /**
+     * Method for access to CustomerRegistry due to Singleton GoF.
+     * @return INSTANCE of CustomerRegistry.
+     */
+    public static CustomerRegistry getCustomerRegistry(){
+        return INSTANCE;
+    }
+
+    public void setLogger (Logger logger){
+        this.logger = logger;
+    }
+
+    /**
      * Retrieves information about an existing customer based on their phonenumber.
+     * To avoid NPE an if-statement is used for the logger call.
      * @param phoneNumber The customer's phone number.
      * @return Information about the customer in the form of a CustomerDTO.
      * @throws UserNotFoundException if no customer with the specified phone
@@ -35,7 +51,9 @@ public class CustomerRegistry{
                 throws UserNotFoundException, DatabaseFailureException {
         
         if (phoneNumber.equals("0000")) {
-            logger.log("DatabaseFailureException: Could not reach database.");
+            if (logger != null) {
+                logger.log("Database failure occured when customer searched for" + phoneNumber);
+            }
             throw new DatabaseFailureException("Could not reach database.");
         }
         for (CustomerDTO customer : customers) {

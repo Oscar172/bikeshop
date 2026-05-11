@@ -9,10 +9,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import se.kth.iv1350.util.FileLogger;
-import se.kth.iv1350.util.Logger;
-
-
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.view.RepairOrderObserver;
@@ -31,13 +27,13 @@ public class RepairOrderRegistryTest {
     @Before
     public void setUp() {
         registry = new RepairOrderRegistry();
-        Logger logger = new FileLogger("logs/database-log.txt");
-        contr = new Controller(new CustomerRegistry(logger), registry, new Printer());
+        contr = new Controller(CustomerRegistry.getCustomerRegistry(), registry, new Printer());
         createTestOrder();
     }
 
     @After
     public void tearDown() {
+        contr = null;
         registry = null;
     }
 
