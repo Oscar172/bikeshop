@@ -11,7 +11,6 @@ import se.kth.iv1350.util.Logger;
  */
 public class View {
     private final Controller contr;
-    private final Logger logger;
 
     /**
      * Creates a new View.
@@ -21,7 +20,6 @@ public class View {
      */
     public View(Controller contr, Logger logger) {
         this.contr = contr;
-        this.logger = logger;
     }
 
       /**
