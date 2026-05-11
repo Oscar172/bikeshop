@@ -84,6 +84,7 @@ public class RepairOrderRegistryTest {
     public void testFindAllRepairOrders() {
         contr.createRepairOrder("Flat tire", phoneNumber, "BIKE2");
 
+
         RepairOrderDTO[] results = registry.findAllRepairOrders(phoneNumber);
         assertEquals("Should find 2 orders", 2, results.length);
     }
