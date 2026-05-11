@@ -25,7 +25,7 @@ public class Main
     public static void main(String[] args ){   
         Logger repairOrderFileLogger = new FileLogger("logs/repair-order-log.txt");
         Logger databaseLogger = new FileLogger("logs/database-log.txt");
-        CustomerRegistry customerRegistry = new CustomerRegistry();
+        CustomerRegistry customerRegistry = CustomerRegistry.getCustomerRegistry();
         Printer printer = new Printer();
         RepairOrderRegistry repairOrderRegistry = new RepairOrderRegistry();
 
