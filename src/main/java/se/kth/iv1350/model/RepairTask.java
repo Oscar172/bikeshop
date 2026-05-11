@@ -36,5 +36,23 @@ public class RepairTask {
     public double getCost(){
         return cost;
     }
+
+    /**
+     * Returns the state of the repair task.
+     * 
+     * @return The state of the repair task.
+     */
+    public String getState(){
+        return state;
+    }
+
+    /**
+     * Returns the description of the repair task
+     * 
+     * @return The description of the repair Task.
+     */
+    public String getDescription(){
+        return description;
+    }
 }
 

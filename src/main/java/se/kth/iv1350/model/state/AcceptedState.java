@@ -15,8 +15,13 @@ public class AcceptedState implements RepairOrderState{
     }
 
     @Override
-    public void onHold(RepairOrder order){
-        order.setState(new OnHoldState());
+    public void payed(RepairOrder order){
+        order.setState(new PayedState());
+    }
+
+    @Override
+    public void readyForApproval(RepairOrder order){
+        order.setState(new ReadyForApproval());
     }
 
     @Override

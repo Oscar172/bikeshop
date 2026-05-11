@@ -30,7 +30,6 @@ public class CustomerRegistryTest {
     @After
     public void tearDown() {
         registry = null;
-
         phoneNumber = null;
         name = null;
         nonExistingPhoneNumber = null;

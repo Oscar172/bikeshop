@@ -2,7 +2,7 @@ package se.kth.iv1350.model.state;
 
 import se.kth.iv1350.model.RepairOrder;
 
-public class OnHoldState implements RepairOrderState {
+public class ReadyForApproval implements RepairOrderState{
 
     @Override
     public void accept(RepairOrder order){
@@ -15,12 +15,17 @@ public class OnHoldState implements RepairOrderState {
     }
 
     @Override
-    public void onHold(RepairOrder order){
-        //Already ON-HOLD state, no change is made.
+    public void payed(RepairOrder order){
+        order.setState(new PayedState());
+    }
+
+    @Override
+    public void readyForApproval(RepairOrder order){
+        order.setState(new ReadyForApproval());
     }
 
     @Override
     public String getStateName(){
-        return "ON-HOLD";
+        return "READYFORAPPROVAL";
     }
 }

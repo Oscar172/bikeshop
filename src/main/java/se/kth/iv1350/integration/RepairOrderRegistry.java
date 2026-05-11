@@ -4,7 +4,6 @@ import se.kth.iv1350.model.RepairOrder;
 import se.kth.iv1350.model.RepairTask;
 import se.kth.iv1350.view.RepairOrderObserver;
 
-//nytt
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +15,6 @@ public class RepairOrderRegistry {
 
     private final RepairOrder[] repairOrders;
     private int nrOfRepairOrders;
-
-    //nytt
     private final List<RepairOrderObserver> repairOrderObservers;
     
     /**
@@ -26,7 +23,7 @@ public class RepairOrderRegistry {
     public RepairOrderRegistry(){
         this.repairOrders = new RepairOrder[100];
         this.nrOfRepairOrders = 0;
-        this.repairOrderObservers = new ArrayList<>(); //nytt
+        this.repairOrderObservers = new ArrayList<>();
     }
 
     /**
@@ -145,7 +142,7 @@ public class RepairOrderRegistry {
     public RepairOrder acceptRepairOrder(String repairOrderId){
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
-            repairOrder.updateRepairOrderStatus("ACCEPTED");
+            repairOrder.accept();
             notifyObservers(repairOrder);
             return repairOrder;
         }
@@ -160,7 +157,7 @@ public class RepairOrderRegistry {
     public void rejectRepairOrder(String repairOrderId){
         RepairOrder repairOrder = findRepairOrderById(repairOrderId);
         if(repairOrder != null){
-            repairOrder.updateRepairOrderStatus("REJECTED");
+            repairOrder.reject();
             notifyObservers(repairOrder);
         }
     }

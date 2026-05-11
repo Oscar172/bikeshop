@@ -9,7 +9,7 @@ public class RejectedState implements RepairOrderState{
 
     @Override
     public void accept(RepairOrder order){
-        //Rejected state is final state, np state change is made.
+        //Rejected state is final state, no state change is made.
     }
 
     @Override
@@ -18,7 +18,12 @@ public class RejectedState implements RepairOrderState{
     }
 
     @Override
-    public void onHold(RepairOrder order){
+    public void payed(RepairOrder order){
+        ////Rejected rejected, no state change is made.
+    }
+
+    @Override
+    public void readyForApproval(RepairOrder order){
         //Rejected state is final state, np state change is made.
     }
 
