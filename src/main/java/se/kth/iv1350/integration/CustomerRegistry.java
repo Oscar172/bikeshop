@@ -3,9 +3,8 @@ package se.kth.iv1350.integration;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
-import se.kth.iv1350.util.Logger;
+import se.kth.iv1350.integration.exceptions.UserNotFoundException;
 
 /**
  * Represents a customer registry and contains logic for searching for customers.
@@ -13,8 +12,6 @@ import se.kth.iv1350.util.Logger;
 public class CustomerRegistry{
 
     private static final CustomerRegistry INSTANCE = new CustomerRegistry();
-
-    private Logger logger;
 
     private List<CustomerDTO> customers = new ArrayList<>();
 
@@ -34,10 +31,6 @@ public class CustomerRegistry{
         return INSTANCE;
     }
 
-    public void setLogger (Logger logger){
-        this.logger = logger;
-    }
-
     /**
      * Retrieves information about an existing customer based on their phonenumber.
      * To avoid NPE an if-statement is used for the logger call.
@@ -51,17 +44,14 @@ public class CustomerRegistry{
                 throws UserNotFoundException, DatabaseFailureException {
         
         if (phoneNumber.equals("0000")) {
-            if (logger != null) {
-                logger.log("Database not accessable occured when system searched for: " + phoneNumber);
-            }
-            throw new DatabaseFailureException("Could not reach database.");
+            throw new DatabaseFailureException("Could not reach database, when system searched for phone number: " + phoneNumber);
         }
         for (CustomerDTO customer : customers) {
             if(customer.getPhoneNumber().equals(phoneNumber)) {
                 return customer;
             }
         }
-        throw new UserNotFoundException("No customer was found under this phonenumber: " + phoneNumber);
+        throw new UserNotFoundException("No customer was found under this phone number: " + phoneNumber);
     }
 
 }

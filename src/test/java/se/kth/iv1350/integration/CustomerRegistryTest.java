@@ -3,15 +3,13 @@ package se.kth.iv1350.integration;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
 import se.kth.iv1350.integration.exceptions.DatabaseFailureException;
 import se.kth.iv1350.integration.exceptions.UserNotFoundException;
-import se.kth.iv1350.util.FileLogger;
-import se.kth.iv1350.util.Logger;
 
 public class CustomerRegistryTest {
     private CustomerRegistry registry;
@@ -24,16 +22,12 @@ public class CustomerRegistryTest {
     public void setUp() {
         registry = CustomerRegistry.getCustomerRegistry();
 
-        Logger logger = new FileLogger("logs/database-log.txt");
-        registry.setLogger(logger);
-
-
         phoneNumber = "1234";
         name = "Gustaf";
         nonExistingPhoneNumber = "1223";
         phoneNumberTriggersDatabaseFailureException = "0000";
-
     }
+    
     @After
     public void tearDown() {
         registry = null;
