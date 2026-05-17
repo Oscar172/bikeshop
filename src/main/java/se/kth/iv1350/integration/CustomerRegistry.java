@@ -25,6 +25,7 @@ public class CustomerRegistry{
 
     /**
      * Method for access to CustomerRegistry due to Singleton GoF.
+     * 
      * @return INSTANCE of CustomerRegistry.
      */
     public static CustomerRegistry getCustomerRegistry(){
@@ -53,6 +54,4 @@ public class CustomerRegistry{
         }
         throw new UserNotFoundException("No customer was found under this phone number: " + phoneNumber);
     }
-
 }
-

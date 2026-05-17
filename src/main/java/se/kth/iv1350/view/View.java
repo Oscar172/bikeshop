@@ -28,7 +28,7 @@ public class View {
     */
     public void runFakeExecution() {
         String phoneNumber = "1234";
-        String phonNumberDataFail = "0000";
+        String phoneNumberDataFail = "0000";
         String phoneNumberNotFound = "1235";
         String repairOrderId = "RO-1";
 
@@ -37,7 +37,7 @@ public class View {
 
         System.out.println("----- Data Failure Exception Sample -----");
         try {
-            CustomerDTO foundCustomer = contr.searchForCustomer(phonNumberDataFail);
+            contr.searchForCustomer(phoneNumberDataFail);
         } catch (UserNotFoundException e) {
             System.out.println("ERROR: " + e.getMessage());
         } catch (DatabaseFailureException e) {
@@ -49,7 +49,7 @@ public class View {
 
         System.out.println("----- User Not Found Exception Sample -----");
         try {
-            CustomerDTO foundCustomer = contr.searchForCustomer(phoneNumberNotFound);    
+            contr.searchForCustomer(phoneNumberNotFound);    
         } catch (UserNotFoundException e) {
             System.out.println("ERROR: " + e.getMessage());
         } catch (DatabaseFailureException e) {
