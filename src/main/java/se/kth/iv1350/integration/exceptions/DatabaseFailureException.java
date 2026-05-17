@@ -9,6 +9,7 @@ package se.kth.iv1350.integration.exceptions;
 public class DatabaseFailureException extends RuntimeException {
     /**
      * Creates a new instance with a message that describe the error.
+     * 
      * @param message A message explaining what went wrong.
      */
     public DatabaseFailureException (String message) {
