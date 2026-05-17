@@ -46,7 +46,6 @@ public class RepairOrderRegistryTest {
         }
     }
 
-    //Test observer used to verufy that observers are notified whena  arepair order is updated.
     @Test
     public void testObserverIsNotifiedWhenRepairOrderIsUpdated(){
         TestObserver observer = new TestObserver();
@@ -62,7 +61,6 @@ public class RepairOrderRegistryTest {
 
     }
 
-    // Nya av Tova
     @Test
     public void testFindRepairOrderById() {
         String repairOrderId = "RO-1";
