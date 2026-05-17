@@ -1,5 +1,8 @@
 package se.kth.iv1350.integration;
 
+/**
+ * Contains customer information transferred between layers.
+ */
 public class CustomerDTO {
     private final String phoneNumber;
     private final String name;
@@ -8,6 +11,7 @@ public class CustomerDTO {
      * Creates a new CustomerDTO containing customer information.
      * 
      * @param phoneNumber The customer's phone number.
+     * 
      * @param name The name of the customer.
      */
     public CustomerDTO (String phoneNumber, String name){
@@ -24,7 +28,7 @@ public class CustomerDTO {
         return phoneNumber;
     }
 
-    /** Returns the cusomter's name.
+    /** Returns the customer's name.
      * 
      * @return The customer's name.
      */
