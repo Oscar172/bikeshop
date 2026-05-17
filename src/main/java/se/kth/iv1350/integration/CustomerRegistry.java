@@ -35,8 +35,11 @@ public class CustomerRegistry{
     /**
      * Retrieves information about an existing customer based on their phonenumber.
      * To avoid NPE an if-statement is used for the logger call.
+     * 
      * @param phoneNumber The customer's phone number.
+     * 
      * @return Information about the customer in the form of a CustomerDTO.
+     * 
      * @throws UserNotFoundException if no customer with the specified phone
      * number can be found in the customer registry.
      * @throws DatabaseFailureException if the database can not be reached.
