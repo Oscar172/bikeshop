@@ -2,11 +2,11 @@ package se.kth.iv1350.model.state;
 
 import se.kth.iv1350.model.RepairOrder;
 
-public class PayedState implements RepairOrderState {
+public class PaidState implements RepairOrderState {
 
 
     @Override
-    public void payed(RepairOrder order){
+    public void paid(RepairOrder order){
         //Payed is final state, no change is made.
     }
 
@@ -27,7 +27,7 @@ public class PayedState implements RepairOrderState {
 
     @Override
     public String getStateName(){
-        return "PAYED";
+        return "PAID";
     }
 }
 

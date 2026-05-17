@@ -18,7 +18,7 @@ public class RejectedState implements RepairOrderState{
     }
 
     @Override
-    public void payed(RepairOrder order){
+    public void paid(RepairOrder order){
         ////Rejected rejected, no state change is made.
     }
 

@@ -108,15 +108,23 @@ public class RepairOrderRegistry {
     public void incrementNrOfRepairOrders() {
         this.nrOfRepairOrders++;
     }
+    /**
+     * Returns the current number of stored repair orders.
+     * 
+     * @return The number of repair orders in the registry.
+     */
     public int getNrOfRepairOrders() {
         return this.nrOfRepairOrders;
     }
-
+    /**
+     * Returns all repair orders stored in the registry
+     * 
+     * @return An array containing the stored repair orders.
+     */
     public RepairOrder[] getRepairOrders() {
         return this.repairOrders;
     }
 
-    //nytt
     /**
      * Adds an observer that will be notified when a repair order is updated.
      * @param observer The observer to add.
@@ -130,10 +138,7 @@ public class RepairOrderRegistry {
      * @param repairOrder The updated repair order.
      */
     public void notifyObservers(RepairOrder repairOrder){
-
         RepairOrderDTO repairOrderDTO = repairOrder.createRepairOrderDTO();
-
-        //Gå igenom varje observer i listan, för varje observer anropa repairOrderUpdated(..), skicka in repairOrderDTO
         for(RepairOrderObserver observer : repairOrderObservers){
             observer.repairOrderUpdated(repairOrderDTO);
         }

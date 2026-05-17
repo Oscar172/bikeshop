@@ -16,8 +16,8 @@ public class CreatedState implements RepairOrderState {
     }
 
     @Override
-    public void payed(RepairOrder order){
-        order.setState(new PayedState());
+    public void paid(RepairOrder order){
+        order.setState(new PaidState());
     }
 
     @Override

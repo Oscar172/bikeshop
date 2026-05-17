@@ -56,27 +56,48 @@ public class RepairOrder {
         return repairOrder;
     }
 
-    
+    /**
+     * Sets the current state of this repair order.
+     * 
+     * @param newState The new state to assign to the repair order.
+     */    
     public void setState(RepairOrderState newState){
         this.state = newState;
     }
-    
+
+    /**
+     * Attempts to accept this repair order.
+     */
     public void accept() {
         state.accept(this);
     }
 
+    /**
+     * Attempts to reject this repair order.
+     */
     public void reject() {
         state.reject(this);
     }
 
-    public void payed() {
-        state.payed(this);
+    /**
+     * Attempts to mark this repair order as paid.
+     */
+    public void paid() {
+        state.paid(this);
     }
-
+    
+    /**
+     * Attempts to mark this repair order as ready for approval.
+     */
     public void readyForApproval() {
         state.readyForApproval(this);
     }
 
+    /**
+     * Returns the name of the current state
+     * 
+     * @return The current state name.
+     */
     public String getState() {
         return state.getStateName();
     }

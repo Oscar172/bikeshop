@@ -218,3 +218,47 @@ Total cost: 249.9
 Diagnostic report: Fix flat tire and other stuff
 ETA: One week after accepted offer
 
+2026-05-17T16:01:39.118245800 
+-----Repair Order Log-----
+Repair Order ID: RO-1
+Phone Number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total Cost: 0.0
+Diagnostic Report: 
+Etimated Repair Time: One week after accepted offer
+
+2026-05-17T16:01:39.118245800 
+-----Repair Order Log-----
+Repair Order ID: RO-1
+Phone Number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total Cost: 0.0
+Diagnostic Report: Fix flat tire and other stuff
+Etimated Repair Time: One week after accepted offer
+
+2026-05-17T16:01:39.120486300 
+-----Repair Order Log-----
+Repair Order ID: RO-1
+Phone Number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: CREATED
+Total Cost: 249.9
+Diagnostic Report: Fix flat tire and other stuff
+Etimated Repair Time: One week after accepted offer
+
+2026-05-17T16:01:39.121490900 
+-----Repair Order Log-----
+Repair Order ID: RO-1
+Phone Number: 1234
+Problem Description: Flat tire and a broken front-light
+Serial Number: BIKE-001
+Status: ACCEPTED
+Total Cost: 249.9
+Diagnostic Report: Fix flat tire and other stuff
+Etimated Repair Time: One week after accepted offer
+
