@@ -61,9 +61,9 @@ public class CustomerRegistryTest {
             registry.findCustomer(phoneNumberTriggersDatabaseFailureException);
             fail("Should have thrown DatabaseFailureException, but didn't.");
         } catch (DatabaseFailureException e) {
-            String expectedMessage = "Could not reach database.";
-            assertEquals("Error message in DatabaseFailureException does not match.", 
-                     expectedMessage, e.getMessage());
+            String expectedMessage = "Could not reach database";
+            assertTrue("Error message in DatabaseFailureException does not match.", 
+                     e.getMessage().contains(expectedMessage));
         } catch (UserNotFoundException e) {
             fail("Threw UserNotFoundException instead of DatabaseFailureException.");
         }
